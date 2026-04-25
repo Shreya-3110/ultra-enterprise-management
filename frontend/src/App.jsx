@@ -18,7 +18,8 @@ import {
   Scissors,
   RotateCcw,
   Terminal,
-  ShieldAlert
+  ShieldAlert,
+  Sparkles
 } from 'lucide-react';
 import { AuthProvider, useAuth } from './context/AuthContext';
 
