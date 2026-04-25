@@ -1,0 +1,20 @@
+◇ injected env (8) from .env // tip: ◈ secrets for agents [www.dotenvx.com]
+Connected to DB
+Found Student: Jeffin John
+Active Fee Structure ID: undefined
+Raw Student Data: {
+  "parentDetails": {
+    "name": "Shreya Upadhyay",
+    "phone": "9179032730"
+  },
+  "_id": "69e51a5f49df4a4036c104b9",
+  "schoolId": "69e511600bec3a9c62a17b62",
+  "admissionNumber": "ADM-2026-3214",
+  "firstName": "Jeffin",
+  "lastName": "John",
+  "currentClass": "X-C",
+  "status": "ACTIVE",
+  "walletBalance": 8000,
+  "createdAt": "2026-04-19T18:09:35.683Z",
+  "__v": 0
+}

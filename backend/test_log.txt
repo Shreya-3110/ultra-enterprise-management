@@ -1,0 +1,8 @@
+Γùç injected env (11) from .env // tip: Γùê secrets for agents [www.dotenvx.com]
+--- STARTING REAL WHATSAPP TEST ---
+Sending live alert to 9179032730...
+[WhatsApp Error] MongooseError: Operation `notifications.insertOne()` buffering timed out after 10000ms
+Γ¥î FAILED. Check the console logs above for the error.
+    at Timeout._onTimeout (C:\Users\shrey\OneDrive\Desktop\Ultra Enterprise Management\backend\node_modules\mongoose\lib\drivers\node-mongodb-native\collection.js:142:25)
+    at listOnTimeout (node:internal/timers:594:17)
+    at process.processTimers (node:internal/timers:529:7)

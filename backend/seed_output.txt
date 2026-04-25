@@ -1,0 +1,13 @@
+
+> backend@1.0.0 seed
+> node scripts/seed.js
+
+Γùç injected env (4) from .env // tip: Γùê encrypted .env [www.dotenvx.com]
+Connected to MongoDB for seeding...
+Error seeding data: TypeError: next is not a function
+    at model.<anonymous> (C:\Users\shrey\OneDrive\Desktop\Ultra Enterprise Management\backend\models\User.js:42:3)
+    at async Kareem.execPre (C:\Users\shrey\OneDrive\Desktop\Ultra Enterprise Management\backend\node_modules\kareem\index.js:70:24)
+    at async model.$__save (C:\Users\shrey\OneDrive\Desktop\Ultra Enterprise Management\backend\node_modules\mongoose\lib\model.js:397:5)
+    at async model.save (C:\Users\shrey\OneDrive\Desktop\Ultra Enterprise Management\backend\node_modules\mongoose\lib\model.js:667:5)
+    at async Function.create (C:\Users\shrey\OneDrive\Desktop\Ultra Enterprise Management\backend\node_modules\mongoose\lib\model.js:2754:5)
+    at async seedData (C:\Users\shrey\OneDrive\Desktop\Ultra Enterprise Management\backend\scripts\seed.js:36:24)
