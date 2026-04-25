@@ -104,39 +104,20 @@ exports.login = async (req, res) => {
       return res.status(401).json({ success: false, message: 'Invalid credentials' });
     }
 
-    // Generate 6 Digit OTP Code
-    const otpCode = Math.floor(100000 + Math.random() * 900000).toString();
-    user.otpCode = otpCode;
-    user.otpExpires = Date.now() + 10 * 60 * 1000; // 10 minutes
-    await user.save();
+    // SKIP 2FA: Return token and user data immediately for demo/simplicity
+    const token = generateToken(user._id);
 
-    // Send Email (Either Mock Ethereal or Live SMTP)
-    try {
-       const transporter = await createTransporter();
-       const info = await transporter.sendMail({
-          from: '"Ultra Enterprise Security" <security@ultraenterprise.com>',
-          to: user.email,
-          subject: "Your Two-Factor Authentication Code",
-          text: `Your requested login code is: ${otpCode}. Valid for 10 minutes.`,
-          html: `<h1>Ultra Enterprise Security</h1><p>Your requested login code is: <b>${otpCode}</b>.</p><p>Valid for 10 minutes.</p>`
-       });
-       
-       console.log('\n\x1b[36m%s\x1b[0m', '🛡️ [2FA SECURITY TRIGGERED]');
-       console.log('2FA Code       :', otpCode);
-       if (info.messageId && nodemailer.getTestMessageUrl(info)) {
-           console.log('Email Preview URL:', nodemailer.getTestMessageUrl(info), '\n');
-       }
-    } catch(err) {
-       console.error("Failed to trigger email", err);
-       console.log(`[FALLBACK CODE]: ${otpCode}`);
-    }
-
-    // Return the requirement flag without giving out the actual JWT
     res.status(200).json({
       success: true,
-      requires2FA: true,
-      email: user.email,
-      message: '2FA token generated and sent to email'
+      token,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        schoolId: user.schoolId._id,
+        plan: user.schoolId.subscriptionPlan
+      }
     });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
