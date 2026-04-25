@@ -111,6 +111,7 @@ const Layout = ({ children }) => {
               <SidebarLink to="/franchise" icon={<BarChart3 size={20} />} label="Franchise Finances" active={location.pathname === '/franchise'} />
               <SidebarLink to="/adjustments" icon={<Scissors size={20} />} label="Financial Adjustments" active={location.pathname === '/adjustments'} />
               <SidebarLink to="/integrations" icon={<Terminal size={20} />} label="API Integration" active={location.pathname === '/integrations'} />
+              <SidebarLink to="/subscription" icon={<Sparkles size={20} />} label="Subscription Plan" active={location.pathname === '/subscription'} />
             </>
           )}
 
