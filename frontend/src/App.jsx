@@ -21,26 +21,36 @@ import {
   ShieldAlert
 } from 'lucide-react';
 import { AuthProvider, useAuth } from './context/AuthContext';
-import Dashboard from './pages/Dashboard';
-import ParentDashboard from './pages/ParentDashboard';
-import Students from './pages/Students';
-import Fees from './pages/Fees';
-import Payments from './pages/Payments';
-import ActivityLog from './pages/ActivityLog';
-import Notifications from './pages/Notifications';
-import Reports from './pages/Reports';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import ParentRegister from './pages/ParentRegister';
-import Subscription from './pages/Subscription';
-import Settings from './pages/Settings';
-import Landing from './pages/Landing';
-import MigrationCenter from './pages/MigrationCenter';
-import BranchManagement from './pages/BranchManagement';
-import FranchiseConsole from './pages/FranchiseConsole';
-import Adjustments from './pages/Adjustments';
-import IntegrationCenter from './pages/IntegrationCenter';
-import RecoveryCenter from './pages/RecoveryCenter';
+
+// Lazy load pages for performance optimization
+const Dashboard = React.lazy(() => import('./pages/Dashboard'));
+const ParentDashboard = React.lazy(() => import('./pages/ParentDashboard'));
+const Students = React.lazy(() => import('./pages/Students'));
+const Fees = React.lazy(() => import('./pages/Fees'));
+const Payments = React.lazy(() => import('./pages/Payments'));
+const ActivityLog = React.lazy(() => import('./pages/ActivityLog'));
+const Notifications = React.lazy(() => import('./pages/Notifications'));
+const Reports = React.lazy(() => import('./pages/Reports'));
+const Login = React.lazy(() => import('./pages/Login'));
+const Register = React.lazy(() => import('./pages/Register'));
+const ParentRegister = React.lazy(() => import('./pages/ParentRegister'));
+const Subscription = React.lazy(() => import('./pages/Subscription'));
+const Settings = React.lazy(() => import('./pages/Settings'));
+const Landing = React.lazy(() => import('./pages/Landing'));
+const MigrationCenter = React.lazy(() => import('./pages/MigrationCenter'));
+const BranchManagement = React.lazy(() => import('./pages/BranchManagement'));
+const FranchiseConsole = React.lazy(() => import('./pages/FranchiseConsole'));
+const Adjustments = React.lazy(() => import('./pages/Adjustments'));
+const IntegrationCenter = React.lazy(() => import('./pages/IntegrationCenter'));
+const RecoveryCenter = React.lazy(() => import('./pages/RecoveryCenter'));
+
+// Loading component for Suspense
+const PageLoader = () => (
+  <div className="flex flex-col items-center justify-center min-h-[400px] w-full">
+    <Loader2 className="animate-spin text-blue-600 mb-4" size={40} />
+    <p className="text-slate-500 font-medium animate-pulse">Loading dashboard components...</p>
+  </div>
+);
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
@@ -214,137 +224,139 @@ const App = () => {
   return (
     <AuthProvider>
       <Router>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/register-parent" element={<ParentRegister />} />
-          
-          <Route path="/" element={<Landing />} />
+        <React.Suspense fallback={<PageLoader />}>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/register-parent" element={<ParentRegister />} />
+            
+            <Route path="/" element={<Landing />} />
 
-          {/* Protected Dashboard Routes */}
-          <Route path="/dashboard" element={
-            <ProtectedRoute>
-              <Layout>
-                <DashboardSwitcher />
-              </Layout>
-            </ProtectedRoute>
-          } />
-          
-          <Route path="/students" element={
-            <ProtectedRoute>
-              <Layout>
-                <Students />
-              </Layout>
-            </ProtectedRoute>
-          } />
-          
-          <Route path="/fees" element={
-            <ProtectedRoute>
-              <Layout>
-                <Fees />
-              </Layout>
-            </ProtectedRoute>
-          } />
-          
-          <Route path="/payments" element={
-            <ProtectedRoute>
-              <Layout>
-                <Payments />
-              </Layout>
-            </ProtectedRoute>
-          } />
+            {/* Protected Dashboard Routes */}
+            <Route path="/dashboard" element={
+              <ProtectedRoute>
+                <Layout>
+                  <DashboardSwitcher />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            
+            <Route path="/students" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Students />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            
+            <Route path="/fees" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Fees />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            
+            <Route path="/payments" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Payments />
+                </Layout>
+              </ProtectedRoute>
+            } />
 
-          <Route path="/activity" element={
-            <ProtectedRoute>
-              <Layout>
-                <ActivityLog />
-              </Layout>
-            </ProtectedRoute>
-          } />
+            <Route path="/activity" element={
+              <ProtectedRoute>
+                <Layout>
+                  <ActivityLog />
+                </Layout>
+              </ProtectedRoute>
+            } />
 
-          <Route path="/communications" element={
-            <ProtectedRoute>
-              <Layout>
-                <Notifications />
-              </Layout>
-            </ProtectedRoute>
-          } />
+            <Route path="/communications" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Notifications />
+                </Layout>
+              </ProtectedRoute>
+            } />
 
-          <Route path="/reports" element={
-            <ProtectedRoute>
-              <Layout>
-                <Reports />
-              </Layout>
-            </ProtectedRoute>
-          } />
+            <Route path="/reports" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Reports />
+                </Layout>
+              </ProtectedRoute>
+            } />
 
-          <Route path="/settings" element={
-            <ProtectedRoute>
-              <Layout>
-                <Settings />
-              </Layout>
-            </ProtectedRoute>
-          } />
+            <Route path="/settings" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Settings />
+                </Layout>
+              </ProtectedRoute>
+            } />
 
-          <Route path="/subscription" element={
-            <ProtectedRoute>
-              <Layout>
-                <Subscription />
-              </Layout>
-            </ProtectedRoute>
-          } />
+            <Route path="/subscription" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Subscription />
+                </Layout>
+              </ProtectedRoute>
+            } />
 
-          <Route path="/migration" element={
-            <ProtectedRoute>
-              <Layout>
-                <MigrationCenter />
-              </Layout>
-            </ProtectedRoute>
-          } />
+            <Route path="/migration" element={
+              <ProtectedRoute>
+                <Layout>
+                  <MigrationCenter />
+                </Layout>
+              </ProtectedRoute>
+            } />
 
-          <Route path="/branches" element={
-            <ProtectedRoute>
-              <Layout>
-                <BranchManagement />
-              </Layout>
-            </ProtectedRoute>
-          } />
+            <Route path="/branches" element={
+              <ProtectedRoute>
+                <Layout>
+                  <BranchManagement />
+                </Layout>
+              </ProtectedRoute>
+            } />
 
-          <Route path="/franchise" element={
-            <ProtectedRoute>
-              <Layout>
-                <FranchiseConsole />
-              </Layout>
-            </ProtectedRoute>
-          } />
+            <Route path="/franchise" element={
+              <ProtectedRoute>
+                <Layout>
+                  <FranchiseConsole />
+                </Layout>
+              </ProtectedRoute>
+            } />
 
-          <Route path="/adjustments" element={
-            <ProtectedRoute>
-              <Layout>
-                <Adjustments />
-              </Layout>
-            </ProtectedRoute>
-          } />
+            <Route path="/adjustments" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Adjustments />
+                </Layout>
+              </ProtectedRoute>
+            } />
 
-          <Route path="/integrations" element={
-            <ProtectedRoute>
-              <Layout>
-                <IntegrationCenter />
-              </Layout>
-            </ProtectedRoute>
-          } />
+            <Route path="/integrations" element={
+              <ProtectedRoute>
+                <Layout>
+                  <IntegrationCenter />
+                </Layout>
+              </ProtectedRoute>
+            } />
 
-          <Route path="/recovery" element={
-            <ProtectedRoute>
-              <Layout>
-                <RecoveryCenter />
-              </Layout>
-            </ProtectedRoute>
-          } />
+            <Route path="/recovery" element={
+              <ProtectedRoute>
+                <Layout>
+                  <RecoveryCenter />
+                </Layout>
+              </ProtectedRoute>
+            } />
 
-          {/* Catch all redirect */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+            {/* Catch all redirect */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </React.Suspense>
       </Router>
     </AuthProvider>
   );
