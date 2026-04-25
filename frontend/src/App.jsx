@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
+import axios from 'axios';
 import { 
   Users, 
   CreditCard, 
@@ -64,8 +65,24 @@ const ProtectedRoute = ({ children }) => {
 
 const Layout = ({ children }) => {
   const location = useLocation();
-  const { logout, user } = useAuth();
+  const { logout, user, token } = useAuth();
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
+  const [notifications, setNotifications] = React.useState([]);
+  const [isNotifOpen, setIsNotifOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    const fetchNotifs = async () => {
+      try {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api/v1'}/notifications`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        if (res.data.success) setNotifications(res.data.data.slice(0, 5));
+      } catch (err) {
+        console.error("Notif fetch error", err);
+      }
+    };
+    if (token) fetchNotifs();
+  }, [token]);
 
   return (
     <div className="flex h-screen bg-[#F8FAFC] text-slate-700 font-sans overflow-hidden">
@@ -161,9 +178,39 @@ const Layout = ({ children }) => {
           </div>
           
           <div className="flex items-center gap-3 sm:gap-6">
-            <button className="text-slate-400 hover:text-slate-600 transition-colors p-2">
-              <Bell size={20} />
-            </button>
+            <div className="relative">
+              <button 
+                onClick={() => setIsNotifOpen(!isNotifOpen)}
+                className={`transition-colors p-2 rounded-lg relative ${isNotifOpen ? 'bg-blue-50 text-blue-600' : 'text-slate-400 hover:text-slate-600'}`}
+              >
+                <Bell size={20} />
+                {notifications.length > 0 && (
+                  <span className="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-red-500 border-2 border-white rounded-full animate-pulse" />
+                )}
+              </button>
+
+              {isNotifOpen && (
+                <div className="absolute right-0 mt-3 w-80 bg-white rounded-2xl shadow-2xl border border-slate-100 py-4 z-[60] animate-in fade-in slide-in-from-top-2">
+                  <div className="px-6 pb-3 border-b border-slate-50 flex justify-between items-center">
+                    <h3 className="font-bold text-sm text-slate-900">Activity Hub</h3>
+                    <Link to="/communications" className="text-[10px] font-bold text-blue-600 uppercase hover:underline">View All</Link>
+                  </div>
+                  <div className="max-h-80 overflow-y-auto">
+                    {notifications.length === 0 ? (
+                      <div className="py-8 text-center text-slate-400 text-xs italic">No recent system activity</div>
+                    ) : (
+                      notifications.map(n => (
+                        <div key={n._id} className="px-6 py-4 hover:bg-slate-50 transition-colors border-b border-slate-50 last:border-0">
+                          <p className="text-[11px] font-bold text-slate-900 line-clamp-1">{n.subject || 'System Alert'}</p>
+                          <p className="text-[10px] text-slate-500 mt-0.5 line-clamp-2 leading-relaxed">{n.message}</p>
+                          <p className="text-[9px] font-medium text-slate-300 mt-2 uppercase tracking-tighter">{new Date(n.sentAt).toLocaleString()}</p>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
             <div className="h-8 w-px bg-slate-200 hidden xs:block"></div>
             <div className="flex items-center gap-3">
               <div className="text-right hidden md:block">
