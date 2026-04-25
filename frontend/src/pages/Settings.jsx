@@ -9,7 +9,9 @@ import {
   Smartphone, 
   BellRing,
   ShieldCheck,
-  CreditCard
+  CreditCard,
+  Copy,
+  Info
 } from 'lucide-react';
 
 const Settings = () => {
@@ -79,6 +81,33 @@ const Settings = () => {
                <h3 className="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2">
                   <Building2 size={20} className="text-slate-400" /> Institution Profile
                </h3>
+
+               {/* School ID Onboarding Section */}
+               <div className="mb-8 p-6 bg-blue-50 rounded-2xl border border-blue-100 flex flex-col md:flex-row items-center justify-between gap-4">
+                  <div className="flex items-start gap-3">
+                     <div className="w-10 h-10 rounded-xl bg-blue-500 text-white flex items-center justify-center shrink-0 shadow-lg shadow-blue-500/20">
+                        <Info size={20} />
+                     </div>
+                     <div>
+                        <p className="text-sm font-black text-blue-900 uppercase tracking-tight">Parent Onboarding ID</p>
+                        <p className="text-xs text-blue-600 font-medium max-w-sm">Parents must enter this ID when registering to link their account to your school.</p>
+                     </div>
+                  </div>
+                  <div className="flex items-center gap-2 bg-white px-4 py-2.5 rounded-xl border border-blue-200 shadow-sm w-full md:w-auto">
+                     <code className="text-xs font-black text-slate-700 tracking-wider uppercase select-all">{user?.schoolId || '65ecc...' }</code>
+                     <button 
+                       type="button"
+                       onClick={() => {
+                         navigator.clipboard.writeText(user?.schoolId);
+                         alert('School ID copied! Share this with parents.');
+                       }}
+                       className="p-1.5 hover:bg-slate-50 text-slate-400 hover:text-blue-600 transition-colors rounded-lg"
+                       title="Copy ID"
+                     >
+                        <Copy size={16} />
+                     </button>
+                  </div>
+               </div>
                
                <form onSubmit={handleSave} className="space-y-6">
                   <div className="space-y-2">
