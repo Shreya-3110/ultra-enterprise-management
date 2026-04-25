@@ -15,7 +15,8 @@ import {
   FileText,
   Download,
   CheckCircle2,
-  Search
+  Search,
+  Sparkles
 } from 'lucide-react';
 import PlanGate from '../components/PlanGate';
 import { useAuth } from '../context/AuthContext';
@@ -147,8 +148,31 @@ const Dashboard = () => {
         </button>
       </div>
 
+      {/* Performance & Upgrade Banner */}
+      {user?.plan === 'BASIC' && (
+        <div className="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-3xl p-8 text-white shadow-xl shadow-blue-200 mb-8 flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden relative group">
+          <div className="relative z-10">
+            <h2 className="text-2xl font-black mb-2 flex items-center gap-2">
+              <Sparkles size={24} className="text-amber-300 animate-pulse" />
+              Upgrade to Standard or Premium
+            </h2>
+            <p className="text-blue-100 font-medium max-w-lg">
+              You are currently using the Basic version. Upgrade now to unlock **AI-powered analytics**, 
+              **automated WhatsApp alerts**, and **mass data migration** for your institution.
+            </p>
+          </div>
+          <Link 
+            to="/subscription" 
+            className="relative z-10 bg-white text-blue-600 px-8 py-4 rounded-2xl font-black hover:scale-105 transition-transform shadow-lg whitespace-nowrap"
+          >
+            Upgrade My Account
+          </Link>
+          <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-64 h-64 bg-white/10 rounded-full blur-3xl group-hover:bg-white/20 transition-colors" />
+        </div>
+      )}
+
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-10">
         <StatCard title="Total Students" value={stats?.studentCount?.toLocaleString() || '0'} change="+12" isUp={true} icon={<Users size={20} />} />
         <StatCard title="Total Collection" value={`₹${stats?.totalCollection?.toLocaleString() || '0'}`} change={`+₹${stats?.lateFeesRecovered?.toLocaleString() || '0'} late fees`} isUp={true} icon={<DollarSign size={20} />} />
         <StatCard title="Wallet Credits" value={`₹${stats?.walletCredits?.toLocaleString() || '0'}`} change="Surplus" isUp={true} icon={<Wallet size={20} />} />
