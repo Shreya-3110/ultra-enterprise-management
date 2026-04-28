@@ -108,7 +108,7 @@ const Layout = ({ children }) => {
           </button>
         </div>
 
-        <nav className="flex-1 py-6 space-y-1">
+        <nav className="flex-1 py-6 space-y-1 overflow-y-auto custom-scrollbar">
           <SidebarLink to="/dashboard" icon={<LayoutDashboard size={20} />} label="Overview" active={location.pathname === '/dashboard'} />
           
           {user?.role !== 'PARENT' && (

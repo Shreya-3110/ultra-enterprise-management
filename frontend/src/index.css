@@ -120,20 +120,25 @@ body {
   }
 }
 
-/* Scrollbar styling for code blocks */
-.overflow-x-auto::-webkit-scrollbar {
+/* Scrollbar styling for code blocks and sidebar */
+.overflow-x-auto::-webkit-scrollbar,
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
   height: 4px;
 }
 
-.overflow-x-auto::-webkit-scrollbar-track {
+.overflow-x-auto::-webkit-scrollbar-track,
+.custom-scrollbar::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.overflow-x-auto::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+.overflow-x-auto::-webkit-scrollbar-thumb,
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.05);
   border-radius: 10px;
 }
 
-.overflow-x-auto:hover::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
+.overflow-x-auto:hover::-webkit-scrollbar-thumb,
+.custom-scrollbar:hover::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
 }
