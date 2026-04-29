@@ -93,7 +93,7 @@ const seedData = async () => {
       lateFee: 500,
       installments: [
         { amount: 15000, dueDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), status: 'PENDING' }, // Due in 3 days
-        { amount: 15000, dueDate: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000), status: 'PENDING' }, // Overdue
+        { amount: 15000, dueDate: new Date(Date.now() - 6 * 24 * 60 * 60 * 1000), status: 'PENDING' }, // Overdue (Multiple of 3)
         { amount: 15000, dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), status: 'PENDING' }
       ]
     });

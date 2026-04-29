@@ -49,18 +49,23 @@ const parseTemplate = (text, data) => {
 /**
  * Sends a payment reminder email
  */
-exports.sendEmailReminder = async (schoolId, studentId, recipient, studentName, feeName, dueDate, amount) => {
+exports.sendEmailReminder = async (schoolId, studentId, recipient, studentName, feeName, dueDate, amount, isOverdue = false) => {
   try {
     const transporter = await createTransporter();
     
     // Check for custom template
     const template = await MessageTemplate.findOne({ schoolId, category: 'DUE_REMINDER', type: 'EMAIL', isActive: true });
     
-    let subject = `Payment Reminder: ${feeName} for ${studentName}`;
-    let text = `Dear Parent, This is a reminder that an installment of ₹${amount} for ${feeName} is due on ${dueDate.toDateString()}.`;
+    let subject = isOverdue 
+      ? `⚠️ OVERDUE ALERT: ${feeName} for ${studentName}`
+      : `Payment Reminder: ${feeName} for ${studentName}`;
+      
+    let text = isOverdue
+      ? `Dear Parent, This is an urgent notice that an installment of ₹${amount} for ${feeName} was due on ${dueDate.toDateString()} and is now OVERDUE. Please clear this balance immediately to avoid further late fees.`
+      : `Dear Parent, This is a reminder that an installment of ₹${amount} for ${feeName} is due on ${dueDate.toDateString()}.`;
     
     if (template) {
-        const data = { STUDENT_NAME: studentName, FEE_NAME: feeName, DUE_DATE: dueDate.toDateString(), AMOUNT: amount };
+        const data = { STUDENT_NAME: studentName, FEE_NAME: feeName, DUE_DATE: dueDate.toDateString(), AMOUNT: amount, STATUS: isOverdue ? 'OVERDUE' : 'DUE' };
         if (template.subject) subject = parseTemplate(template.subject, data);
         text = parseTemplate(template.body, data);
     }
@@ -70,7 +75,19 @@ exports.sendEmailReminder = async (schoolId, studentId, recipient, studentName, 
       to: recipient,
       subject,
       text,
-      html: `<div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 10px;">${text.replace(/\n/g, '<br>')}</div>`
+      html: `
+        <div style="font-family: sans-serif; padding: 20px; border: 1px solid ${isOverdue ? '#ef4444' : '#eee'}; border-radius: 10px;">
+          <h2 style="color: ${isOverdue ? '#ef4444' : '#3b82f6'};">${isOverdue ? 'Overdue Payment Notice' : 'Payment Reminder'}</h2>
+          <p>${text.replace(/\n/g, '<br>')}</p>
+          <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
+              <p style="margin: 5px 0;"><b>Student:</b> ${studentName}</p>
+              <p style="margin: 5px 0;"><b>Fee Component:</b> ${feeName}</p>
+              <p style="margin: 5px 0;"><b>Amount:</b> ₹${amount}</p>
+              <p style="margin: 5px 0;"><b>Due Date:</b> ${dueDate.toDateString()}</p>
+          </div>
+          <p style="font-size: 12px; color: #64748b;">Please login to the portal to make a payment.</p>
+        </div>
+      `
     };
 
     const info = await transporter.sendMail(mailOptions);
@@ -80,14 +97,14 @@ exports.sendEmailReminder = async (schoolId, studentId, recipient, studentName, 
       schoolId,
       studentId,
       type: 'EMAIL',
-      category: 'FEE_DUE',
+      category: isOverdue ? 'OVERDUE_ALERT' : 'FEE_DUE',
       recipient,
       subject: mailOptions.subject,
       message: mailOptions.text,
       status: 'SENT'
     });
 
-    console.log(`[Email] Message sent: ${info.messageId}`);
+    console.log(`[Email] ${isOverdue ? 'Overdue' : 'Reminder'} sent: ${info.messageId}`);
     return true;
   } catch (error) {
     console.error('[Email Error]', error);

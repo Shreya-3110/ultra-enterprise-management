@@ -11,15 +11,11 @@ const runReminderEngine = async () => {
   try {
     console.log('[Reminder Engine] Starting Daily Scan...');
     const now = new Date();
+    now.setHours(0,0,0,0);
     
-    // Calculate targets
-    const threeDaysFromNow = new Date();
-    threeDaysFromNow.setDate(now.getDate() + 3);
-
     // Find all unfulfiled installments
-    // Using simple approach: finding all pending student fees
     const fees = await StudentFee.find({ 
-      'installments.status': { $in: ['PENDING', 'OVERDUE'] } 
+      'installments.status': { $in: ['PENDING', 'OVERDUE', 'PARTIAL'] } 
     }).populate('studentId').populate('feeStructureId');
 
     console.log(`[Reminder Engine] Scanning ${fees.length} active ledgers...`);
@@ -31,6 +27,8 @@ const runReminderEngine = async () => {
         if (inst.status === 'PAID') continue;
 
         const dueDate = new Date(inst.dueDate);
+        dueDate.setHours(0,0,0,0);
+        
         const diffInDays = Math.ceil((dueDate - now) / (1000 * 60 * 60 * 24));
 
         // Logic 1: Exactly 3 Days before due date
@@ -45,11 +43,11 @@ const runReminderEngine = async () => {
           await triggerAlerts(feeRecord, inst);
         }
 
-        // Logic 3: Overdue
-        if (inst.status === 'OVERDUE' || diffInDays < 0) {
-          // Send reminder every few days if overdue (e.g., if divisible by 3)
-          if (Math.abs(diffInDays) % 3 === 0) {
-            console.log(`[Reminder Engine] Sending Overdue Alert for ${feeRecord.studentId.firstName}`);
+        // Logic 3: Overdue (Day 1, and then every 3 days)
+        if (diffInDays < 0) {
+          const overdueDays = Math.abs(diffInDays);
+          if (overdueDays === 1 || overdueDays % 3 === 0) {
+            console.log(`[Reminder Engine] Sending Overdue Alert for ${feeRecord.studentId.firstName} (${overdueDays} days late)`);
             await triggerAlerts(feeRecord, inst, true);
           }
         }
@@ -76,7 +74,8 @@ const triggerAlerts = async (feeRecord, inst, isOverdue = false) => {
       student.firstName, 
       feeRecord.feeStructureId.name, 
       inst.dueDate, 
-      inst.amount
+      inst.amount,
+      isOverdue
     );
   }
 
@@ -98,12 +97,9 @@ const triggerAlerts = async (feeRecord, inst, isOverdue = false) => {
  * Initialize Cron Job (Every midnight at 12:00 AM)
  */
 const initReminderScheduler = () => {
-    // Schedule for 00:00 every night: '0 0 * * *'
-    // For testing/demo, we can run it every hour: '0 * * * *'
     cron.schedule('0 0 * * *', () => {
         runReminderEngine();
     });
-
     console.log('[Scheduler] Payment Reminder Cron initialized (Daily at 00:00).');
 };
 
