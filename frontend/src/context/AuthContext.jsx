@@ -44,8 +44,16 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('token');
   };
 
+  const completeTour = () => {
+    if (user) {
+      const updatedUser = { ...user, hasCompletedTour: true };
+      setUser(updatedUser);
+      localStorage.setItem('user', JSON.stringify(updatedUser));
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, token, login, logout, isAuthenticated: !!token, loading }}>
+    <AuthContext.Provider value={{ user, token, login, logout, completeTour, isAuthenticated: !!token, loading }}>
         {!loading && children}
     </AuthContext.Provider>
   );

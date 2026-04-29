@@ -23,6 +23,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import ProductTour from './components/ProductTour';
 
 // Lazy load pages for performance optimization
 const Dashboard = React.lazy(() => import('./pages/Dashboard'));
@@ -86,6 +87,7 @@ const Layout = ({ children }) => {
 
   return (
     <div className="flex h-screen bg-[#F8FAFC] text-slate-700 font-sans overflow-hidden">
+      <ProductTour />
       {/* Sidebar Overlay for Mobile */}
       {isSidebarOpen && (
         <div 
@@ -108,8 +110,8 @@ const Layout = ({ children }) => {
           </button>
         </div>
 
-        <nav className="flex-1 py-6 space-y-1 overflow-y-auto custom-scrollbar">
-          <SidebarLink to="/dashboard" icon={<LayoutDashboard size={20} />} label="Overview" active={location.pathname === '/dashboard'} />
+        <nav id="sidebar-nav" className="flex-1 py-6 space-y-1 overflow-y-auto custom-scrollbar">
+          <SidebarLink id="overview-link" to="/dashboard" icon={<LayoutDashboard size={20} />} label="Overview" active={location.pathname === '/dashboard'} />
           
           {user?.role !== 'PARENT' && (
             <>
@@ -140,7 +142,7 @@ const Layout = ({ children }) => {
             </>
           )}
           
-          <div className="mt-8 px-8 pt-4 border-t border-slate-50">
+          <div id="support-section" className="mt-8 px-8 pt-4 border-t border-slate-50">
             <h3 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4">Support</h3>
             <SidebarLink to="/settings" icon={<SettingsIcon size={20} />} label="Configuration" active={location.pathname === '/settings'} />
           </div>
@@ -162,7 +164,7 @@ const Layout = ({ children }) => {
       {/* Main Container */}
       <div className="flex-1 flex flex-col h-full overflow-hidden">
         {/* Top Navbar */}
-        <header className="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 sm:px-10 flex-shrink-0">
+        <header id="top-navbar" className="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 sm:px-10 flex-shrink-0">
           <div className="flex items-center gap-4">
             <button 
               onClick={() => setIsSidebarOpen(true)}
@@ -212,7 +214,7 @@ const Layout = ({ children }) => {
               )}
             </div>
             <div className="h-8 w-px bg-slate-200 hidden xs:block"></div>
-            <div className="flex items-center gap-3">
+            <div id="user-profile" className="flex items-center gap-3">
               <div className="text-right hidden md:block">
                 <p className="text-sm font-bold text-slate-900">{user?.name || 'Guest'}</p>
                 <p className="text-[10px] font-medium text-slate-400">{user?.role || 'User'}</p>
@@ -240,9 +242,10 @@ const Layout = ({ children }) => {
   );
 };
 
-const SidebarLink = ({ to, icon, label, active }) => (
+const SidebarLink = ({ to, icon, label, active, id }) => (
   <Link
     to={to}
+    id={id}
     className={`flex items-center gap-3 px-8 py-3 transition-all duration-200 relative group
       ${active 
         ? 'text-blue-600 font-bold bg-blue-50/50' 

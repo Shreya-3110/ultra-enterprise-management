@@ -116,7 +116,8 @@ exports.login = async (req, res) => {
         email: user.email,
         role: user.role,
         schoolId: user.schoolId._id,
-        plan: user.schoolId.subscriptionPlan
+        plan: user.schoolId.subscriptionPlan,
+        hasCompletedTour: user.hasCompletedTour
       }
     });
   } catch (error) {
@@ -161,7 +162,8 @@ exports.verifyTwoFactor = async (req, res) => {
             email: user.email,
             role: user.role,
             schoolId: user.schoolId._id,
-            plan: user.schoolId.subscriptionPlan
+            plan: user.schoolId.subscriptionPlan,
+            hasCompletedTour: user.hasCompletedTour
          }
       });
    } catch (error) {
@@ -196,6 +198,25 @@ exports.upgradePlan = async (req, res) => {
        success: true,
        message: `Successfully upgraded to ${school.subscriptionPlan} Plan!`,
        newPlan: school.subscriptionPlan
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// @desc    Update tour completion status
+// @route   POST /api/v1/auth/tour-complete
+exports.updateTourStatus = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) return res.status(404).json({ success: false, message: 'User not found' });
+
+    user.hasCompletedTour = true;
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+      message: 'Tour status updated successfully'
     });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
