@@ -19,16 +19,33 @@ const autoLinkStudentToFee = async (studentId, schoolId) => {
       isActive: true
     });
 
-    if (!matchingFees || matchingFees.length === 0) {
-      console.log(`[Fee Linker] No matching fees found for Student: ${student.firstName} (Class: ${student.currentClass})`);
+    let allFeesToLink = [...matchingFees];
+
+    if (student.activeFeeStructures && student.activeFeeStructures.length > 0) {
+      const explicitFees = await FeeStructure.find({
+        _id: { $in: student.activeFeeStructures },
+        schoolId: schoolId
+      });
+      
+      const existingIds = new Set(allFeesToLink.map(f => f._id.toString()));
+      for (const fee of explicitFees) {
+        if (!existingIds.has(fee._id.toString())) {
+          allFeesToLink.push(fee);
+          existingIds.add(fee._id.toString());
+        }
+      }
+    }
+
+    if (!allFeesToLink || allFeesToLink.length === 0) {
+      console.log(`[Fee Linker] No fees found to link for Student: ${student.firstName}`);
       return [];
     }
 
-    console.log(`[Fee Linker] Found ${matchingFees.length} Match(es) for Student: ${student.firstName}`);
+    console.log(`[Fee Linker] Found ${allFeesToLink.length} Match(es) for Student: ${student.firstName}`);
 
     const linkedIds = [];
 
-    for (const matchingFee of matchingFees) {
+    for (const matchingFee of allFeesToLink) {
       linkedIds.push(matchingFee._id);
 
       // 2. Initialize the Ledger (StudentFee) for each fee if not exists
@@ -58,7 +75,7 @@ const autoLinkStudentToFee = async (studentId, schoolId) => {
       $addToSet: { activeFeeStructures: { $each: linkedIds } }
     });
 
-    return matchingFees;
+    return allFeesToLink;
   } catch (error) {
     console.error('[Fee Linker Error]', error.message);
     return [];
