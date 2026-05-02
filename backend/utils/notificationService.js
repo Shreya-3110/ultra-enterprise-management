@@ -214,3 +214,55 @@ exports.sendWhatsAppReminder = async (schoolId, studentId, phone, studentName, a
     return false;
   }
 };
+
+/**
+ * Sends a welcome email upon registration
+ */
+exports.sendWelcomeEmail = async (schoolId, recipient, name, role, schoolName = 'Ultra Enterprise') => {
+  try {
+    const transporter = await createTransporter();
+    
+    const isSchool = role === 'ADMIN';
+    const subject = isSchool ? `Welcome to Ultra Enterprise Management, ${name}!` : `Welcome to ${schoolName} Portal!`;
+    const roleText = isSchool ? 'School Administrator' : 'Parent';
+    
+    const text = isSchool 
+      ? `Dear ${name},\n\nWelcome to Ultra Enterprise Management! We are thrilled to have your school onboard. Your admin account is now active and ready to use.\n\nBest regards,\nThe Ultra Team`
+      : `Dear ${name},\n\nWelcome! Your ${roleText} account has been successfully registered. You can now log in to view your dashboard, check fee ledgers, and receive important updates.\n\nBest regards,\nUltra Enterprise Management`;
+
+    const mailOptions = {
+      from: '"Ultra Enterprise" <welcome@ultra.edu>',
+      to: recipient,
+      subject,
+      text,
+      html: `
+        <div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+          <h2 style="color: #3b82f6;">Welcome to Ultra Enterprise</h2>
+          <p>Dear <b>${name}</b>,</p>
+          <p>${text.replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>')}</p>
+          <p style="font-size: 12px; color: #64748b; margin-top: 20px;">Automated message from Ultra Enterprise Management</p>
+        </div>
+      `
+    };
+
+    const info = await transporter.sendMail(mailOptions);
+
+    // Log to DB
+    await Notification.create({
+      schoolId,
+      studentId: null,
+      type: 'EMAIL',
+      category: 'WELCOME',
+      recipient,
+      subject: mailOptions.subject,
+      message: mailOptions.text,
+      status: 'SENT'
+    });
+
+    console.log(`[Email] Welcome sent to ${recipient}: ${info.messageId}`);
+    return true;
+  } catch (error) {
+    console.error('[Email Error - Welcome]', error);
+    return false;
+  }
+};

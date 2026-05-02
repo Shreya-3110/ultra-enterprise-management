@@ -17,7 +17,7 @@ const notificationSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: ['FEE_DUE', 'OVERDUE_ALERT', 'PAYMENT_CONFIRMATION', 'GENERAL', 'URGENT'],
+    enum: ['FEE_DUE', 'OVERDUE_ALERT', 'PAYMENT_CONFIRMATION', 'GENERAL', 'URGENT', 'WELCOME'],
     default: 'GENERAL'
   },
   recipient: {

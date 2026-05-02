@@ -1,7 +1,7 @@
 const User = require('../models/User');
 const School = require('../models/School');
 const jwt = require('jsonwebtoken');
-const { createTransporter } = require('../utils/notificationService');
+const { createTransporter, sendWelcomeEmail } = require('../utils/notificationService');
 const nodemailer = require('nodemailer'); // Keep for getTestMessageUrl if fallbacks happen
 
 // Helper to generate token
@@ -33,6 +33,9 @@ exports.registerSchool = async (req, res) => {
     });
 
     const token = generateToken(user._id);
+
+    // Send welcome email asynchronously
+    sendWelcomeEmail(school._id, user.email, user.name, user.role, school.name);
 
     res.status(201).json({
       success: true,
@@ -71,6 +74,13 @@ exports.registerUser = async (req, res) => {
     });
 
     const token = generateToken(user._id);
+
+    // Fetch school name for the email
+    const school = await School.findById(schoolId);
+    // Send welcome email asynchronously
+    if (school) {
+      sendWelcomeEmail(schoolId, user.email, user.name, user.role, school.name);
+    }
 
     res.status(201).json({
       success: true,
