@@ -43,6 +43,7 @@ const Students = () => {
     firstName: '',
     lastName: '',
     currentClass: '',
+    section: 'A',
     parentName: '',
     parentEmail: '',
     parentPhone: '',
@@ -103,6 +104,7 @@ const Students = () => {
       firstName: '',
       lastName: '',
       currentClass: '',
+      section: 'A',
       parentName: '',
       parentEmail: '',
       parentPhone: '',
@@ -118,6 +120,7 @@ const Students = () => {
       firstName: student.firstName,
       lastName: student.lastName,
       currentClass: student.currentClass,
+      section: student.section || 'A',
       parentName: student.parentDetails?.name || '',
       parentEmail: student.parentDetails?.email || '',
       parentPhone: student.parentDetails?.phone || '',
@@ -134,6 +137,7 @@ const Students = () => {
       firstName: '',
       lastName: '',
       currentClass: '',
+      section: 'A',
       parentName: '',
       parentEmail: '',
       parentPhone: '',
@@ -339,7 +343,7 @@ const Students = () => {
                       </div>
                     </td>
                     <td className="px-8 py-6">
-                      <p className="text-sm font-bold text-slate-700">{student.currentClass}</p>
+                      <p className="text-sm font-bold text-slate-700">{student.currentClass} - {student.section || 'A'}</p>
                       <p className="text-xs text-slate-400 font-medium">Standard Section</p>
                     </td>
                     <td className="px-8 py-6">
@@ -562,16 +566,35 @@ const Students = () => {
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Class Assignment</label>
-                <input 
-                  required
-                  name="currentClass"
-                  value={formData.currentClass}
-                  onChange={handleInputChange}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white transition-all text-slate-700 font-medium"
-                  placeholder="e.g. X-A"
-                />
+              <div className="grid grid-cols-2 gap-5">
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Class Assignment</label>
+                  <select 
+                    required
+                    name="currentClass"
+                    value={formData.currentClass}
+                    onChange={handleInputChange}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white transition-all text-slate-700 font-bold appearance-none"
+                  >
+                    <option value="">Select Class</option>
+                    {['Nursery', 'LKG', 'UKG', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'].map(c => (
+                      <option key={c} value={c}>{c}</option>
+                    ))}
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Section</label>
+                  <select 
+                    name="section"
+                    value={formData.section}
+                    onChange={handleInputChange}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white transition-all text-slate-700 font-bold appearance-none"
+                  >
+                    {['A', 'B', 'C'].map(s => (
+                      <option key={s} value={s}>{s}</option>
+                    ))}
+                  </select>
+                </div>
               </div>
 
               <div className="space-y-2">

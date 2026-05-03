@@ -49,6 +49,10 @@ exports.createFee = async (req, res) => {
 
     const fee = await FeeStructure.create(req.body);
 
+    // Auto-link this new fee to any existing students that match the criteria
+    const { autoLinkFeeToStudents } = require('../utils/feeAutoLinker');
+    await autoLinkFeeToStudents(fee);
+
     // Audit Log
     await logAction({
       schoolId: req.user.schoolId,

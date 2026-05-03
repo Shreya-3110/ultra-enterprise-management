@@ -34,7 +34,7 @@ const Fees = () => {
     feeHeads: [{ headName: 'Tuition Fee', amount: '' }],
     amount: 0,
     frequency: 'MONTHLY',
-    applicableClasses: '',
+    applicableClasses: [],
     installments: [],
     lateFee: 0,
     lateFeeFrequency: 'FIXED'
@@ -121,10 +121,7 @@ const Fees = () => {
     try {
       setSubmitting(true);
       const payload = {
-        ...formData,
-        applicableClasses: typeof formData.applicableClasses === 'string' 
-          ? formData.applicableClasses.split(',').map(c => c.trim()) 
-          : formData.applicableClasses
+        ...formData
       };
 
       const response = await axios.post(`${API_BASE_URL}/fees`, payload, {
@@ -140,7 +137,7 @@ const Fees = () => {
           feeHeads: [{ headName: 'Tuition Fee', amount: '' }],
           amount: 0,
           frequency: 'MONTHLY',
-          applicableClasses: '',
+          applicableClasses: [],
           installments: [],
           lateFee: 0,
           lateFeeFrequency: 'FIXED'
@@ -390,14 +387,32 @@ const Fees = () => {
 
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Target Academic Classes</label>
-                  <input 
-                    required
-                    name="applicableClasses"
-                    value={formData.applicableClasses}
-                    onChange={handleInputChange}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white transition-all text-slate-700 font-medium"
-                    placeholder="e.g. IX, X, XI, XII (comma separated)"
-                  />
+                  <div className="flex flex-wrap gap-2">
+                    {['Nursery', 'LKG', 'UKG', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'].map(c => (
+                      <button
+                        type="button"
+                        key={c}
+                        onClick={() => {
+                          setFormData(prev => ({
+                            ...prev,
+                            applicableClasses: prev.applicableClasses.includes(c)
+                              ? prev.applicableClasses.filter(cls => cls !== c)
+                              : [...prev.applicableClasses, c]
+                          }))
+                        }}
+                        className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all border ${
+                          formData.applicableClasses.includes(c)
+                            ? 'bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-500/20'
+                            : 'bg-white text-slate-500 border-slate-200 hover:border-blue-300 hover:bg-blue-50'
+                        }`}
+                      >
+                        {c}
+                      </button>
+                    ))}
+                  </div>
+                  {formData.applicableClasses.length === 0 && (
+                    <p className="text-[10px] text-red-500 font-medium ml-1">Please select at least one target class</p>
+                  )}
                 </div>
 
                 {/* Late Fee Automation Section */}
@@ -504,7 +519,7 @@ const Fees = () => {
                   </button>
                   <button 
                     type="submit"
-                    disabled={submitting || (formData.installments.length > 0 && formData.installments.reduce((acc, curr) => acc + Number(curr.amount || 0), 0) !== Number(formData.amount))}
+                    disabled={submitting || formData.applicableClasses.length === 0 || (formData.installments.length > 0 && formData.installments.reduce((acc, curr) => acc + Number(curr.amount || 0), 0) !== Number(formData.amount))}
                     className="flex-1 py-4 bg-blue-600 text-white rounded-2xl text-sm font-bold hover:bg-blue-700 transition-all shadow-xl shadow-blue-500/30 disabled:opacity-50 disabled:bg-slate-300 disabled:shadow-none flex items-center justify-center gap-2 border-b-4 border-blue-800 active:border-b-0 active:translate-y-1"
                   >
                     {submitting ? <Loader2 className="animate-spin" size={18} /> : <ShieldCheck size={18} />}
