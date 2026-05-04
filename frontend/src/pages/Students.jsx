@@ -266,20 +266,20 @@ const Students = () => {
     <div className="space-y-8 max-w-7xl mx-auto animate-in fade-in duration-500">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Student Directory</h2>
-          <p className="text-sm text-slate-500 mt-1">Manage admissions, classes, and guardian details</p>
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Student Directory</h2>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Manage admissions, classes, and guardian details</p>
         </div>
         <div className="flex gap-3">
           <button 
             onClick={() => generateStudentReport(students)}
-            className="flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-50 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700/50 rounded-xl text-sm font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/80 dark:bg-slate-800/50 transition-colors"
           >
             <Download size={18} />
             Export to PDF
           </button>
           <button 
             onClick={() => setIsBulkModalOpen(true)}
-            className="flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-50 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700/50 rounded-xl text-sm font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/80 dark:bg-slate-800/50 transition-colors"
           >
             <FileDown size={18} />
             Bulk Import
@@ -295,14 +295,14 @@ const Students = () => {
         </div>
       </div>
 
-      <div className="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm shadow-slate-200/50">
-        <div className="p-6 border-b border-slate-100 flex flex-col md:flex-row items-center gap-4">
+      <div className="bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700/50 rounded-3xl overflow-hidden shadow-sm shadow-slate-200/50">
+        <div className="p-6 border-b border-slate-100 dark:border-slate-800 flex flex-col md:flex-row items-center gap-4">
           <div className="relative flex-1 w-full">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
             <input 
               type="text" 
               placeholder="Search by student name or record ID..." 
-              className="w-full bg-slate-50 border border-slate-200 rounded-2xl pl-11 pr-4 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white transition-all text-slate-700"
+              className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-2xl pl-11 pr-4 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -318,43 +318,43 @@ const Students = () => {
           ) : (
             <table className="w-full text-left">
               <thead>
-                <tr className="bg-slate-50/50">
-                  <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">Student Identity</th>
-                  <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">Class & Section</th>
-                  <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">Guardian Details</th>
-                  <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">Account Status</th>
-                  <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">Fee Plan</th>
-                  <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">Risk Profile</th>
-                  <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 text-right">Actions</th>
+                <tr className="bg-slate-50 dark:bg-slate-800/50/50">
+                  <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 dark:border-slate-800">Student Identity</th>
+                  <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 dark:border-slate-800">Class & Section</th>
+                  <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 dark:border-slate-800">Guardian Details</th>
+                  <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 dark:border-slate-800">Account Status</th>
+                  <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 dark:border-slate-800">Fee Plan</th>
+                  <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 dark:border-slate-800">Risk Profile</th>
+                  <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 dark:border-slate-800 text-right">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {students.map((student, idx) => (
-                  <tr key={student._id} className={`${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/20'} hover:bg-blue-50/30 transition-colors group`}>
+                  <tr key={student._id} className={`${idx % 2 === 0 ? 'bg-white dark:bg-[#111827]' : 'bg-slate-50 dark:bg-slate-800/50/20'} hover:bg-blue-50/30 transition-colors group`}>
                     <td className="px-8 py-6">
                       <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center font-bold text-slate-500 text-xs shadow-sm shadow-slate-100 group-hover:border-blue-200 transition-colors">
+                        <div className="w-10 h-10 rounded-xl bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700/50 flex items-center justify-center font-bold text-slate-500 dark:text-slate-400 text-xs shadow-sm shadow-slate-100 group-hover:border-blue-200 transition-colors">
                           {student.firstName[0]}{student.lastName[0]}
                         </div>
                         <div>
-                          <p className="font-bold text-sm text-slate-800 tracking-tight">{student.firstName} {student.lastName}</p>
+                          <p className="font-bold text-sm text-slate-800 dark:text-slate-100 tracking-tight">{student.firstName} {student.lastName}</p>
                           <p className="text-[10px] text-slate-400 font-bold uppercase tracking-tighter mt-0.5">{student.admissionNumber}</p>
                         </div>
                       </div>
                     </td>
                     <td className="px-8 py-6">
-                      <p className="text-sm font-bold text-slate-700">{student.currentClass} - {student.section || 'A'}</p>
+                      <p className="text-sm font-bold text-slate-700 dark:text-slate-300">{student.currentClass} - {student.section || 'A'}</p>
                       <p className="text-xs text-slate-400 font-medium">Standard Section</p>
                     </td>
                     <td className="px-8 py-6">
-                      <p className="text-sm text-slate-700 font-bold">{student.parentDetails?.name}</p>
+                      <p className="text-sm text-slate-700 dark:text-slate-300 font-bold">{student.parentDetails?.name}</p>
                       <p className="text-xs text-slate-400 font-medium mt-0.5">{student.parentDetails?.phone}</p>
                     </td>
                     <td className="px-8 py-6">
                       <span className={`text-[10px] font-bold px-3 py-1 rounded-full ${
                         student.status === 'ACTIVE' 
                         ? 'bg-green-50 text-green-600 border border-green-100' 
-                        : 'bg-slate-100 text-slate-400 border border-slate-200'
+                        : 'bg-slate-100 dark:bg-slate-800 text-slate-400 border border-slate-200 dark:border-slate-700/50'
                       }`}>
                         {student.status || 'ACTIVE'}
                       </span>
@@ -365,7 +365,7 @@ const Students = () => {
                           {typeof student.activeFeeStructure === 'object' ? student.activeFeeStructure.name : 'Linked'}
                         </span>
                       ) : (
-                        <span className="text-[10px] font-bold px-3 py-1 bg-slate-50 text-slate-400 border border-slate-100 rounded-full italic">No Plan Assigned</span>
+                        <span className="text-[10px] font-bold px-3 py-1 bg-slate-50 dark:bg-slate-800/50 text-slate-400 border border-slate-100 dark:border-slate-800 rounded-full italic">No Plan Assigned</span>
                       )}
                     </td>
                     <td className="px-8 py-6">
@@ -411,13 +411,13 @@ const Students = () => {
 
       {/* Bulk Import Modal */}
       {isBulkModalOpen && (
-        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
-          <div className="bg-white rounded-[2.5rem] w-full max-w-xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-200">
-            <div className="px-8 pt-8 pb-6 bg-slate-50/50">
+        <div className="fixed inset-0 bg-slate-900 dark:bg-slate-950/40 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-[#111827] rounded-[2.5rem] w-full max-w-xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-200">
+            <div className="px-8 pt-8 pb-6 bg-slate-50 dark:bg-slate-800/50/50">
               <div className="flex justify-between items-start mb-6">
                 <div>
-                  <h3 className="text-xl font-bold text-slate-900">Bulk Student Import</h3>
-                  <p className="text-xs text-slate-500 mt-1">Upload a CSV file to add multiple students at once.</p>
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white">Bulk Student Import</h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Upload a CSV file to add multiple students at once.</p>
                 </div>
                 <button 
                   onClick={() => { 
@@ -425,7 +425,7 @@ const Students = () => {
                     setBulkFile(null); 
                     setBulkResults(null); 
                   }}
-                  className="p-2 hover:bg-white rounded-xl transition-colors text-slate-400 hover:text-slate-600"
+                  className="p-2 hover:bg-white dark:bg-[#111827] rounded-xl transition-colors text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 dark:text-slate-400"
                 >
                   <X size={20} />
                 </button>
@@ -433,7 +433,7 @@ const Students = () => {
 
               {!bulkResults ? (
                 <form onSubmit={handleBulkUpload} className="space-y-6">
-                  <div className="border-2 border-dashed border-slate-200 rounded-[2rem] p-8 text-center bg-white hover:border-blue-400 transition-colors group">
+                  <div className="border-2 border-dashed border-slate-200 dark:border-slate-700/50 rounded-[2rem] p-8 text-center bg-white dark:bg-[#111827] hover:border-blue-400 transition-colors group">
                     <input 
                       type="file" 
                       accept=".csv"
@@ -445,7 +445,7 @@ const Students = () => {
                       <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
                         <Upload size={32} />
                       </div>
-                      <p className="text-sm font-bold text-slate-700">{bulkFile ? bulkFile.name : 'Choose CSV file'}</p>
+                      <p className="text-sm font-bold text-slate-700 dark:text-slate-300">{bulkFile ? bulkFile.name : 'Choose CSV file'}</p>
                       <p className="text-xs text-slate-400 mt-1" id="bulk-import-description">Drag and drop or click to browse</p>
                     </label>
                   </div>
@@ -498,7 +498,7 @@ const Students = () => {
                   {bulkResults.details.length > 0 && (
                     <div className="space-y-2 max-h-40 overflow-y-auto pr-2 custom-scrollbar">
                       {bulkResults.details.map((detail, idx) => (
-                        <div key={idx} className="p-3 bg-slate-50 border border-slate-100 rounded-xl text-[10px] text-slate-500 font-medium font-mono whitespace-nowrap overflow-hidden text-ellipsis">
+                        <div key={idx} className="p-3 bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 rounded-xl text-[10px] text-slate-500 dark:text-slate-400 font-medium font-mono whitespace-nowrap overflow-hidden text-ellipsis">
                           {detail}
                         </div>
                       ))}
@@ -511,7 +511,7 @@ const Students = () => {
                       setBulkResults(null);
                       setBulkFile(null);
                     }}
-                    className="w-full py-4 bg-slate-900 text-white rounded-2xl text-sm font-bold hover:bg-slate-800 transition-all"
+                    className="w-full py-4 bg-slate-900 dark:bg-slate-950 text-white rounded-2xl text-sm font-bold hover:bg-slate-800 transition-all"
                   >
                     Done
                   </button>
@@ -524,16 +524,16 @@ const Students = () => {
 
       {/* Unified Add/Edit Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-md animate-in fade-in duration-300">
-          <div className="bg-white w-full max-w-md rounded-[2.5rem] shadow-2xl border border-white/20 overflow-hidden animate-in slide-in-from-bottom-8 duration-500">
-            <div className="p-8 border-b border-slate-100 flex items-center justify-between">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900 dark:bg-slate-950/60 backdrop-blur-md animate-in fade-in duration-300">
+          <div className="bg-white dark:bg-[#111827] w-full max-w-md rounded-[2.5rem] shadow-2xl border border-white/20 overflow-hidden animate-in slide-in-from-bottom-8 duration-500">
+            <div className="p-8 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
               <div>
-                <h3 className="text-xl font-bold text-slate-900 tracking-tight">{editingId ? 'Update Student' : 'Register Student'}</h3>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">{editingId ? 'Update Student' : 'Register Student'}</h3>
                 <p className="text-xs text-slate-400 mt-1 font-medium">{editingId ? 'Modify existing academic record' : 'Add a new academic life cycle entry'}</p>
               </div>
               <button 
                 onClick={closeModal}
-                className="p-3 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-2xl transition-all"
+                className="p-3 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 dark:bg-slate-800 rounded-2xl transition-all"
               >
                 <X size={24} />
               </button>
@@ -549,7 +549,7 @@ const Students = () => {
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleInputChange}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white transition-all text-slate-700 font-medium"
+                    className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300 font-medium"
                     placeholder="Rahul"
                   />
                 </div>
@@ -560,7 +560,7 @@ const Students = () => {
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleInputChange}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white transition-all text-slate-700 font-medium"
+                    className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300 font-medium"
                     placeholder="Kumar"
                   />
                 </div>
@@ -574,7 +574,7 @@ const Students = () => {
                     name="currentClass"
                     value={formData.currentClass}
                     onChange={handleInputChange}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white transition-all text-slate-700 font-bold appearance-none"
+                    className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300 font-bold appearance-none"
                   >
                     <option value="">Select Class</option>
                     {['Nursery', 'LKG', 'UKG', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'].map(c => (
@@ -588,7 +588,7 @@ const Students = () => {
                     name="section"
                     value={formData.section}
                     onChange={handleInputChange}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white transition-all text-slate-700 font-bold appearance-none"
+                    className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300 font-bold appearance-none"
                   >
                     {['A', 'B', 'C'].map(s => (
                       <option key={s} value={s}>{s}</option>
@@ -604,7 +604,7 @@ const Students = () => {
                   name="parentName"
                   value={formData.parentName}
                   onChange={handleInputChange}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white transition-all text-slate-700 font-medium"
+                  className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300 font-medium"
                   placeholder="Full name of parent"
                 />
               </div>
@@ -617,7 +617,7 @@ const Students = () => {
                   name="parentEmail"
                   value={formData.parentEmail}
                   onChange={handleInputChange}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white transition-all text-slate-700 font-medium"
+                  className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300 font-medium"
                   placeholder="parent@example.com"
                 />
               </div>
@@ -629,7 +629,7 @@ const Students = () => {
                   name="parentPhone"
                   value={formData.parentPhone}
                   onChange={handleInputChange}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white transition-all text-slate-700 font-medium"
+                  className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300 font-medium"
                   placeholder="Mobile number"
                 />
               </div>
@@ -640,7 +640,7 @@ const Students = () => {
                   name="activeFeeStructure"
                   value={formData.activeFeeStructure}
                   onChange={handleInputChange}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white transition-all text-slate-700 font-bold appearance-none"
+                  className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300 font-bold appearance-none"
                 >
                   <option value="">No Active Plan</option>
                   {feeStructures.map(fee => (
@@ -657,7 +657,7 @@ const Students = () => {
                   name="status"
                   value={formData.status}
                   onChange={handleInputChange}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white transition-all text-slate-700 font-bold appearance-none"
+                  className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300 font-bold appearance-none"
                 >
                   <option value="INQUIRY">INQUIRY (Prospect)</option>
                   <option value="ACTIVE">ACTIVE (Enrolled)</option>
@@ -670,7 +670,7 @@ const Students = () => {
                 <button 
                   type="button"
                   onClick={closeModal}
-                  className="flex-1 py-4 bg-white border border-slate-200 text-slate-600 rounded-2xl text-sm font-bold hover:bg-slate-50 transition-all font-sans"
+                  className="flex-1 py-4 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700/50 text-slate-600 dark:text-slate-400 rounded-2xl text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-800/80 dark:bg-slate-800/50 transition-all font-sans"
                 >
                   Discard
                 </button>

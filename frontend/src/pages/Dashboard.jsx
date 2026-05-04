@@ -134,15 +134,15 @@ const Dashboard = () => {
     <div className="space-y-10 max-w-7xl mx-auto">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tighter flex items-center gap-2">
+          <h2 className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white tracking-tighter flex items-center gap-2">
             Intelligence Center
             <span className="text-[10px] bg-blue-600 text-white px-2 py-0.5 rounded-full uppercase tracking-widest font-black">AI Enabled</span>
           </h2>
-          <p className="text-sm text-slate-500 font-medium mt-1">Institutional health and predictive revenue modeling.</p>
+          <p className="text-sm text-slate-500 dark:text-slate-400 font-medium mt-1">Institutional health and predictive revenue modeling.</p>
         </div>
         <button 
            onClick={() => generateDashboardSummary(stats, recentLogs)}
-           className="px-6 py-3 bg-slate-900 text-white rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-black transition-all shadow-xl shadow-slate-900/20 active:scale-95"
+           className="px-6 py-3 bg-slate-900 dark:bg-slate-950 text-white rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-black transition-all shadow-xl shadow-slate-900/20 active:scale-95"
         >
            Export Strategy Report
         </button>
@@ -163,11 +163,11 @@ const Dashboard = () => {
           </div>
           <Link 
             to="/subscription" 
-            className="relative z-10 bg-white text-blue-600 px-8 py-4 rounded-2xl font-black hover:scale-105 transition-transform shadow-lg whitespace-nowrap"
+            className="relative z-10 bg-white dark:bg-[#111827] text-blue-600 px-8 py-4 rounded-2xl font-black hover:scale-105 transition-transform shadow-lg whitespace-nowrap"
           >
             Upgrade My Account
           </Link>
-          <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-64 h-64 bg-white/10 rounded-full blur-3xl group-hover:bg-white/20 transition-colors" />
+          <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-64 h-64 bg-white dark:bg-[#111827]/10 rounded-full blur-3xl group-hover:bg-white dark:bg-[#111827]/20 transition-colors" />
         </div>
       )}
 
@@ -181,12 +181,12 @@ const Dashboard = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Cash Flow Forecast Chart */}
-        <div className="lg:col-span-2 bg-white border border-slate-100 rounded-[2.5rem] p-8 shadow-xl shadow-slate-200/40 relative overflow-hidden group">
+        <div className="lg:col-span-2 bg-white dark:bg-[#111827] border border-slate-100 dark:border-slate-800 rounded-[2.5rem] p-8 shadow-xl shadow-slate-200/40 relative overflow-hidden group">
           <div className="absolute top-0 right-0 p-8">
              <Zap size={32} className="text-emerald-500 opacity-20" />
           </div>
           <div className="mb-8">
-            <h3 className="font-black text-slate-900 text-lg uppercase tracking-tight">Financial Forecasting</h3>
+            <h3 className="font-black text-slate-900 dark:text-white text-lg uppercase tracking-tight">Financial Forecasting</h3>
             <p className="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">Predicted Inbound Cash Flow (Next 6 Months)</p>
           </div>
           <div className="h-[300px]">
@@ -195,35 +195,35 @@ const Dashboard = () => {
         </div>
 
         {/* AI Deferral Alerts / Defaulter Risk */}
-        <div className="bg-slate-900 rounded-[2.5rem] flex flex-col shadow-2xl shadow-slate-900/40 p-8 border border-white/5">
+        <div className="bg-slate-900 dark:bg-slate-950 rounded-[2.5rem] flex flex-col shadow-2xl shadow-slate-900/40 p-8 border border-white/5">
           <div className="mb-8">
             <h3 className="font-black text-white text-lg flex items-center gap-2">
               <Zap size={18} className="text-amber-400 fill-amber-400" />
               Risk Analysis
             </h3>
-            <p className="text-[10px] text-slate-500 font-black uppercase tracking-widest mt-1">Critical Defaulter Warnings</p>
+            <p className="text-[10px] text-slate-500 dark:text-slate-400 font-black uppercase tracking-widest mt-1">Critical Defaulter Warnings</p>
           </div>
           <div className="flex-1 space-y-6">
             {aiData?.defaulterAlerts?.length === 0 ? (
               <div className="text-center py-10">
-                 <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4">
+                 <div className="w-12 h-12 bg-white dark:bg-[#111827]/5 rounded-full flex items-center justify-center mx-auto mb-4">
                     <CheckCircle2 size={24} className="text-emerald-500" />
                  </div>
                  <p className="text-xs text-slate-400 font-bold">No high-risk students detected.</p>
               </div>
             ) : (
               aiData?.defaulterAlerts?.map((risk, i) => (
-                <div key={i} className="bg-white/5 border border-white/10 p-4 rounded-2xl group hover:bg-white/10 transition-all cursor-pointer">
+                <div key={i} className="bg-white dark:bg-[#111827]/5 border border-white/10 p-4 rounded-2xl group hover:bg-white dark:bg-[#111827]/10 transition-all cursor-pointer">
                   <div className="flex justify-between items-start">
                      <div>
                         <p className="text-xs font-black text-white uppercase">{risk.name}</p>
-                        <p className="text-[9px] text-slate-500 font-bold">ADM: {risk.admissionNumber} • {risk.class}</p>
+                        <p className="text-[9px] text-slate-500 dark:text-slate-400 font-bold">ADM: {risk.admissionNumber} • {risk.class}</p>
                      </div>
                      <span className="text-[10px] font-black text-rose-500 bg-rose-500/10 px-2 py-0.5 rounded-full">{risk.riskScore}% RISK</span>
                   </div>
                   <div className="mt-3 flex gap-1 flex-wrap">
                     {risk.reasons.slice(0, 2).map((r, ri) => (
-                       <span key={ri} className="text-[8px] font-bold text-slate-400 bg-white/5 border border-white/5 px-2 py-0.5 rounded uppercase tracking-tighter">
+                       <span key={ri} className="text-[8px] font-bold text-slate-400 bg-white dark:bg-[#111827]/5 border border-white/5 px-2 py-0.5 rounded uppercase tracking-tighter">
                           {r.split(' ')[0]} {r.split(' ')[1]}...
                        </span>
                     ))}
@@ -232,7 +232,7 @@ const Dashboard = () => {
               ))
             )}
           </div>
-          <button className="mt-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl text-[10px] font-black text-slate-400 uppercase tracking-widest transition-all">
+          <button className="mt-8 py-4 bg-white dark:bg-[#111827]/5 hover:bg-white dark:bg-[#111827]/10 border border-white/10 rounded-2xl text-[10px] font-black text-slate-400 uppercase tracking-widest transition-all">
              Full Risk Audit
           </button>
         </div>
@@ -240,8 +240,8 @@ const Dashboard = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pb-10">
         <PlanGate requiredPlan="STANDARD" message="Standard plan required for AI analytics">
-          <div className="bg-white border border-slate-100 p-8 rounded-[2.5rem] shadow-xl shadow-slate-200/40 flex flex-col h-full relative overflow-hidden group">
-            <h3 className="text-lg font-black text-slate-900 mb-8 flex items-center gap-3">
+          <div className="bg-white dark:bg-[#111827] border border-slate-100 dark:border-slate-800 p-8 rounded-[2.5rem] shadow-xl shadow-slate-200/40 flex flex-col h-full relative overflow-hidden group">
+            <h3 className="text-lg font-black text-slate-900 dark:text-white mb-8 flex items-center gap-3">
               <span className="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-[1.2rem] flex items-center justify-center shadow-lg shadow-indigo-100/50">
                 <TrendingUp size={20} />
               </span>
@@ -249,16 +249,16 @@ const Dashboard = () => {
             </h3>
             <div className="space-y-4">
                {aiData?.riskProfiles?.slice(0, 4).map((p, i) => (
-                  <div key={i} className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-blue-400 transition-all">
+                  <div key={i} className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-800 group hover:border-blue-400 transition-all">
                      <div className="flex items-center gap-4">
                         <div className={`w-2 h-2 rounded-full ${p.riskScore > 60 ? 'bg-rose-500' : 'bg-blue-500'} animate-pulse`} />
                         <div>
-                           <p className="text-sm font-black text-slate-800 uppercase tracking-tight">{p.name}</p>
+                           <p className="text-sm font-black text-slate-800 dark:text-slate-100 uppercase tracking-tight">{p.name}</p>
                            <p className="text-[10px] text-slate-400 font-bold italic">{p.reasons[0] || 'Behavior Stable'}</p>
                         </div>
                      </div>
                      <div className="text-right">
-                        <p className="text-sm font-black text-slate-900">{p.riskScore}%</p>
+                        <p className="text-sm font-black text-slate-900 dark:text-white">{p.riskScore}%</p>
                         <p className={`text-[8px] font-black uppercase ${p.riskStatus === 'High' ? 'text-rose-500' : 'text-slate-400'}`}>{p.riskStatus} Profile</p>
                      </div>
                   </div>
@@ -267,9 +267,9 @@ const Dashboard = () => {
           </div>
         </PlanGate>
 
-        <div className="bg-white border border-slate-100 p-8 rounded-[2.5rem] shadow-xl shadow-slate-200/40">
+        <div className="bg-white dark:bg-[#111827] border border-slate-100 dark:border-slate-800 p-8 rounded-[2.5rem] shadow-xl shadow-slate-200/40">
            <div className="flex items-center justify-between mb-8">
-              <h3 className="text-lg font-black text-slate-900 flex items-center gap-3">
+              <h3 className="text-lg font-black text-slate-900 dark:text-white flex items-center gap-3">
                  <span className="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-[1.2rem] flex items-center justify-center shadow-lg shadow-emerald-100/50">
                    <Clock size={20} />
                  </span>
@@ -283,7 +283,7 @@ const Dashboard = () => {
                    <div className="absolute left-0 top-1.5 w-2 h-2 rounded-full bg-blue-500 border-2 border-white ring-4 ring-blue-50 flex-shrink-0 group-hover:scale-125 transition-transform" />
                    <div className="flex justify-between items-start">
                       <div>
-                         <p className="text-[11px] font-black text-slate-800 uppercase leading-none">{log.action.replace('_', ' ')}</p>
+                         <p className="text-[11px] font-black text-slate-800 dark:text-slate-100 uppercase leading-none">{log.action.replace('_', ' ')}</p>
                          <p className="text-[10px] text-slate-400 font-medium mt-1 italic">{log.details}</p>
                       </div>
                       <p className="text-[9px] font-black text-slate-300 uppercase tracking-tighter">{new Date(log.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
@@ -298,9 +298,9 @@ const Dashboard = () => {
 };
 
 const StatCard = ({ title, value, change, isUp, icon }) => (
-  <div className="bg-white border border-slate-200 p-6 rounded-2xl flex flex-col justify-between">
+  <div className="bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700/50 p-6 rounded-2xl flex flex-col justify-between">
     <div className="flex items-start justify-between">
-      <div className="p-2 bg-slate-50 rounded-lg text-slate-400 border border-slate-100">
+      <div className="p-2 bg-slate-50 dark:bg-slate-800/50 rounded-lg text-slate-400 border border-slate-100 dark:border-slate-800">
         {icon}
       </div>
       <div className={`flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full ${
@@ -312,7 +312,7 @@ const StatCard = ({ title, value, change, isUp, icon }) => (
     </div>
     <div className="mt-4">
       <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">{title}</p>
-      <p className="text-2xl font-bold text-slate-900 mt-1">{value}</p>
+      <p className="text-2xl font-bold text-slate-900 dark:text-white mt-1">{value}</p>
     </div>
   </div>
 );
@@ -320,7 +320,7 @@ const StatCard = ({ title, value, change, isUp, icon }) => (
 const InsightItem = ({ text }) => (
   <div className="flex items-start gap-3">
     <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0"></div>
-    <p className="text-xs text-slate-600 leading-relaxed font-medium">{text}</p>
+    <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-medium">{text}</p>
   </div>
 );
 
@@ -328,13 +328,13 @@ const MinimalRow = ({ name, type, status, amount }) => (
   <tr>
     <td className="px-8 py-4">
       <div className="flex items-center gap-3">
-        <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-[10px] font-bold text-slate-500">
+        <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-[10px] font-bold text-slate-500 dark:text-slate-400">
           {name.split(' ').map(n => n[0]).join('')}
         </div>
-        <span className="text-sm font-semibold text-slate-700">{name}</span>
+        <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">{name}</span>
       </div>
     </td>
-    <td className="px-8 py-4 text-xs font-medium text-slate-500">{type}</td>
+    <td className="px-8 py-4 text-xs font-medium text-slate-500 dark:text-slate-400">{type}</td>
     <td className="px-8 py-4">
       <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full ${
         status === 'Paid' ? 'bg-green-50 text-green-600' : 'bg-amber-50 text-amber-600'
@@ -342,7 +342,7 @@ const MinimalRow = ({ name, type, status, amount }) => (
         {status}
       </span>
     </td>
-    <td className="px-8 py-4 text-sm font-bold text-slate-900">{amount}</td>
+    <td className="px-8 py-4 text-sm font-bold text-slate-900 dark:text-white">{amount}</td>
   </tr>
 );
 

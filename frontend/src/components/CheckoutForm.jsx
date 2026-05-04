@@ -39,7 +39,7 @@ const CheckoutForm = ({ clientSecret, onPaymentSuccess, onCancel, amount }) => {
   const cardElementOptions = {
     style: {
       base: {
-        color: "#1e293b", // text-slate-800
+        color: "#1e293b", // text-slate-800 dark:text-slate-100
         fontFamily: 'Inter, system-ui, sans-serif',
         fontSmoothing: "antialiased",
         fontSize: "16px",
@@ -56,9 +56,9 @@ const CheckoutForm = ({ clientSecret, onPaymentSuccess, onCancel, amount }) => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
-        <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Card Details</label>
-        <div className="p-3 bg-white border border-slate-300 rounded-lg shadow-sm">
+      <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700/50">
+        <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-3">Card Details</label>
+        <div className="p-3 bg-white dark:bg-[#111827] border border-slate-300 rounded-lg shadow-sm">
            <CardElement options={cardElementOptions} />
         </div>
       </div>
@@ -75,7 +75,7 @@ const CheckoutForm = ({ clientSecret, onPaymentSuccess, onCancel, amount }) => {
           type="button" 
           onClick={onCancel}
           disabled={processing}
-          className="flex-1 py-3 bg-white border border-slate-300 rounded-xl text-slate-600 font-bold hover:bg-slate-50 transition-colors disabled:opacity-50"
+          className="flex-1 py-3 bg-white dark:bg-[#111827] border border-slate-300 rounded-xl text-slate-600 dark:text-slate-400 font-bold hover:bg-slate-50 dark:hover:bg-slate-800/80 dark:bg-slate-800/50 transition-colors disabled:opacity-50"
         >
           Cancel
         </button>

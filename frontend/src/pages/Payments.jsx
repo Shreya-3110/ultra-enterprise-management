@@ -120,8 +120,8 @@ const Payments = () => {
     <div className="space-y-10 max-w-7xl mx-auto animate-in fade-in duration-500">
       <div className="flex justify-between items-end">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Transaction Ledger</h2>
-          <p className="text-sm text-slate-500 mt-1">Real-time payment tracking and financial reconciliation</p>
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Transaction Ledger</h2>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Real-time payment tracking and financial reconciliation</p>
         </div>
         <button 
           onClick={() => setIsModalOpen(true)}
@@ -132,16 +132,16 @@ const Payments = () => {
         </button>
       </div>
 
-      <div className="bg-white border border-slate-200 rounded-[2.5rem] shadow-sm overflow-hidden">
-        <div className="p-8 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+      <div className="bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700/50 rounded-[2.5rem] shadow-sm overflow-hidden">
+        <div className="p-8 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-800/50/50">
           <div className="relative w-96">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
             <input 
               placeholder="Search by student or transaction ID..."
-              className="w-full bg-white border border-slate-200 rounded-2xl pl-11 pr-4 py-2.5 text-sm outline-none focus:ring-2 ring-blue-500/10 transition-all font-medium"
+              className="w-full bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700/50 rounded-2xl pl-11 pr-4 py-2.5 text-sm outline-none focus:ring-2 ring-blue-500/10 transition-all font-medium"
             />
           </div>
-          <button className="flex items-center gap-2 px-4 py-2 text-slate-600 font-bold text-sm hover:bg-white rounded-xl transition-all">
+          <button className="flex items-center gap-2 px-4 py-2 text-slate-600 dark:text-slate-400 font-bold text-sm hover:bg-white dark:bg-[#111827] rounded-xl transition-all">
             <Download size={16} />
             Export Ledger
           </button>
@@ -156,7 +156,7 @@ const Payments = () => {
           ) : (
             <table className="w-full">
               <thead>
-                <tr className="text-left border-b border-slate-100">
+                <tr className="text-left border-b border-slate-100 dark:border-slate-800">
                   <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Student</th>
                   <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Amount</th>
                   <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Method</th>
@@ -166,31 +166,31 @@ const Payments = () => {
               </thead>
               <tbody className="divide-y divide-slate-50">
                 {payments.map((payment) => (
-                  <tr key={payment._id} className="group hover:bg-slate-50/50 transition-colors">
+                  <tr key={payment._id} className="group hover:bg-slate-50 dark:hover:bg-slate-800/80 dark:bg-slate-800/50/50 transition-colors">
                     <td className="px-8 py-5">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 font-black text-xs">
                           {payment.studentId?.firstName?.[0]}{payment.studentId?.lastName?.[0]}
                         </div>
                         <div>
-                          <p className="font-bold text-slate-900 text-sm">{payment.studentId?.firstName} {payment.studentId?.lastName}</p>
+                          <p className="font-bold text-slate-900 dark:text-white text-sm">{payment.studentId?.firstName} {payment.studentId?.lastName}</p>
                           <p className="text-[10px] text-slate-400 font-medium font-mono uppercase tracking-tighter">ID: {payment._id.slice(-8)}</p>
                         </div>
                       </div>
                     </td>
                     <td className="px-8 py-5">
-                      <span className={`font-black text-sm ${payment.status === 'REFUNDED' ? 'text-red-500 line-through' : 'text-slate-900'}`}>
+                      <span className={`font-black text-sm ${payment.status === 'REFUNDED' ? 'text-red-500 line-through' : 'text-slate-900 dark:text-white'}`}>
                         ₹{payment.amountPaid?.toLocaleString()}
                       </span>
                     </td>
                     <td className="px-8 py-5">
                       <div className="flex items-center gap-2">
                         <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
-                        <span className="text-[11px] font-bold text-slate-600">{payment.method}</span>
+                        <span className="text-[11px] font-bold text-slate-600 dark:text-slate-400">{payment.method}</span>
                       </div>
                     </td>
                     <td className="px-8 py-5">
-                      <div className="flex items-center gap-2 text-slate-500">
+                      <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400">
                         <Clock size={14} />
                         <span className="text-[11px] font-medium">{new Date(payment.datePaid).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
                       </div>
@@ -225,16 +225,16 @@ const Payments = () => {
 
       {/* Record Payment Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-md animate-in fade-in duration-300">
-          <div className="bg-white w-full max-w-lg rounded-[2.5rem] shadow-2xl border border-white/20 overflow-hidden animate-in slide-in-from-bottom-8 duration-500">
-            <div className="p-8 border-b border-slate-100 flex items-center justify-between">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900 dark:bg-slate-950/60 backdrop-blur-md animate-in fade-in duration-300">
+          <div className="bg-white dark:bg-[#111827] w-full max-w-lg rounded-[2.5rem] shadow-2xl border border-white/20 overflow-hidden animate-in slide-in-from-bottom-8 duration-500">
+            <div className="p-8 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
               <div>
-                <h3 className="text-xl font-bold text-slate-900 tracking-tight">Record Collection</h3>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">Record Collection</h3>
                 <p className="text-xs text-slate-400 mt-1 font-medium">Link transaction to student ledger</p>
               </div>
               <button 
                 onClick={() => setIsModalOpen(false)}
-                className="p-3 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-2xl transition-all"
+                className="p-3 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 dark:bg-slate-800 rounded-2xl transition-all"
               >
                 <X size={24} />
               </button>
@@ -251,7 +251,7 @@ const Payments = () => {
                       name="studentId"
                       value={formData.studentId}
                       onChange={handleInputChange}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-2xl pl-11 pr-4 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white transition-all text-slate-700 font-medium appearance-none"
+                      className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-2xl pl-11 pr-4 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300 font-medium appearance-none"
                     >
                       <option value="">Select a student...</option>
                       {students.map(s => (
@@ -275,7 +275,7 @@ const Payments = () => {
                       name="feeStructureId"
                       value={formData.feeStructureId}
                       onChange={handleInputChange}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-2xl pl-11 pr-4 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white transition-all text-slate-700 font-medium appearance-none"
+                      className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-2xl pl-11 pr-4 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300 font-medium appearance-none"
                     >
                       <option value="">Advance / General Collection</option>
                       {fees.map(f => (
@@ -285,16 +285,16 @@ const Payments = () => {
                   </div>
                   
                   {formData.feeStructureId && (
-                    <div className="mt-4 p-4 bg-slate-50 rounded-2xl border border-slate-100 space-y-3 animate-in fade-in zoom-in-95 duration-300">
+                    <div className="mt-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-800 space-y-3 animate-in fade-in zoom-in-95 duration-300">
                       <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Fee Head Breakdown</p>
                       {fees.find(f => f._id === formData.feeStructureId)?.feeHeads?.map((head, i) => (
                         <div key={i} className="flex justify-between items-center text-xs">
-                          <span className="text-slate-500 font-bold">{head.headName}</span>
-                          <span className="text-slate-900 font-black">₹{head.amount?.toLocaleString()}</span>
+                          <span className="text-slate-500 dark:text-slate-400 font-bold">{head.headName}</span>
+                          <span className="text-slate-900 dark:text-white font-black">₹{head.amount?.toLocaleString()}</span>
                         </div>
                       ))}
                       {fees.find(f => f._id === formData.feeStructureId)?.lateFee > 0 && (
-                        <div className="flex justify-between items-center text-xs text-amber-600 font-bold pt-2 border-t border-slate-200/50">
+                        <div className="flex justify-between items-center text-xs text-amber-600 font-bold pt-2 border-t border-slate-200 dark:border-slate-700/50/50">
                           <span className="flex items-center gap-1"><Zap size={10} strokeWidth={3} /> Potential Late Penalty fine</span>
                           <span>+ ₹{fees.find(f => f._id === formData.feeStructureId)?.lateFee?.toLocaleString()}</span>
                         </div>
@@ -312,7 +312,7 @@ const Payments = () => {
                       name="amountPaid"
                       value={formData.amountPaid}
                       onChange={handleInputChange}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white transition-all text-slate-700 font-bold"
+                      className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300 font-bold"
                       placeholder="2500"
                     />
                   </div>
@@ -322,7 +322,7 @@ const Payments = () => {
                       name="method"
                       value={formData.method}
                       onChange={handleInputChange}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white transition-all text-slate-700 font-bold appearance-none"
+                      className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300 font-bold appearance-none"
                     >
                       <option value="UPI">UPI Transfer</option>
                       <option value="CASH">Cash Payment</option>
@@ -338,16 +338,16 @@ const Payments = () => {
                     name="notes"
                     value={formData.notes}
                     onChange={handleInputChange}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white transition-all text-slate-700 font-medium resize-none h-20"
+                    className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300 font-medium resize-none h-20"
                     placeholder="Transaction ID or specific remarks..."
                   />
                 </div>
 
-                <div className="pt-4 flex gap-4 bg-white sticky bottom-0 py-2">
+                <div className="pt-4 flex gap-4 bg-white dark:bg-[#111827] sticky bottom-0 py-2">
                   <button 
                     type="button"
                     onClick={() => setIsModalOpen(false)}
-                    className="flex-1 py-4 bg-white border border-slate-200 text-slate-600 rounded-2xl text-sm font-bold hover:bg-slate-50 transition-all active:scale-95"
+                    className="flex-1 py-4 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700/50 text-slate-600 dark:text-slate-400 rounded-2xl text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-800/80 dark:bg-slate-800/50 transition-all active:scale-95"
                   >
                     Discard
                   </button>

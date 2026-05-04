@@ -21,11 +21,11 @@ const PlanGate = ({ children, requiredPlan, message = "Upgrade to unlock this fe
   return (
     <div className="relative group cursor-not-allowed">
       {/* Locked Overlay */}
-      <div className="absolute inset-x-2 inset-y-2 z-10 bg-white/40 backdrop-blur-[1px] rounded-[1.5rem] opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-4 text-center border-2 border-blue-200 border-dashed">
+      <div className="absolute inset-x-2 inset-y-2 z-10 bg-white dark:bg-[#111827]/40 backdrop-blur-[1px] rounded-[1.5rem] opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-4 text-center border-2 border-blue-200 border-dashed">
         <div className="p-2 bg-blue-100 text-blue-600 rounded-xl mb-2 shadow-sm">
           <Zap size={18} fill="currentColor" />
         </div>
-        <p className="text-[10px] font-black text-slate-900 uppercase tracking-widest leading-tight">
+        <p className="text-[10px] font-black text-slate-900 dark:text-white uppercase tracking-widest leading-tight">
           {message}
         </p>
         <button className="mt-3 text-[10px] font-bold text-white bg-blue-600 px-3 py-1.5 rounded-lg shadow-lg shadow-blue-500/20 active:scale-95 transition-transform">

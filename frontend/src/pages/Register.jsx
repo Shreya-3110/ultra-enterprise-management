@@ -45,14 +45,14 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center p-6 font-sans">
-      <div className="w-full max-w-lg bg-white border border-slate-200 rounded-3xl shadow-xl shadow-slate-200/50 overflow-hidden animate-in fade-in zoom-in duration-500">
+    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#0B1121] flex items-center justify-center p-6 font-sans">
+      <div className="w-full max-w-lg bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700/50 rounded-3xl shadow-xl shadow-slate-200/50 overflow-hidden animate-in fade-in zoom-in duration-500">
         <div className="p-10">
           <div className="flex flex-col items-center text-center mb-10">
              <div className="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-600 mb-6 border border-indigo-100">
                <Building2 size={32} />
              </div>
-             <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Onboard Institution</h1>
+             <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Onboard Institution</h1>
              <p className="text-sm text-slate-400 mt-2 font-medium">Create your multi-tenant Ultra Enterprise workspace</p>
           </div>
 
@@ -67,7 +67,7 @@ const Register = () => {
                    required
                    value={formData.schoolName}
                    onChange={handleChange}
-                   className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-11 pr-4 py-3 text-sm outline-none focus:ring-2 ring-indigo-500/10 focus:bg-white transition-all text-slate-700"
+                   className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-xl pl-11 pr-4 py-3 text-sm outline-none focus:ring-2 ring-indigo-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300"
                    placeholder="e.g. Stanford University"
                  />
                </div>
@@ -84,7 +84,7 @@ const Register = () => {
                      required
                      value={formData.adminName}
                      onChange={handleChange}
-                     className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-11 pr-4 py-3 text-sm outline-none focus:ring-2 ring-indigo-500/10 focus:bg-white transition-all text-slate-700"
+                     className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-xl pl-11 pr-4 py-3 text-sm outline-none focus:ring-2 ring-indigo-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300"
                      placeholder="John Doe"
                    />
                  </div>
@@ -100,7 +100,7 @@ const Register = () => {
                      required
                      value={formData.email}
                      onChange={handleChange}
-                     className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-11 pr-4 py-3 text-sm outline-none focus:ring-2 ring-indigo-500/10 focus:bg-white transition-all text-slate-700"
+                     className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-xl pl-11 pr-4 py-3 text-sm outline-none focus:ring-2 ring-indigo-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300"
                      placeholder="admin@school.com"
                    />
                  </div>
@@ -117,7 +117,7 @@ const Register = () => {
                    required
                    value={formData.password}
                    onChange={handleChange}
-                   className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-11 pr-4 py-3 text-sm outline-none focus:ring-2 ring-indigo-500/10 focus:bg-white transition-all text-slate-700"
+                   className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-xl pl-11 pr-4 py-3 text-sm outline-none focus:ring-2 ring-indigo-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300"
                    placeholder="Minimum 6 characters"
                    minLength={6}
                  />
@@ -143,7 +143,7 @@ const Register = () => {
             </p>
           </form>
 
-          <div className="mt-8 pt-8 border-t border-slate-50 text-center">
+          <div className="mt-8 pt-8 border-t border-slate-50 dark:border-slate-800/50 text-center">
             <p className="text-xs text-slate-400 font-medium">
               Already have an enterprise deployed? <Link to="/login" className="text-indigo-600 font-bold hover:underline cursor-pointer">Sign In</Link>
             </p>

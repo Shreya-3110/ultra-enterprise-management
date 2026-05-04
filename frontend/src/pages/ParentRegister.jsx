@@ -47,14 +47,14 @@ const ParentRegister = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center p-6 font-sans">
-      <div className="w-full max-w-lg bg-white border border-slate-200 rounded-3xl shadow-xl shadow-slate-200/50 overflow-hidden animate-in fade-in zoom-in duration-500">
+    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#0B1121] flex items-center justify-center p-6 font-sans">
+      <div className="w-full max-w-lg bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700/50 rounded-3xl shadow-xl shadow-slate-200/50 overflow-hidden animate-in fade-in zoom-in duration-500">
         <div className="p-10">
           <div className="flex flex-col items-center text-center mb-10">
              <div className="w-16 h-16 bg-pink-50 rounded-2xl flex items-center justify-center text-pink-600 mb-6 border border-pink-100">
                <Heart size={32} />
              </div>
-             <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Parent Portal Signup</h1>
+             <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Parent Portal Signup</h1>
              <p className="text-sm text-slate-400 mt-2 font-medium">Link your account to your children's records</p>
           </div>
 
@@ -69,7 +69,7 @@ const ParentRegister = () => {
                    required
                    value={formData.name}
                    onChange={handleChange}
-                   className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-11 pr-4 py-3 text-sm outline-none focus:ring-2 ring-pink-500/10 focus:bg-white transition-all text-slate-700"
+                   className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-xl pl-11 pr-4 py-3 text-sm outline-none focus:ring-2 ring-pink-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300"
                    placeholder="e.g. Manisha Upadhyay"
                  />
                </div>
@@ -85,7 +85,7 @@ const ParentRegister = () => {
                    required
                    value={formData.email}
                    onChange={handleChange}
-                   className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-11 pr-4 py-3 text-sm outline-none focus:ring-2 ring-pink-500/10 focus:bg-white transition-all text-slate-700"
+                   className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-xl pl-11 pr-4 py-3 text-sm outline-none focus:ring-2 ring-pink-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300"
                    placeholder="Use the email provided to the school"
                  />
                </div>
@@ -101,7 +101,7 @@ const ParentRegister = () => {
                    required
                    value={formData.schoolId}
                    onChange={handleChange}
-                   className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-11 pr-4 py-3 text-sm outline-none focus:ring-2 ring-pink-500/10 focus:bg-white transition-all text-slate-700"
+                   className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-xl pl-11 pr-4 py-3 text-sm outline-none focus:ring-2 ring-pink-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300"
                    placeholder="Paste the unique School ID here"
                  />
                </div>
@@ -117,7 +117,7 @@ const ParentRegister = () => {
                    required
                    value={formData.password}
                    onChange={handleChange}
-                   className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-11 pr-4 py-3 text-sm outline-none focus:ring-2 ring-pink-500/10 focus:bg-white transition-all text-slate-700"
+                   className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-xl pl-11 pr-4 py-3 text-sm outline-none focus:ring-2 ring-pink-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300"
                    placeholder="Minimum 6 characters"
                    minLength={6}
                  />
@@ -140,12 +140,12 @@ const ParentRegister = () => {
             </button>
           </form>
 
-          <div className="mt-8 pt-8 border-t border-slate-50 text-center flex flex-col gap-3">
+          <div className="mt-8 pt-8 border-t border-slate-50 dark:border-slate-800/50 text-center flex flex-col gap-3">
             <p className="text-xs text-slate-400 font-medium">
               Are you a School Administrator? <Link to="/register" className="text-indigo-600 font-bold hover:underline cursor-pointer">Register Institution</Link>
             </p>
             <p className="text-xs text-slate-400 font-medium">
-              Already have an account? <Link to="/login" className="text-slate-600 font-bold hover:underline cursor-pointer">Sign In</Link>
+              Already have an account? <Link to="/login" className="text-slate-600 dark:text-slate-400 font-bold hover:underline cursor-pointer">Sign In</Link>
             </p>
           </div>
         </div>

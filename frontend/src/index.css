@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Base configuration (Light Mode defaults will be inherited) */
+body {
+  @apply bg-[#F8FAFC] text-slate-700 dark:bg-[#0B1121] dark:text-slate-300;
+}
 @theme {
   --color-primary: #3b82f6;
   --color-primary-hover: #2563eb;

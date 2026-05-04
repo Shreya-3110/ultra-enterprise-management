@@ -68,14 +68,14 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center p-6 font-sans">
-      <div className="w-full max-w-md bg-white border border-slate-200 rounded-3xl shadow-xl shadow-slate-200/50 overflow-hidden animate-in fade-in zoom-in duration-500">
+    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#0B1121] flex items-center justify-center p-6 font-sans">
+      <div className="w-full max-w-md bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700/50 rounded-3xl shadow-xl shadow-slate-200/50 overflow-hidden animate-in fade-in zoom-in duration-500">
         <div className="p-10">
           <div className="flex flex-col items-center text-center mb-10">
             <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-6 border border-blue-100">
               <ShieldCheck size={32} />
             </div>
-            <h1 className="text-2xl font-bold text-slate-900 tracking-tight">
+            <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
                {step === 'OTP' ? 'Security Verification' : 'Ultra Enterprise'}
             </h1>
             <p className="text-sm text-slate-400 mt-2 font-medium">
@@ -94,7 +94,7 @@ const Login = () => {
                      required
                      value={email}
                      onChange={(e) => setEmail(e.target.value)}
-                     className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-11 pr-4 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white transition-all text-slate-700"
+                     className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-xl pl-11 pr-4 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300"
                      placeholder="admin@school.com"
                    />
                  </div>
@@ -109,7 +109,7 @@ const Login = () => {
                      required
                      value={password}
                      onChange={(e) => setPassword(e.target.value)}
-                     className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-11 pr-4 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white transition-all text-slate-700"
+                     className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-xl pl-11 pr-4 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300"
                      placeholder="••••••••"
                    />
                  </div>
@@ -140,7 +140,7 @@ const Login = () => {
                    maxLength={6}
                    value={otpCode}
                    onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, ''))} // Numeric only
-                   className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 text-center text-2xl font-black tracking-[0.5em] outline-none focus:ring-2 ring-blue-500/10 focus:bg-white transition-all text-slate-700"
+                   className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-xl px-4 py-4 text-center text-2xl font-black tracking-[0.5em] outline-none focus:ring-2 ring-blue-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300"
                    placeholder="000000"
                  />
                </div>
@@ -160,7 +160,7 @@ const Login = () => {
                <button 
                  type="submit"
                  disabled={loading}
-                 className="w-full py-4 bg-slate-900 text-white rounded-xl text-sm font-bold hover:bg-slate-800 transition-all shadow-lg shadow-slate-900/20 disabled:opacity-50 flex items-center justify-center gap-2"
+                 className="w-full py-4 bg-slate-900 dark:bg-slate-950 text-white rounded-xl text-sm font-bold hover:bg-slate-800 transition-all shadow-lg shadow-slate-900/20 disabled:opacity-50 flex items-center justify-center gap-2"
                >
                  {loading && <Loader2 className="animate-spin" size={18} />}
                  {loading ? 'Verifying...' : 'Unlock Dashboard'}
@@ -169,14 +169,14 @@ const Login = () => {
                <button 
                   type="button"
                   onClick={() => { setStep('CREDENTIALS'); setOtpCode(''); setError(''); }}
-                  className="w-full text-xs font-bold text-slate-400 hover:text-slate-600 transition-colors"
+                  className="w-full text-xs font-bold text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 dark:text-slate-400 transition-colors"
                >
                   ← Back to Login
                </button>
              </form>
           )}
 
-          <div className="mt-8 pt-8 border-t border-slate-50 text-center">
+          <div className="mt-8 pt-8 border-t border-slate-50 dark:border-slate-800/50 text-center">
             <p className="text-xs text-slate-400 font-medium">
               Are you a Parent? <Link to="/register-parent" className="text-pink-600 font-bold hover:underline cursor-pointer">Join Parent Portal</Link>
             </p>

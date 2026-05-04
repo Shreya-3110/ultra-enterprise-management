@@ -58,24 +58,24 @@ const ParentDashboard = () => {
       {/* Welcome Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
-          <h1 className="text-4xl font-black text-slate-900 tracking-tight">Parent Portal</h1>
-          <p className="text-slate-500 mt-2 font-medium">Hello! Welcome back to your child's academic and fee overview.</p>
+          <h1 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">Parent Portal</h1>
+          <p className="text-slate-500 dark:text-slate-400 mt-2 font-medium">Hello! Welcome back to your child's academic and fee overview.</p>
         </div>
-        <div className="flex items-center gap-3 bg-white p-2 rounded-2xl border border-slate-100 shadow-sm">
+        <div className="flex items-center gap-3 bg-white dark:bg-[#111827] p-2 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm">
           <div className="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold">
             {children.length}
           </div>
           <div className="pr-4">
             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Children</p>
-            <p className="text-sm font-bold text-slate-900">Registered</p>
+            <p className="text-sm font-bold text-slate-900 dark:text-white">Registered</p>
           </div>
         </div>
       </div>
 
       {children.length === 0 ? (
-        <div className="bg-white p-12 rounded-3xl border border-dashed border-slate-200 text-center">
+        <div className="bg-white dark:bg-[#111827] p-12 rounded-3xl border border-dashed border-slate-200 dark:border-slate-700/50 text-center">
             <Users className="mx-auto text-slate-300 mb-4" size={48} />
-            <p className="text-lg font-bold text-slate-600">No matching child records found.</p>
+            <p className="text-lg font-bold text-slate-600 dark:text-slate-400">No matching child records found.</p>
             <p className="text-slate-400 max-w-xs mx-auto mt-2">If your child was recently admitted, please ensure your email matches the one in school records.</p>
         </div>
       ) : (
@@ -87,7 +87,7 @@ const ParentDashboard = () => {
       )}
       {/* Mobile Bottom Navigation (Visible only on small screens) */}
       <div className="md:hidden fixed bottom-6 left-6 right-6 z-50">
-        <div className="bg-slate-900 shadow-2xl shadow-slate-900/40 rounded-[2rem] p-3 flex items-center justify-around border border-white/10 backdrop-blur-xl">
+        <div className="bg-slate-900 dark:bg-slate-950 shadow-2xl shadow-slate-900/40 rounded-[2rem] p-3 flex items-center justify-around border border-white/10 backdrop-blur-xl">
           <button className="flex flex-col items-center gap-1 text-white">
             <div className="w-10 h-10 rounded-2xl bg-blue-600 flex items-center justify-center">
               <Users size={18} />
@@ -95,19 +95,19 @@ const ParentDashboard = () => {
             <span className="text-[10px] font-black uppercase tracking-tighter">Kids</span>
           </button>
           <button className="flex flex-col items-center gap-1 text-slate-400">
-            <div className="w-10 h-10 rounded-2xl bg-white/5 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-2xl bg-white dark:bg-[#111827]/5 flex items-center justify-center">
               <Receipt size={18} />
             </div>
             <span className="text-[10px] font-black uppercase tracking-tighter">History</span>
           </button>
           <button className="flex flex-col items-center gap-1 text-slate-400">
-            <div className="w-10 h-10 rounded-2xl bg-white/5 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-2xl bg-white dark:bg-[#111827]/5 flex items-center justify-center">
               <Calendar size={18} />
             </div>
             <span className="text-[10px] font-black uppercase tracking-tighter">Events</span>
           </button>
           <button className="flex flex-col items-center gap-1 text-slate-400">
-            <div className="w-10 h-10 rounded-2xl bg-white/5 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-2xl bg-white dark:bg-[#111827]/5 flex items-center justify-center">
               <CreditCard size={18} />
             </div>
             <span className="text-[10px] font-black uppercase tracking-tighter">Wallet</span>
@@ -186,9 +186,9 @@ const ChildCard = ({ child }) => {
     };
 
     return (
-        <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-2xl shadow-slate-200/50 overflow-hidden flex flex-col group hover:border-blue-400 transition-all duration-300">
+        <div className="bg-white dark:bg-[#111827] rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-2xl shadow-slate-200/50 overflow-hidden flex flex-col group hover:border-blue-400 transition-all duration-300">
             {/* Child Profile Header - App Style */}
-            <div className="bg-slate-900 p-6 md:p-8 text-white relative">
+            <div className="bg-slate-900 dark:bg-slate-950 p-6 md:p-8 text-white relative">
                 <div className="absolute top-0 right-0 w-48 h-48 bg-blue-500/20 rounded-full blur-[80px] -translate-y-12 translate-x-12" />
                 <div className="relative flex items-center gap-5">
                     <div className="w-16 h-16 md:w-20 md:h-20 rounded-[1.5rem] bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-500/30">
@@ -200,8 +200,8 @@ const ChildCard = ({ child }) => {
                             <div className="bg-emerald-500/20 text-emerald-400 text-[10px] font-black px-3 py-1 rounded-full border border-emerald-500/30 uppercase tracking-widest">Active</div>
                         </div>
                         <div className="flex flex-wrap items-center gap-2 mt-2">
-                            <span className="text-[10px] font-bold px-2 py-1 bg-white/5 rounded-lg border border-white/10 uppercase">ID: {child.admissionNumber}</span>
-                            <span className="text-[10px] font-bold px-2 py-1 bg-white/5 rounded-lg border border-white/10 uppercase">Class: {child.currentClass}</span>
+                            <span className="text-[10px] font-bold px-2 py-1 bg-white dark:bg-[#111827]/5 rounded-lg border border-white/10 uppercase">ID: {child.admissionNumber}</span>
+                            <span className="text-[10px] font-bold px-2 py-1 bg-white dark:bg-[#111827]/5 rounded-lg border border-white/10 uppercase">Class: {child.currentClass}</span>
                         </div>
                     </div>
                 </div>
@@ -210,9 +210,9 @@ const ChildCard = ({ child }) => {
             {/* Content Body - Mobile Card Style */}
             <div className="p-6 md:p-8 space-y-8">
                 <div className="grid grid-cols-2 gap-3 md:gap-4">
-                    <div className="p-4 md:p-5 rounded-3xl bg-slate-50 border border-slate-100 shadow-sm">
+                    <div className="p-4 md:p-5 rounded-3xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 shadow-sm">
                         <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Combined Due</p>
-                        <p className="text-lg md:text-xl font-black text-slate-900">₹{totalFee.toLocaleString()}</p>
+                        <p className="text-lg md:text-xl font-black text-slate-900 dark:text-white">₹{totalFee.toLocaleString()}</p>
                     </div>
                     <div className="p-4 md:p-5 rounded-3xl bg-blue-50 border border-blue-100 shadow-sm">
                         <p className="text-[10px] font-bold text-blue-400 uppercase tracking-widest mb-1">Pending</p>
@@ -221,34 +221,34 @@ const ChildCard = ({ child }) => {
                 </div>
 
                 {/* Tracking Bar */}
-                <div className="bg-white p-5 rounded-3xl border border-slate-100 shadow-inner shadow-slate-50">
+                <div className="bg-white dark:bg-[#111827] p-5 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-inner shadow-slate-50">
                    <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
                             <TrendingDown size={14} className="text-blue-500" />
-                            <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Fee Progress</span>
+                            <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Fee Progress</span>
                         </div>
                         <span className="text-xs font-black text-blue-600">{totalFee > 0 ? Math.round((paidFee / totalFee) * 100) : 0}% Paid</span>
                    </div>
-                   <div className="h-4 w-full bg-slate-100/50 rounded-full overflow-hidden p-1">
+                   <div className="h-4 w-full bg-slate-100 dark:bg-slate-800/50 rounded-full overflow-hidden p-1">
                         <div className="h-full bg-blue-600 rounded-full transition-all duration-1000 shadow-[0_0_12px_rgba(37,99,235,0.4)]" style={{ width: `${totalFee > 0 ? Math.min(100, (paidFee / totalFee) * 100) : 0}%` }} />
                    </div>
                    <p className="text-[10px] text-slate-400 mt-3 font-medium text-center">Your payments are protected with 256-bit encryption</p>
                 </div>
 
                 {/* Mobile View: Quick Tabs for Installments/Collections */}
-                <div className="bg-slate-50/50 rounded-[2rem] p-6 border border-slate-100">
+                <div className="bg-slate-50 dark:bg-slate-800/50/50 rounded-[2rem] p-6 border border-slate-100 dark:border-slate-800">
                     <div className="flex items-center gap-3 mb-6">
                         <Calendar size={18} className="text-blue-500" />
-                        <h4 className="text-sm font-black text-slate-900 uppercase tracking-widest">Installment Strategy</h4>
+                        <h4 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest">Installment Strategy</h4>
                     </div>
                     <div className="space-y-4 max-h-48 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-slate-200">
                          {child.installments && child.installments.length > 0 ? child.installments.map((inst, i) => (
-                            <div key={i} className="flex justify-between items-center bg-white p-3 rounded-2xl border border-slate-100 shadow-sm transition-transform active:scale-[0.98]">
+                            <div key={i} className="flex justify-between items-center bg-white dark:bg-[#111827] p-3 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm transition-transform active:scale-[0.98]">
                                <div className="flex items-center gap-3">
-                                  <div className={`w-8 h-8 rounded-xl flex items-center justify-center ${inst.status === 'PAID' ? 'bg-emerald-100 text-emerald-600' : 'bg-slate-100 text-slate-400'}`}>
+                                  <div className={`w-8 h-8 rounded-xl flex items-center justify-center ${inst.status === 'PAID' ? 'bg-emerald-100 text-emerald-600' : 'bg-slate-100 dark:bg-slate-800 text-slate-400'}`}>
                                     {inst.status === 'PAID' ? <CheckCircle2 size={16} /> : <div className="text-[10px] font-black font-mono">T{i+1}</div>}
                                   </div>
-                                  <span className="text-sm font-bold text-slate-700">₹{inst.amount.toLocaleString()}</span>
+                                  <span className="text-sm font-bold text-slate-700 dark:text-slate-300">₹{inst.amount.toLocaleString()}</span>
                                </div>
                                <div className="text-right">
                                   <p className={`text-[10px] font-black uppercase tracking-widest ${inst.status === 'PAID' ? 'text-emerald-600' : 'text-slate-400'}`}>
@@ -268,18 +268,18 @@ const ChildCard = ({ child }) => {
                     <button 
                        onClick={handleOpenPayment}
                        disabled={pendingFee <= 0 || !child.activeFeeStructures || child.activeFeeStructures.length === 0}
-                       className="col-span-2 py-5 bg-slate-900 hover:bg-black text-white rounded-[1.5rem] font-black transition-all shadow-xl shadow-slate-200 flex items-center justify-center gap-3 active:scale-95 disabled:grayscale"
+                       className="col-span-2 py-5 bg-slate-900 dark:bg-slate-950 hover:bg-black text-white rounded-[1.5rem] font-black transition-all shadow-xl shadow-slate-200 flex items-center justify-center gap-3 active:scale-95 disabled:grayscale"
                     >
                         <CreditCard size={20} />
                         <span className="uppercase tracking-widest text-sm">{pendingFee > 0 ? `Pay ₹${pendingFee.toLocaleString()} Now` : 'Fully Paid'}</span>
                     </button>
-                    <button className="py-4 bg-white border border-slate-200 rounded-2xl text-[10px] font-black text-slate-900 uppercase hover:bg-slate-50 transition-all flex items-center justify-center gap-2 active:scale-95">
+                    <button className="py-4 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700/50 rounded-2xl text-[10px] font-black text-slate-900 dark:text-white uppercase hover:bg-slate-50 dark:hover:bg-slate-800/80 dark:bg-slate-800/50 transition-all flex items-center justify-center gap-2 active:scale-95">
                         <Receipt size={14} />
                         Receipts
                     </button>
                     <button 
                         onClick={handleDownloadPDF}
-                        className="py-4 bg-white border border-slate-200 rounded-2xl text-[10px] font-black text-slate-900 uppercase hover:bg-slate-50 transition-all flex items-center justify-center gap-2 active:scale-95"
+                        className="py-4 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700/50 rounded-2xl text-[10px] font-black text-slate-900 dark:text-white uppercase hover:bg-slate-50 dark:hover:bg-slate-800/80 dark:bg-slate-800/50 transition-all flex items-center justify-center gap-2 active:scale-95"
                     >
                         <Download size={14} />
                         Statement
@@ -289,15 +289,15 @@ const ChildCard = ({ child }) => {
 
             {/* Payment Modal Overlay - App Style */}
             {isPaymentModalOpen && (
-               <div className="fixed inset-0 z-[100] flex items-end md:items-center justify-center bg-slate-900/60 backdrop-blur-md p-0 md:p-4">
-                  <div className="bg-white rounded-t-[3rem] md:rounded-[3rem] w-full max-w-md overflow-hidden shadow-2xl animate-in slide-in-from-bottom duration-300">
-                     <div className="bg-slate-900 p-8 text-white text-center rounded-b-[2.5rem]">
-                        <div className="w-12 h-1.5 bg-white/20 rounded-full mx-auto mb-6 md:hidden"></div>
+               <div className="fixed inset-0 z-[100] flex items-end md:items-center justify-center bg-slate-900 dark:bg-slate-950/60 backdrop-blur-md p-0 md:p-4">
+                  <div className="bg-white dark:bg-[#111827] rounded-t-[3rem] md:rounded-[3rem] w-full max-w-md overflow-hidden shadow-2xl animate-in slide-in-from-bottom duration-300">
+                     <div className="bg-slate-900 dark:bg-slate-950 p-8 text-white text-center rounded-b-[2.5rem]">
+                        <div className="w-12 h-1.5 bg-white dark:bg-[#111827]/20 rounded-full mx-auto mb-6 md:hidden"></div>
                         <h3 className="text-2xl font-bold tracking-tight">Secure Payment</h3>
                         <p className="text-slate-400 text-sm mt-1">Direct payment to School Bank</p>
                      </div>
                      <div className="p-8">
-                        <div className="flex items-center justify-between mb-8 pb-8 border-b border-slate-100">
+                        <div className="flex items-center justify-between mb-8 pb-8 border-b border-slate-100 dark:border-slate-800">
                            <span className="text-sm font-bold text-slate-400 uppercase tracking-widest">Total Amount</span>
                            <span className="text-3xl font-black text-blue-600">₹{pendingFee.toLocaleString()}</span>
                         </div>
@@ -305,7 +305,7 @@ const ChildCard = ({ child }) => {
                         {loadingIntent ? (
                            <div className="flex flex-col items-center justify-center py-12">
                               <Loader2 size={40} className="animate-spin text-blue-600 mb-4" />
-                              <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">Processing Gateway...</p>
+                              <p className="text-slate-500 dark:text-slate-400 font-bold uppercase tracking-widest text-[10px]">Processing Gateway...</p>
                            </div>
                         ) : clientSecret ? (
                            <Elements stripe={stripePromise} options={{ clientSecret }}>

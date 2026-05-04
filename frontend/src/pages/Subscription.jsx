@@ -91,8 +91,8 @@ const Subscription = () => {
     <div className="max-w-6xl mx-auto space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
       
       <div className="text-center max-w-2xl mx-auto pt-6">
-         <h1 className="text-4xl font-black text-slate-900 tracking-tight mb-4">Elevate Your Institution</h1>
-         <p className="text-lg text-slate-500 font-medium">
+         <h1 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight mb-4">Elevate Your Institution</h1>
+         <p className="text-lg text-slate-500 dark:text-slate-400 font-medium">
            You are currently on the <strong className="text-blue-600"> {user?.plan || 'BASIC'} </strong> plan. 
            Upgrade your SaaS tier to unlock heavy enterprise analytics and mass data processing capabilities instantly.
          </p>
@@ -106,8 +106,8 @@ const Subscription = () => {
             return (
                <div 
                   key={plan.name}
-                  className={`bg-white rounded-[2.5rem] p-8 border-2 transition-all relative flex flex-col h-full
-                     ${plan.popular ? 'border-blue-500 shadow-2xl shadow-blue-500/20 md:-mt-4' : 'border-slate-100 hover:border-slate-300 shadow-lg shadow-slate-200/50'}
+                  className={`bg-white dark:bg-[#111827] rounded-[2.5rem] p-8 border-2 transition-all relative flex flex-col h-full
+                     ${plan.popular ? 'border-blue-500 shadow-2xl shadow-blue-500/20 md:-mt-4' : 'border-slate-100 dark:border-slate-800 hover:border-slate-300 shadow-lg shadow-slate-200/50'}
                   `}
                >
                   {plan.popular && (
@@ -123,13 +123,13 @@ const Subscription = () => {
                         {plan.icon}
                      </div>
                      <div>
-                        <h3 className="text-xl font-bold text-slate-900">{plan.name}</h3>
+                        <h3 className="text-xl font-bold text-slate-900 dark:text-white">{plan.name}</h3>
                         <p className="text-xs font-semibold text-slate-400 mt-0.5">{plan.description}</p>
                      </div>
                   </div>
 
                   <div className="mb-8">
-                     <p className="text-4xl font-black text-slate-900 flex items-end gap-1">
+                     <p className="text-4xl font-black text-slate-900 dark:text-white flex items-end gap-1">
                         {plan.price}
                         <span className="text-sm font-bold text-slate-400 mb-1">/{plan.period}</span>
                      </p>
@@ -139,7 +139,7 @@ const Subscription = () => {
                      {plan.features.map((feat, idx) => (
                         <div key={idx} className="flex items-start gap-3">
                            <CheckCircle2 size={20} className={`text-${plan.popular ? 'blue' : 'green'}-500 shrink-0 mt-0.5`} />
-                           <span className="text-sm font-medium text-slate-600">{feat}</span>
+                           <span className="text-sm font-medium text-slate-600 dark:text-slate-400">{feat}</span>
                         </div>
                      ))}
                   </div>
@@ -148,9 +148,9 @@ const Subscription = () => {
                      disabled={isCurrent || isLoading}
                      onClick={() => handleUpgrade(plan.name)}
                      className={`w-full py-4 rounded-xl text-sm font-bold transition-all flex items-center justify-center gap-2
-                        ${isCurrent ? 'bg-slate-100 text-slate-400 cursor-not-allowed' : 
+                        ${isCurrent ? 'bg-slate-100 dark:bg-slate-800 text-slate-400 cursor-not-allowed' : 
                           plan.popular ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-600/30' : 
-                          'bg-slate-900 text-white hover:bg-slate-800 shadow-lg shadow-slate-900/20'
+                          'bg-slate-900 dark:bg-slate-950 text-white hover:bg-slate-800 shadow-lg shadow-slate-900/20'
                         }
                      `}
                   >

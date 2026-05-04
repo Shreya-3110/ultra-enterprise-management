@@ -170,8 +170,8 @@ const Fees = () => {
     <div className="space-y-10 max-w-7xl mx-auto animate-in fade-in duration-500">
       <div className="flex justify-between items-end">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Fee Engine Configuration</h2>
-          <p className="text-sm text-slate-500 mt-1">Configure academic fee structures, heads, and auto-billing rules</p>
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Fee Engine Configuration</h2>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Configure academic fee structures, heads, and auto-billing rules</p>
         </div>
         <button 
           onClick={() => setIsModalOpen(true)}
@@ -190,13 +190,13 @@ const Fees = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {fees.map((fee) => (
-            <div key={fee._id} className="bg-white border border-slate-200 p-6 rounded-[2rem] flex flex-col hover:border-blue-300 transition-all group shadow-sm shadow-slate-100 relative overflow-hidden">
+            <div key={fee._id} className="bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700/50 p-6 rounded-[2rem] flex flex-col hover:border-blue-300 transition-all group shadow-sm shadow-slate-100 relative overflow-hidden">
               <div className="flex justify-between items-start mb-6">
-                <div className="p-3 bg-slate-50 rounded-2xl text-slate-400 group-hover:text-blue-500 group-hover:bg-blue-50 transition-colors">
+                <div className="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-2xl text-slate-400 group-hover:text-blue-500 group-hover:bg-blue-50 transition-colors">
                   <Layers size={20} />
                 </div>
                 <div className="flex gap-2">
-                  <span className="text-[9px] font-black text-slate-400 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-100 uppercase tracking-widest flex items-center gap-1">
+                  <span className="text-[9px] font-black text-slate-400 bg-slate-50 dark:bg-slate-800/50 px-2.5 py-1 rounded-lg border border-slate-100 dark:border-slate-800 uppercase tracking-widest flex items-center gap-1">
                     v{fee.version || 1}
                   </span>
                   <span className="text-[9px] font-black text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-100 uppercase tracking-widest">{fee.frequency}</span>
@@ -209,10 +209,10 @@ const Fees = () => {
                 </div>
               </div>
               
-              <h4 className="font-extrabold text-slate-900 text-lg mb-1 leading-tight">{fee.name}</h4>
+              <h4 className="font-extrabold text-slate-900 dark:text-white text-lg mb-1 leading-tight">{fee.name}</h4>
               <div className="flex items-center gap-2 mb-4">
                 <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">Category:</span>
-                <span className="text-[10px] font-black text-slate-700 bg-slate-100 px-2 py-0.5 rounded uppercase tracking-tighter">
+                <span className="text-[10px] font-black text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded uppercase tracking-tighter">
                    {fee.category || 'General'}
                 </span>
               </div>
@@ -221,10 +221,10 @@ const Fees = () => {
                 {Array.isArray(fee.applicableClasses) ? fee.applicableClasses.join(', ') : fee.applicableClasses}
               </p>
               
-              <div className="mt-auto pt-6 border-t border-slate-50 flex items-center justify-between">
+              <div className="mt-auto pt-6 border-t border-slate-50 dark:border-slate-800/50 flex items-center justify-between">
                 <div>
                   <p className="text-[10px] font-bold text-slate-300 uppercase">Total Plan Value</p>
-                  <span className="text-xl font-black text-slate-900">₹{fee.amount?.toLocaleString()}</span>
+                  <span className="text-xl font-black text-slate-900 dark:text-white">₹{fee.amount?.toLocaleString()}</span>
                 </div>
                 <button className="text-slate-300 group-hover:text-blue-500 group-hover:translate-x-1 transition-all">
                   <ChevronRight size={20} />
@@ -234,7 +234,7 @@ const Fees = () => {
               {fee.feeHeads && fee.feeHeads.length > 0 && (
                 <div className="mt-4 space-y-1">
                   {fee.feeHeads.map((h, i) => (
-                    <div key={i} className="flex justify-between items-center text-[10px] text-slate-500 font-medium">
+                    <div key={i} className="flex justify-between items-center text-[10px] text-slate-500 dark:text-slate-400 font-medium">
                       <span>{h.headName}</span>
                       <span className="font-bold">₹{h.amount?.toLocaleString()}</span>
                     </div>
@@ -243,14 +243,14 @@ const Fees = () => {
               )}
 
               {fee.installments && fee.installments.length > 0 && (
-                <div className="mt-6 pt-6 border-t border-slate-50 space-y-3">
+                <div className="mt-6 pt-6 border-t border-slate-50 dark:border-slate-800/50 space-y-3">
                   <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Installment Strategy</p>
                   <div className="space-y-2">
                     {fee.installments.map((inst, i) => (
                       <div key={i} className="flex justify-between items-center text-[11px]">
                         <div className="flex items-center gap-2">
                           <div className={`w-1.5 h-1.5 rounded-full ${inst.status === 'PAID' ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)]' : 'bg-slate-300'}`}></div>
-                          <span className="font-bold text-slate-600">₹{inst.amount?.toLocaleString()}</span>
+                          <span className="font-bold text-slate-600 dark:text-slate-400">₹{inst.amount?.toLocaleString()}</span>
                         </div>
                         <span className={`font-black uppercase tracking-tighter ${inst.status === 'PAID' ? 'text-green-600' : 'text-slate-400'}`}>
                           {inst.status === 'PAID' ? 'PAID' : new Date(inst.dueDate).toLocaleDateString('en-GB', { day: '2-digit', month: 'short' })}
@@ -267,16 +267,16 @@ const Fees = () => {
 
       {/* Dynamic Fee Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-md animate-in fade-in duration-300">
-          <div className="bg-white w-full max-w-2xl rounded-[2.5rem] shadow-2xl border border-white/20 overflow-hidden animate-in slide-in-from-bottom-8 duration-500">
-            <div className="p-8 border-b border-slate-100 flex items-center justify-between bg-white sticky top-0 z-10">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900 dark:bg-slate-950/60 backdrop-blur-md animate-in fade-in duration-300">
+          <div className="bg-white dark:bg-[#111827] w-full max-w-2xl rounded-[2.5rem] shadow-2xl border border-white/20 overflow-hidden animate-in slide-in-from-bottom-8 duration-500">
+            <div className="p-8 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-white dark:bg-[#111827] sticky top-0 z-10">
               <div>
-                <h3 className="text-xl font-bold text-slate-900 tracking-tight">Configure Fee Engine</h3>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">Configure Fee Engine</h3>
                 <p className="text-xs text-slate-400 mt-1 font-medium">Define complex pricing rules and installment models</p>
               </div>
               <button 
                 onClick={() => setIsModalOpen(false)}
-                className="p-3 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-2xl transition-all"
+                className="p-3 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 dark:bg-slate-800 rounded-2xl transition-all"
               >
                 <X size={24} />
               </button>
@@ -292,7 +292,7 @@ const Fees = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white transition-all text-slate-700 font-medium"
+                      className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300 font-medium"
                       placeholder="e.g. Class 10 - Standard Science"
                     />
                   </div>
@@ -303,7 +303,7 @@ const Fees = () => {
                       name="category"
                       value={formData.category}
                       onChange={handleInputChange}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white transition-all text-slate-700 font-bold appearance-none"
+                      className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300 font-bold appearance-none"
                     >
                       <option value="GENERAL">General/Open</option>
                       <option value="PREMIUM">Premium/Special</option>
@@ -318,7 +318,7 @@ const Fees = () => {
                       name="frequency"
                       value={formData.frequency}
                       onChange={handleInputChange}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white transition-all text-slate-700 font-bold appearance-none"
+                      className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-blue-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300 font-bold appearance-none"
                     >
                       <option value="MONTHLY">Monthly Billing</option>
                       <option value="QUARTERLY">Quarterly Cycle</option>
@@ -329,7 +329,7 @@ const Fees = () => {
                 </div>
 
                 {/* Multiple Fee Heads Section */}
-                <div className="space-y-4 pt-6 border-t border-slate-50">
+                <div className="space-y-4 pt-6 border-t border-slate-50 dark:border-slate-800/50">
                   <div className="flex items-center justify-between">
                     <div>
                       <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Multiple Fee Heads</label>
@@ -352,7 +352,7 @@ const Fees = () => {
                             placeholder="Head Name (e.g. Lab Fee)"
                             value={head.headName}
                             onChange={(e) => updateFeeHead(idx, 'headName', e.target.value)}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs outline-none focus:ring-2 ring-blue-500/10 focus:bg-white transition-all text-slate-700 font-medium"
+                            className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-xl px-4 py-2.5 text-xs outline-none focus:ring-2 ring-blue-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300 font-medium"
                           />
                         </div>
                         <div className="flex-1 space-y-1">
@@ -361,7 +361,7 @@ const Fees = () => {
                             placeholder="Amount (₹)"
                             value={head.amount}
                             onChange={(e) => updateFeeHead(idx, 'amount', e.target.value)}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs outline-none focus:ring-2 ring-blue-500/10 focus:bg-white transition-all text-slate-700 font-bold text-right"
+                            className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-xl px-4 py-2.5 text-xs outline-none focus:ring-2 ring-blue-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300 font-bold text-right"
                           />
                         </div>
                         <button 
@@ -376,7 +376,7 @@ const Fees = () => {
                     ))}
                   </div>
 
-                  <div className="p-4 bg-slate-900 rounded-2xl flex justify-between items-center shadow-lg shadow-slate-200">
+                  <div className="p-4 bg-slate-900 dark:bg-slate-950 rounded-2xl flex justify-between items-center shadow-lg shadow-slate-200">
                     <div className="flex items-center gap-2">
                        <ShieldCheck size={16} className="text-green-500" />
                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Aggregated Amount</span>
@@ -403,7 +403,7 @@ const Fees = () => {
                         className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all border ${
                           formData.applicableClasses.includes(c)
                             ? 'bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-500/20'
-                            : 'bg-white text-slate-500 border-slate-200 hover:border-blue-300 hover:bg-blue-50'
+                            : 'bg-white dark:bg-[#111827] text-slate-500 dark:text-slate-400 border-slate-200 dark:border-slate-700/50 hover:border-blue-300 hover:bg-blue-50'
                         }`}
                       >
                         {c}
@@ -416,7 +416,7 @@ const Fees = () => {
                 </div>
 
                 {/* Late Fee Automation Section */}
-                <div className="grid grid-cols-2 gap-6 pt-6 border-t border-slate-50">
+                <div className="grid grid-cols-2 gap-6 pt-6 border-t border-slate-50 dark:border-slate-800/50">
                   <div className="space-y-2">
                     <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Late Fee Penalty (₹)</label>
                     <div className="relative">
@@ -426,7 +426,7 @@ const Fees = () => {
                         name="lateFee"
                         value={formData.lateFee}
                         onChange={handleInputChange}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl pl-10 pr-5 py-3 text-sm outline-none focus:ring-2 ring-amber-500/10 focus:bg-white transition-all text-slate-700 font-bold"
+                        className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-2xl pl-10 pr-5 py-3 text-sm outline-none focus:ring-2 ring-amber-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300 font-bold"
                         placeholder="0"
                       />
                     </div>
@@ -437,7 +437,7 @@ const Fees = () => {
                       name="lateFeeFrequency"
                       value={formData.lateFeeFrequency}
                       onChange={handleInputChange}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-amber-500/10 focus:bg-white transition-all text-slate-700 font-bold appearance-none"
+                      className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-2xl px-5 py-3 text-sm outline-none focus:ring-2 ring-amber-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300 font-bold appearance-none"
                     >
                       <option value="FIXED">Single Fixed Fine</option>
                       <option value="DAILY">Daily Cumulative Fine</option>
@@ -446,7 +446,7 @@ const Fees = () => {
                 </div>
 
                 {/* Installments Section */}
-                <div className="space-y-4 pt-6 border-t border-slate-50">
+                <div className="space-y-4 pt-6 border-t border-slate-50 dark:border-slate-800/50">
                   <div className="flex items-center justify-between">
                     <div>
                       <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Installment Strategy</label>
@@ -469,7 +469,7 @@ const Fees = () => {
                           placeholder="Amount"
                           value={inst.amount}
                           onChange={(e) => updateInstallment(idx, 'amount', e.target.value)}
-                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-xs outline-none focus:ring-2 ring-blue-500/10 focus:bg-white transition-all text-slate-700 font-medium"
+                          className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-xl px-4 py-2 text-xs outline-none focus:ring-2 ring-blue-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300 font-medium"
                         />
                       </div>
                       <div className="flex-1 space-y-1">
@@ -477,7 +477,7 @@ const Fees = () => {
                           type="date"
                           value={inst.dueDate}
                           onChange={(e) => updateInstallment(idx, 'dueDate', e.target.value)}
-                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-xs outline-none focus:ring-2 ring-blue-500/10 focus:bg-white transition-all text-slate-700 font-medium"
+                          className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-xl px-4 py-2 text-xs outline-none focus:ring-2 ring-blue-500/10 focus:bg-white dark:bg-[#111827] transition-all text-slate-700 dark:text-slate-300 font-medium"
                         />
                       </div>
                       <button 
@@ -509,11 +509,11 @@ const Fees = () => {
                   )}
                 </div>
 
-                <div className="pt-10 flex gap-4 bg-white sticky bottom-0 z-10 py-4">
+                <div className="pt-10 flex gap-4 bg-white dark:bg-[#111827] sticky bottom-0 z-10 py-4">
                   <button 
                     type="button"
                     onClick={() => setIsModalOpen(false)}
-                    className="flex-1 py-4 bg-white border border-slate-200 text-slate-600 rounded-2xl text-sm font-bold hover:bg-slate-50 transition-all border-b-4 active:border-b-0 active:translate-y-1"
+                    className="flex-1 py-4 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700/50 text-slate-600 dark:text-slate-400 rounded-2xl text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-800/80 dark:bg-slate-800/50 transition-all border-b-4 active:border-b-0 active:translate-y-1"
                   >
                     Discard Changes
                   </button>

@@ -46,13 +46,13 @@ const Notifications = () => {
       {/* Header Area */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Communication Loop</h1>
-          <p className="text-slate-500 mt-1">Audit log of all automated parent alerts and reminders.</p>
+          <h1 className="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Communication Loop</h1>
+          <p className="text-slate-500 dark:text-slate-400 mt-1">Audit log of all automated parent alerts and reminders.</p>
         </div>
         <div className="flex items-center gap-2">
             <button 
                 onClick={fetchNotifications}
-                className="p-2.5 bg-white border border-slate-200 rounded-xl text-slate-600 hover:bg-slate-50 transition-all shadow-sm"
+                className="p-2.5 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700/50 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/80 dark:bg-slate-800/50 transition-all shadow-sm"
                 title="Refresh Logs"
             >
                 <RefreshCcw size={18} />
@@ -93,18 +93,18 @@ const Notifications = () => {
       </div>
 
       {/* Main Content Card */}
-      <div className="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
+      <div className="bg-white dark:bg-[#111827] rounded-3xl shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden">
         {/* Table Controls */}
-        <div className="p-6 border-b border-slate-50 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-50/30">
+        <div className="p-6 border-b border-slate-50 dark:border-slate-800/50 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-50 dark:bg-slate-800/50/30">
           <div className="relative flex-1 max-w-md">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
             <input 
               type="text" 
               placeholder="Search recipient or student..."
-              className="w-full pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-2xl text-sm focus:outline-none focus:ring-4 focus:ring-blue-50 focus:border-blue-400 transition-all shadow-sm"
+              className="w-full pl-12 pr-4 py-3 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700/50 rounded-2xl text-sm focus:outline-none focus:ring-4 focus:ring-blue-50 focus:border-blue-400 transition-all shadow-sm"
             />
           </div>
-          <div className="flex items-center gap-2 p-1 bg-slate-100 rounded-2xl">
+          <div className="flex items-center gap-2 p-1 bg-slate-100 dark:bg-slate-800 rounded-2xl">
             <FilterBtn active={filter === 'ALL'} onClick={() => setFilter('ALL')} label="All" />
             <FilterBtn active={filter === 'EMAIL'} onClick={() => setFilter('EMAIL')} label="Email" />
             <FilterBtn active={filter === 'WHATSAPP'} onClick={() => setFilter('WHATSAPP')} label="WhatsApp" />
@@ -115,13 +115,13 @@ const Notifications = () => {
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-slate-50/50">
-                <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">Timestamp</th>
-                <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">Recipient</th>
-                <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">Student</th>
-                <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">Type</th>
-                <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">Message Snippet</th>
-                <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 text-right">Status</th>
+              <tr className="bg-slate-50 dark:bg-slate-800/50/50">
+                <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 dark:border-slate-800">Timestamp</th>
+                <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 dark:border-slate-800">Recipient</th>
+                <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 dark:border-slate-800">Student</th>
+                <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 dark:border-slate-800">Type</th>
+                <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 dark:border-slate-800">Message Snippet</th>
+                <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 dark:border-slate-800 text-right">Status</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-50">
@@ -135,20 +135,20 @@ const Notifications = () => {
                 </tr>
               ) : (
                 filteredNotifications.map((note) => (
-                  <tr key={note._id} className="hover:bg-slate-50/50 transition-colors group">
+                  <tr key={note._id} className="hover:bg-slate-50 dark:hover:bg-slate-800/80 dark:bg-slate-800/50/50 transition-colors group">
                     <td className="px-8 py-6">
-                      <p className="text-sm font-medium text-slate-900">{new Date(note.sentAt).toLocaleDateString()}</p>
+                      <p className="text-sm font-medium text-slate-900 dark:text-white">{new Date(note.sentAt).toLocaleDateString()}</p>
                       <p className="text-[10px] font-bold text-slate-400">{new Date(note.sentAt).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</p>
                     </td>
                     <td className="px-8 py-6">
                       <div className="flex items-center gap-3">
-                        <div className={`p-2 rounded-lg bg-slate-100 text-slate-500`}>
+                        <div className={`p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400`}>
                           {note.type === 'EMAIL' ? <Mail size={16} /> : <MessageSquare size={16} />}
                         </div>
-                        <span className="text-sm font-semibold text-slate-700">{note.recipient}</span>
+                        <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">{note.recipient}</span>
                       </div>
                     </td>
-                    <td className="px-8 py-6 text-sm font-medium text-slate-600">
+                    <td className="px-8 py-6 text-sm font-medium text-slate-600 dark:text-slate-400">
                       {note.studentId ? `${note.studentId.firstName} ${note.studentId.lastName}` : 'N/A'}
                     </td>
                     <td className="px-8 py-6">
@@ -159,7 +159,7 @@ const Notifications = () => {
                         </span>
                     </td>
                     <td className="px-8 py-6 max-w-xs transition-all">
-                      <p className="text-xs text-slate-500 truncate group-hover:text-clip group-hover:whitespace-normal">
+                      <p className="text-xs text-slate-500 dark:text-slate-400 truncate group-hover:text-clip group-hover:whitespace-normal">
                         {note.message}
                       </p>
                     </td>
@@ -181,14 +181,14 @@ const Notifications = () => {
 };
 
 const StatCard = ({ icon, label, value, color }) => (
-  <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+  <div className="bg-white dark:bg-[#111827] p-6 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
     <div className={`absolute top-0 right-0 w-24 h-24 bg-${color}-500/5 rounded-full -translate-y-8 translate-x-8 transition-transform group-hover:scale-110`} />
     <div className="relative">
-      <div className={`p-3 rounded-2xl bg-white border border-slate-100 shadow-sm w-fit mb-4`}>
+      <div className={`p-3 rounded-2xl bg-white dark:bg-[#111827] border border-slate-100 dark:border-slate-800 shadow-sm w-fit mb-4`}>
         {icon}
       </div>
       <p className="text-sm font-medium text-slate-400">{label}</p>
-      <p className="text-2xl font-bold text-slate-900 mt-1">{value}</p>
+      <p className="text-2xl font-bold text-slate-900 dark:text-white mt-1">{value}</p>
     </div>
   </div>
 );
@@ -198,8 +198,8 @@ const FilterBtn = ({ active, onClick, label }) => (
     onClick={onClick}
     className={`px-4 py-2 rounded-xl text-xs font-bold transition-all
       ${active 
-        ? 'bg-white text-blue-600 shadow-sm' 
-        : 'text-slate-400 hover:text-slate-600'
+        ? 'bg-white dark:bg-[#111827] text-blue-600 shadow-sm' 
+        : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 dark:text-slate-400'
       }`}
   >
     {label}

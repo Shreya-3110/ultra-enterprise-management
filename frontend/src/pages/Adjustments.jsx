@@ -96,11 +96,11 @@ const Adjustments = () => {
         <div className="max-w-6xl mx-auto space-y-10 animate-in fade-in duration-500 pb-20">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                 <div>
-                   <h1 className="text-4xl font-black text-slate-900 tracking-tighter flex items-center gap-3">
+                   <h1 className="text-4xl font-black text-slate-900 dark:text-white tracking-tighter flex items-center gap-3">
                       <Scissors className="text-blue-600" size={36} />
                       Ledger Hardening
                    </h1>
-                   <p className="text-slate-500 font-medium mt-2">Manage refunds, wallet adjustments, and fine waivers.</p>
+                   <p className="text-slate-500 dark:text-slate-400 font-medium mt-2">Manage refunds, wallet adjustments, and fine waivers.</p>
                 </div>
                 
                 <div className="relative w-full max-w-md">
@@ -108,7 +108,7 @@ const Adjustments = () => {
                     <input 
                         type="text" 
                         placeholder="Search Student by ID or Name..."
-                        className="w-full pl-12 pr-4 py-4 bg-white border border-slate-200 rounded-2xl font-bold focus:ring-2 focus:ring-blue-500/20"
+                        className="w-full pl-12 pr-4 py-4 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700/50 rounded-2xl font-bold focus:ring-2 focus:ring-blue-500/20"
                         value={searchQuery}
                         onChange={e => setSearchQuery(e.target.value)}
                         onKeyDown={e => e.key === 'Enter' && searchStudent()}
@@ -122,9 +122,9 @@ const Adjustments = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Student Info & Wallet */}
                     <div className="lg:col-span-1 space-y-8">
-                        <div className="bg-slate-900 rounded-[2.5rem] p-8 text-white shadow-2xl relative overflow-hidden">
+                        <div className="bg-slate-900 dark:bg-slate-950 rounded-[2.5rem] p-8 text-white shadow-2xl relative overflow-hidden">
                             <div className="absolute top-0 right-0 p-8 opacity-10"><Wallet size={80} /></div>
-                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Active Ledger</p>
+                            <p className="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1">Active Ledger</p>
                             <h3 className="text-2xl font-bold uppercase tracking-tight">{student.firstName} {student.lastName}</h3>
                             <p className="text-sm text-slate-400 font-medium">{student.admissionNumber} • {student.currentClass}</p>
 
@@ -134,10 +134,10 @@ const Adjustments = () => {
                             </div>
                         </div>
 
-                        <div className="bg-white border border-slate-100 rounded-[2.5rem] p-8 shadow-xl">
-                            <h4 className="font-black text-slate-900 uppercase tracking-tight mb-6">Manual Adjustment</h4>
+                        <div className="bg-white dark:bg-[#111827] border border-slate-100 dark:border-slate-800 rounded-[2.5rem] p-8 shadow-xl">
+                            <h4 className="font-black text-slate-900 dark:text-white uppercase tracking-tight mb-6">Manual Adjustment</h4>
                             <div className="space-y-4">
-                                <div className="flex gap-2 p-1 bg-slate-50 rounded-xl">
+                                <div className="flex gap-2 p-1 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
                                     <button 
                                         onClick={() => setWalletAction('ADD')}
                                         className={`flex-1 py-2 rounded-lg text-[10px] font-black flex items-center justify-center gap-2 transition-all ${walletAction === 'ADD' ? 'bg-emerald-600 text-white shadow-lg' : 'text-slate-400'}`}
@@ -154,20 +154,20 @@ const Adjustments = () => {
                                 <input 
                                     type="number" 
                                     placeholder="Amount (₹)"
-                                    className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl font-bold"
+                                    className="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 rounded-2xl font-bold"
                                     value={walletAmount}
                                     onChange={e => setWalletAmount(e.target.value)}
                                 />
                                 <textarea 
                                     placeholder="Reason for adjustment..."
-                                    className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl font-medium text-sm min-h-[100px]"
+                                    className="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 rounded-2xl font-medium text-sm min-h-[100px]"
                                     value={reason}
                                     onChange={e => setReason(e.target.value)}
                                 />
                                 <button 
                                     disabled={isAdjusting}
                                     onClick={handleWalletAdjust}
-                                    className="w-full py-4 bg-slate-900 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-black transition-all shadow-lg active:scale-95"
+                                    className="w-full py-4 bg-slate-900 dark:bg-slate-950 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-black transition-all shadow-lg active:scale-95"
                                 >
                                     {isAdjusting ? <Loader2 className="animate-spin mx-auto" size={20} /> : 'Process Adjustment'}
                                 </button>
@@ -177,15 +177,15 @@ const Adjustments = () => {
 
                     {/* Refundable Payments */}
                     <div className="lg:col-span-2 space-y-8">
-                        <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-xl overflow-hidden">
-                            <div className="p-8 border-b border-slate-50 bg-slate-50/20 flex items-center justify-between">
-                                <h3 className="font-black text-slate-900 uppercase tracking-tight">Refundable Transactions</h3>
+                        <div className="bg-white dark:bg-[#111827] rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-xl overflow-hidden">
+                            <div className="p-8 border-b border-slate-50 dark:border-slate-800/50 bg-slate-50 dark:bg-slate-800/50/20 flex items-center justify-between">
+                                <h3 className="font-black text-slate-900 dark:text-white uppercase tracking-tight">Refundable Transactions</h3>
                                 <RotateCcw size={20} className="text-slate-300" />
                             </div>
                             <div className="overflow-x-auto">
                                 <table className="w-full text-left">
                                     <thead>
-                                        <tr className="border-b border-slate-50">
+                                        <tr className="border-b border-slate-50 dark:border-slate-800/50">
                                             <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Receipt ID</th>
                                             <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Amount</th>
                                             <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Status</th>
@@ -197,12 +197,12 @@ const Adjustments = () => {
                                             <tr><td colSpan="4" className="px-8 py-20 text-center text-slate-400 font-medium">No transactions found for this student.</td></tr>
                                         )}
                                         {payments.map((p) => (
-                                            <tr key={p._id} className="group hover:bg-slate-50/50 transition-all">
+                                            <tr key={p._id} className="group hover:bg-slate-50 dark:hover:bg-slate-800/80 dark:bg-slate-800/50/50 transition-all">
                                                 <td className="px-8 py-6">
-                                                    <p className="font-bold text-slate-700 uppercase text-xs tracking-tighter">{p._id.slice(-10)}</p>
+                                                    <p className="font-bold text-slate-700 dark:text-slate-300 uppercase text-xs tracking-tighter">{p._id.slice(-10)}</p>
                                                     <p className="text-[10px] text-slate-400 font-medium italic">Method: {p.paymentMethod}</p>
                                                 </td>
-                                                <td className="px-8 py-6 font-black text-slate-900">₹{p.amountPaid.toLocaleString()}</td>
+                                                <td className="px-8 py-6 font-black text-slate-900 dark:text-white">₹{p.amountPaid.toLocaleString()}</td>
                                                 <td className="px-8 py-6">
                                                     <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase ${p.status === 'REFUNDED' ? 'bg-rose-50 text-rose-600' : 'bg-emerald-50 text-emerald-600'}`}>
                                                         {p.status || 'PAID'}
@@ -226,12 +226,12 @@ const Adjustments = () => {
                         </div>
 
                         <div className="bg-indigo-50 border border-indigo-100 p-8 rounded-[2.5rem] flex items-center gap-6">
-                           <div className="w-16 h-16 bg-white text-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-100">
+                           <div className="w-16 h-16 bg-white dark:bg-[#111827] text-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-100">
                                <TrendingDown size={32} />
                            </div>
                            <div>
-                               <h4 className="font-bold text-slate-900">Fine Waiver Engine</h4>
-                               <p className="text-sm text-slate-500 leading-relaxed">To waive a late fine, go to the **Students** profile and use the **Fee Adjustment** tool on individual installments. This ensures legal compliance with the fee contract.</p>
+                               <h4 className="font-bold text-slate-900 dark:text-white">Fine Waiver Engine</h4>
+                               <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">To waive a late fine, go to the **Students** profile and use the **Fee Adjustment** tool on individual installments. This ensures legal compliance with the fee contract.</p>
                            </div>
                         </div>
                     </div>
@@ -240,7 +240,7 @@ const Adjustments = () => {
 
             {!student && !loading && (
                 <div className="py-40 text-center space-y-4">
-                    <div className="w-20 h-20 bg-slate-100 rounded-[2rem] flex items-center justify-center mx-auto text-slate-300">
+                    <div className="w-20 h-20 bg-slate-100 dark:bg-slate-800 rounded-[2rem] flex items-center justify-center mx-auto text-slate-300">
                         <Search size={40} />
                     </div>
                     <p className="text-slate-400 font-bold">Search for a student to begin financial adjustment.</p>

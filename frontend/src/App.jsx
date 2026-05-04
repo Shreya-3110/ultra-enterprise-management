@@ -23,6 +23,8 @@ import {
   Sparkles
 } from 'lucide-react';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { ThemeProvider, useTheme } from './context/ThemeContext';
+import { Sun, Moon } from 'lucide-react';
 import ProductTour from './components/ProductTour';
 
 // Lazy load pages for performance optimization
@@ -51,7 +53,7 @@ const RecoveryCenter = React.lazy(() => import('./pages/RecoveryCenter'));
 const PageLoader = () => (
   <div className="flex flex-col items-center justify-center min-h-[400px] w-full">
     <Loader2 className="animate-spin text-blue-600 mb-4" size={40} />
-    <p className="text-slate-500 font-medium animate-pulse">Loading dashboard components...</p>
+    <p className="text-slate-500 dark:text-slate-400 font-medium animate-pulse">Loading dashboard components...</p>
   </div>
 );
 
@@ -70,6 +72,7 @@ const Layout = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
   const [notifications, setNotifications] = React.useState([]);
   const [isNotifOpen, setIsNotifOpen] = React.useState(false);
+  const { isDark, toggleTheme } = useTheme();
 
   React.useEffect(() => {
     const fetchNotifs = async () => {
@@ -86,22 +89,22 @@ const Layout = ({ children }) => {
   }, [token]);
 
   return (
-    <div className="flex h-screen bg-[#F8FAFC] text-slate-700 font-sans overflow-hidden">
+    <div className="flex h-screen bg-[#F8FAFC] dark:bg-[#0B1121] text-slate-700 dark:text-slate-300 font-sans overflow-hidden">
       <ProductTour />
       {/* Sidebar Overlay for Mobile */}
       {isSidebarOpen && (
         <div 
-          className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 lg:hidden"
+          className="fixed inset-0 bg-slate-900 dark:bg-slate-950/50 backdrop-blur-sm z-40 lg:hidden"
           onClick={() => setIsSidebarOpen(false)}
         />
       )}
 
       {/* Sidebar */}
       <aside className={`
-        fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-slate-200 flex flex-col items-stretch transition-transform duration-300 lg:relative lg:translate-x-0
+        fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-[#111827] border-r border-slate-200 dark:border-slate-700/50 flex flex-col items-stretch transition-transform duration-300 lg:relative lg:translate-x-0
         ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
-        <div className="h-16 flex items-center justify-between px-8 border-b border-slate-100">
+        <div className="h-16 flex items-center justify-between px-8 border-b border-slate-100 dark:border-slate-800">
           <h1 className="text-xl font-bold text-blue-600 tracking-tight">
             Ultra Enterprise
           </h1>
@@ -142,19 +145,19 @@ const Layout = ({ children }) => {
             </>
           )}
           
-          <div id="support-section" className="mt-8 px-8 pt-4 border-t border-slate-50">
+          <div id="support-section" className="mt-8 px-8 pt-4 border-t border-slate-50 dark:border-slate-800/50">
             <h3 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4">Support</h3>
             <SidebarLink to="/settings" icon={<SettingsIcon size={20} />} label="Configuration" active={location.pathname === '/settings'} />
           </div>
         </nav>
 
         <div className="p-6">
-          <div className={`${user?.plan === 'PREMIUM' ? 'bg-blue-50 border-blue-100' : 'bg-slate-50 border-slate-200'} border rounded-xl p-4`}>
+          <div className={`${user?.plan === 'PREMIUM' ? 'bg-blue-50 border-blue-100' : 'bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700/50'} border rounded-xl p-4`}>
             <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">Subscription</p>
-            <p className={`text-sm font-bold ${user?.plan === 'PREMIUM' ? 'text-blue-700' : 'text-slate-700'}`}>
+            <p className={`text-sm font-bold ${user?.plan === 'PREMIUM' ? 'text-blue-700' : 'text-slate-700 dark:text-slate-300'}`}>
               {user?.plan || 'Basic'} Plan
             </p>
-            <Link to="/subscription" className="mt-3 block text-center w-full py-2 bg-white border border-slate-200 rounded-lg text-xs font-bold hover:bg-slate-50 transition-colors">
+            <Link to="/subscription" className="mt-3 block text-center w-full py-2 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700/50 rounded-lg text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-800/80 dark:bg-slate-800/50 transition-colors">
               {user?.plan === 'PREMIUM' ? 'Plan Details' : 'Upgrade Now'}
             </Link>
           </div>
@@ -164,26 +167,33 @@ const Layout = ({ children }) => {
       {/* Main Container */}
       <div className="flex-1 flex flex-col h-full overflow-hidden">
         {/* Top Navbar */}
-        <header id="top-navbar" className="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 sm:px-10 flex-shrink-0">
+        <header id="top-navbar" className="h-16 bg-white dark:bg-[#111827] border-b border-slate-200 dark:border-slate-700/50 flex items-center justify-between px-4 sm:px-10 flex-shrink-0">
           <div className="flex items-center gap-4">
             <button 
               onClick={() => setIsSidebarOpen(true)}
-              className="lg:hidden p-2 text-slate-500 hover:bg-slate-50 rounded-lg"
+              className="lg:hidden p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/80 dark:bg-slate-800/50 rounded-lg"
             >
               <LayoutDashboard size={20} />
             </button>
-            <div className="flex items-center gap-2 text-sm text-slate-500 font-medium hidden sm:flex">
+            <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 font-medium hidden sm:flex">
               <span>Home</span>
               <ChevronRight size={14} />
-              <span className="text-slate-900 capitalize">{location.pathname === '/dashboard' ? 'Dashboard' : location.pathname.substring(1)}</span>
+              <span className="text-slate-900 dark:text-white capitalize">{location.pathname === '/dashboard' ? 'Dashboard' : location.pathname.substring(1)}</span>
             </div>
           </div>
           
           <div className="flex items-center gap-3 sm:gap-6">
+            <button 
+              onClick={toggleTheme}
+              className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-slate-800 transition-all rounded-lg"
+              title="Toggle Theme"
+            >
+              {isDark ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
             <div className="relative">
               <button 
                 onClick={() => setIsNotifOpen(!isNotifOpen)}
-                className={`transition-colors p-2 rounded-lg relative ${isNotifOpen ? 'bg-blue-50 text-blue-600' : 'text-slate-400 hover:text-slate-600'}`}
+                className={`transition-colors p-2 rounded-lg relative ${isNotifOpen ? 'bg-blue-50 text-blue-600' : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 dark:text-slate-400'}`}
               >
                 <Bell size={20} />
                 {notifications.length > 0 && (
@@ -192,9 +202,9 @@ const Layout = ({ children }) => {
               </button>
 
               {isNotifOpen && (
-                <div className="absolute right-0 mt-3 w-80 bg-white rounded-2xl shadow-2xl border border-slate-100 py-4 z-[60] animate-in fade-in slide-in-from-top-2">
-                  <div className="px-6 pb-3 border-b border-slate-50 flex justify-between items-center">
-                    <h3 className="font-bold text-sm text-slate-900">Activity Hub</h3>
+                <div className="absolute right-0 mt-3 w-80 bg-white dark:bg-[#111827] rounded-2xl shadow-2xl border border-slate-100 dark:border-slate-800 py-4 z-[60] animate-in fade-in slide-in-from-top-2">
+                  <div className="px-6 pb-3 border-b border-slate-50 dark:border-slate-800/50 flex justify-between items-center">
+                    <h3 className="font-bold text-sm text-slate-900 dark:text-white">Activity Hub</h3>
                     <Link to="/communications" className="text-[10px] font-bold text-blue-600 uppercase hover:underline">View All</Link>
                   </div>
                   <div className="max-h-80 overflow-y-auto">
@@ -202,9 +212,9 @@ const Layout = ({ children }) => {
                       <div className="py-8 text-center text-slate-400 text-xs italic">No recent system activity</div>
                     ) : (
                       notifications.map(n => (
-                        <div key={n._id} className="px-6 py-4 hover:bg-slate-50 transition-colors border-b border-slate-50 last:border-0">
-                          <p className="text-[11px] font-bold text-slate-900 line-clamp-1">{n.subject || 'System Alert'}</p>
-                          <p className="text-[10px] text-slate-500 mt-0.5 line-clamp-2 leading-relaxed">{n.message}</p>
+                        <div key={n._id} className="px-6 py-4 hover:bg-slate-50 dark:hover:bg-slate-800/80 dark:bg-slate-800/50 transition-colors border-b border-slate-50 dark:border-slate-800/50 last:border-0">
+                          <p className="text-[11px] font-bold text-slate-900 dark:text-white line-clamp-1">{n.subject || 'System Alert'}</p>
+                          <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-2 leading-relaxed">{n.message}</p>
                           <p className="text-[9px] font-medium text-slate-300 mt-2 uppercase tracking-tighter">{new Date(n.sentAt).toLocaleString()}</p>
                         </div>
                       ))
@@ -216,7 +226,7 @@ const Layout = ({ children }) => {
             <div className="h-8 w-px bg-slate-200 hidden xs:block"></div>
             <div id="user-profile" className="flex items-center gap-3">
               <div className="text-right hidden md:block">
-                <p className="text-sm font-bold text-slate-900">{user?.name || 'Guest'}</p>
+                <p className="text-sm font-bold text-slate-900 dark:text-white">{user?.name || 'Guest'}</p>
                 <p className="text-[10px] font-medium text-slate-400">{user?.role || 'User'}</p>
               </div>
               <div className="w-9 h-9 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold border border-blue-200">
@@ -249,11 +259,11 @@ const SidebarLink = ({ to, icon, label, active, id }) => (
     className={`flex items-center gap-3 px-8 py-3 transition-all duration-200 relative group
       ${active 
         ? 'text-blue-600 font-bold bg-blue-50/50' 
-        : 'text-slate-500 hover:text-slate-900 hover:bg-slate-50'
+        : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white dark:text-white hover:bg-slate-50 dark:hover:bg-slate-800/80 dark:bg-slate-800/50'
       }`}
   >
     {active && <div className="absolute left-0 w-1 h-8 bg-blue-600 rounded-r-full" />}
-    <span className={`${active ? 'text-blue-600' : 'text-slate-400'} group-hover:text-slate-900 ml-1`}>
+    <span className={`${active ? 'text-blue-600' : 'text-slate-400'} group-hover:text-slate-900 dark:hover:text-white dark:text-white ml-1`}>
       {icon}
     </span>
     <span className="text-sm">{label}</span>
@@ -274,8 +284,9 @@ const DashboardSwitcher = () => {
 
 const App = () => {
   return (
-    <AuthProvider>
-      <Router>
+    <ThemeProvider>
+      <AuthProvider>
+        <Router>
         <React.Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/login" element={<Login />} />
@@ -410,7 +421,8 @@ const App = () => {
           </Routes>
         </React.Suspense>
       </Router>
-    </AuthProvider>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 

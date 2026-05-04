@@ -155,11 +155,11 @@ const Reports = () => {
   if (error) {
     return (
       <div className="h-full flex items-center justify-center min-h-[400px]">
-        <div className="bg-slate-50 border border-amber-200 p-10 rounded-[3rem] text-center shadow-2xl shadow-amber-500/10 max-w-md">
+        <div className="bg-slate-50 dark:bg-slate-800/50 border border-amber-200 p-10 rounded-[3rem] text-center shadow-2xl shadow-amber-500/10 max-w-md">
           <AlertCircle size={64} className="text-amber-500 mx-auto mb-6" />
-          <h2 className="text-2xl font-black text-slate-900 mb-2">Premium Analytics</h2>
-          <p className="text-slate-500 font-medium mb-8 leading-relaxed">{error}</p>
-          <button className="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-black transition-all">Upgrade Plan</button>
+          <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-2">Premium Analytics</h2>
+          <p className="text-slate-500 dark:text-slate-400 font-medium mb-8 leading-relaxed">{error}</p>
+          <button className="w-full py-4 bg-slate-900 dark:bg-slate-950 text-white rounded-2xl font-bold hover:bg-black transition-all">Upgrade Plan</button>
         </div>
       </div>
     );
@@ -171,21 +171,21 @@ const Reports = () => {
       {/* Dynamic Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
-          <h1 className="text-4xl md:text-5xl font-black tracking-tighter text-slate-900">Reports Console</h1>
-          <p className="text-slate-500 font-medium text-lg mt-2 italic">Institutional revenue & branch-wise collection intelligence.</p>
+          <h1 className="text-4xl md:text-5xl font-black tracking-tighter text-slate-900 dark:text-white">Reports Console</h1>
+          <p className="text-slate-500 dark:text-slate-400 font-medium text-lg mt-2 italic">Institutional revenue & branch-wise collection intelligence.</p>
         </div>
         <div className="flex flex-wrap gap-3">
             <button onClick={handleExportExcel} className="flex items-center gap-2 bg-emerald-50 text-emerald-700 border border-emerald-100 px-5 py-3 rounded-2xl font-black text-xs uppercase transition-all hover:bg-emerald-100 active:scale-95">
               <FileSpreadsheet size={16} /> Excel Export
             </button>
-            <button onClick={handleExportPDF} className="flex items-center gap-2 bg-slate-900 text-white px-5 py-3 rounded-2xl font-black text-xs uppercase transition-all hover:bg-black shadow-xl shadow-slate-900/20 active:scale-95">
+            <button onClick={handleExportPDF} className="flex items-center gap-2 bg-slate-900 dark:bg-slate-950 text-white px-5 py-3 rounded-2xl font-black text-xs uppercase transition-all hover:bg-black shadow-xl shadow-slate-900/20 active:scale-95">
               <FileText size={16} /> PDF Ledger
             </button>
         </div>
       </div>
 
       {/* Filter Matrix */}
-      <div className="bg-white p-6 rounded-[2.5rem] border border-slate-100 shadow-xl shadow-slate-200/40 grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="bg-white dark:bg-[#111827] p-6 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-xl shadow-slate-200/40 grid grid-cols-1 md:grid-cols-4 gap-6">
           <div className="space-y-2">
              <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2 px-1">
                 <Calendar size={12} /> Date Range
@@ -195,14 +195,14 @@ const Reports = () => {
                   type="date" 
                   value={filters.startDate}
                   onChange={(e) => setFilters({...filters, startDate: e.target.value})}
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-sm font-bold focus:outline-none focus:ring-2 focus:ring-blue-500/20" 
+                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 rounded-xl text-sm font-bold focus:outline-none focus:ring-2 focus:ring-blue-500/20" 
                 />
                 <span className="text-slate-300">→</span>
                 <input 
                   type="date" 
                   value={filters.endDate}
                   onChange={(e) => setFilters({...filters, endDate: e.target.value})}
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-sm font-bold focus:outline-none focus:ring-2 focus:ring-blue-500/20" 
+                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 rounded-xl text-sm font-bold focus:outline-none focus:ring-2 focus:ring-blue-500/20" 
                 />
              </div>
           </div>
@@ -211,7 +211,7 @@ const Reports = () => {
              <select 
                value={filters.class}
                onChange={(e) => setFilters({...filters, class: e.target.value})}
-               className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-sm font-bold"
+               className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 rounded-xl text-sm font-bold"
              >
                 <option value="">All Branches</option>
                 <option value="Class 1">Class 1</option>
@@ -223,7 +223,7 @@ const Reports = () => {
              <select 
                value={filters.category}
                onChange={(e) => setFilters({...filters, category: e.target.value})}
-               className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-sm font-bold"
+               className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 rounded-xl text-sm font-bold"
              >
                 <option value="">All Categories</option>
                 <option value="GENERAL">General</option>
@@ -245,8 +245,8 @@ const Reports = () => {
 
       {/* Analytics Visualization Group */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-         <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-xl overflow-hidden h-[400px]">
-             <h3 className="text-lg font-black text-slate-900 mb-6 flex items-center gap-3">
+         <div className="bg-white dark:bg-[#111827] p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-xl overflow-hidden h-[400px]">
+             <h3 className="text-lg font-black text-slate-900 dark:text-white mb-6 flex items-center gap-3">
                 <div className="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center"><BarChart3 size={18}/></div>
                 Collection Velocity
              </h3>
@@ -264,8 +264,8 @@ const Reports = () => {
                options={{ responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }} 
              />
          </div>
-         <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-xl overflow-hidden h-[400px]">
-             <h3 className="text-lg font-black text-slate-900 mb-6 flex items-center gap-3">
+         <div className="bg-white dark:bg-[#111827] p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-xl overflow-hidden h-[400px]">
+             <h3 className="text-lg font-black text-slate-900 dark:text-white mb-6 flex items-center gap-3">
                 <div className="w-8 h-8 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center"><PieChartIcon size={18}/></div>
                 Ledger Health Split
              </h3>
@@ -285,46 +285,46 @@ const Reports = () => {
       </div>
 
       {/* The Master Ledger Table */}
-      <div className="bg-slate-900 rounded-[3rem] border border-slate-800 shadow-2xl overflow-hidden">
+      <div className="bg-slate-900 dark:bg-slate-950 rounded-[3rem] border border-slate-800 shadow-2xl overflow-hidden">
           <div className="p-8 flex items-center justify-between border-b border-white/5">
              <div>
                 <h3 className="text-xl font-black text-white">Live Collection Ledger</h3>
-                <p className="text-slate-500 text-xs font-bold uppercase tracking-widest mt-1">Global Transaction Audit Trail</p>
+                <p className="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-widest mt-1">Global Transaction Audit Trail</p>
              </div>
-             <div className="bg-white/5 px-4 py-2 rounded-xl border border-white/10">
-                <p className="text-[10px] font-black text-slate-500 uppercase tracking-tighter">Total Inbound</p>
+             <div className="bg-white dark:bg-[#111827]/5 px-4 py-2 rounded-xl border border-white/10">
+                <p className="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-tighter">Total Inbound</p>
                 <p className="text-lg font-black text-blue-400">₹{ledger.reduce((s,i) => s + i.amountPaid, 0).toLocaleString()}</p>
              </div>
           </div>
           <div className="overflow-x-auto">
              <table className="w-full text-left">
                 <thead>
-                   <tr className="bg-white/2">
-                      <th className="px-8 py-5 text-[10px] font-black text-slate-500 uppercase tracking-widest">Date</th>
-                      <th className="px-8 py-5 text-[10px] font-black text-slate-500 uppercase tracking-widest">Student / Admission</th>
-                      <th className="px-8 py-5 text-[10px] font-black text-slate-500 uppercase tracking-widest">Fee Plan</th>
-                      <th className="px-8 py-5 text-[10px] font-black text-slate-500 uppercase tracking-widest">Method</th>
-                      <th className="px-8 py-5 text-[10px] font-black text-slate-500 uppercase tracking-widest text-right">Amount (₹)</th>
+                   <tr className="bg-white dark:bg-[#111827]/2">
+                      <th className="px-8 py-5 text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">Date</th>
+                      <th className="px-8 py-5 text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">Student / Admission</th>
+                      <th className="px-8 py-5 text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">Fee Plan</th>
+                      <th className="px-8 py-5 text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">Method</th>
+                      <th className="px-8 py-5 text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest text-right">Amount (₹)</th>
                    </tr>
                 </thead>
                 <tbody className="divide-y divide-white/5">
                    {ledger.length > 0 ? ledger.map((item) => (
-                      <tr key={item._id} className="hover:bg-white/5 transition-all text-sm group">
+                      <tr key={item._id} className="hover:bg-white dark:bg-[#111827]/5 transition-all text-sm group">
                          <td className="px-8 py-5 text-slate-400 font-medium">
                             {new Date(item.datePaid).toLocaleDateString()}
                          </td>
                          <td className="px-8 py-5">
                             <p className="font-bold text-white uppercase tracking-tight">{item.studentId?.firstName} {item.studentId?.lastName}</p>
-                            <p className="text-[10px] text-slate-500 font-black">{item.studentId?.admissionNumber} • {item.studentId?.currentClass}</p>
+                            <p className="text-[10px] text-slate-500 dark:text-slate-400 font-black">{item.studentId?.admissionNumber} • {item.studentId?.currentClass}</p>
                          </td>
                          <td className="px-8 py-5">
-                            <span className="px-3 py-1 bg-white/5 rounded-lg border border-white/10 text-xs font-bold text-slate-300">
+                            <span className="px-3 py-1 bg-white dark:bg-[#111827]/5 rounded-lg border border-white/10 text-xs font-bold text-slate-300">
                                {item.feeStructureId?.name}
                             </span>
                          </td>
                          <td className="px-8 py-5">
                             <p className="text-xs font-black text-blue-400 uppercase">{item.method}</p>
-                            <p className="text-[8px] text-slate-600 font-mono italic">{item.transactionId}</p>
+                            <p className="text-[8px] text-slate-600 dark:text-slate-400 font-mono italic">{item.transactionId}</p>
                          </td>
                          <td className="px-8 py-5 text-right">
                             <p className="text-lg font-black text-emerald-400">₹{item.amountPaid.toLocaleString()}</p>
@@ -335,7 +335,7 @@ const Reports = () => {
                       <tr>
                          <td colSpan="5" className="px-8 py-20 text-center">
                             {ledgerLoading ? <Loader2 size={32} className="animate-spin text-blue-600 mx-auto" /> : (
-                               <p className="text-slate-600 font-bold">No transactions found for the selected filters.</p>
+                               <p className="text-slate-600 dark:text-slate-400 font-bold">No transactions found for the selected filters.</p>
                             )}
                          </td>
                       </tr>

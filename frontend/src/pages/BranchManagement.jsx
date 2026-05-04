@@ -64,15 +64,15 @@ const BranchManagement = () => {
         <div className="max-w-7xl mx-auto space-y-10 animate-in fade-in duration-500 pb-20">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                 <div>
-                   <h1 className="text-4xl font-black text-slate-900 tracking-tighter flex items-center gap-3">
+                   <h1 className="text-4xl font-black text-slate-900 dark:text-white tracking-tighter flex items-center gap-3">
                       <Building2 className="text-blue-600" size={36} />
                       Head Office Console
                    </h1>
-                   <p className="text-slate-500 font-medium mt-2 italic">Global management of all institutional branch locations.</p>
+                   <p className="text-slate-500 dark:text-slate-400 font-medium mt-2 italic">Global management of all institutional branch locations.</p>
                 </div>
                 <button 
                    onClick={() => setIsModalOpen(true)}
-                   className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-black shadow-xl shadow-slate-900/20 flex items-center gap-3 transition-all hover:bg-black active:scale-95"
+                   className="bg-slate-900 dark:bg-slate-950 text-white px-8 py-4 rounded-2xl font-black shadow-xl shadow-slate-900/20 flex items-center gap-3 transition-all hover:bg-black active:scale-95"
                 >
                    <Plus size={20} />
                    Deploy New Branch
@@ -87,9 +87,9 @@ const BranchManagement = () => {
             </div>
 
             {/* Branch List */}
-            <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-xl overflow-hidden">
-                <div className="p-8 border-b border-slate-50 bg-slate-50/30 flex items-center justify-between">
-                    <h3 className="text-lg font-black text-slate-900 uppercase tracking-tight">Institutional Directory</h3>
+            <div className="bg-white dark:bg-[#111827] rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-xl overflow-hidden">
+                <div className="p-8 border-b border-slate-50 dark:border-slate-800/50 bg-slate-50 dark:bg-slate-800/50/30 flex items-center justify-between">
+                    <h3 className="text-lg font-black text-slate-900 dark:text-white uppercase tracking-tight">Institutional Directory</h3>
                     <div className="flex items-center gap-2 text-xs font-bold text-slate-400">
                         <Globe size={14} /> Global Sync: Active
                     </div>
@@ -97,7 +97,7 @@ const BranchManagement = () => {
                 <div className="overflow-x-auto">
                     <table className="w-full text-left">
                         <thead>
-                            <tr className="border-b border-slate-50">
+                            <tr className="border-b border-slate-50 dark:border-slate-800/50">
                                 <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Branch Name</th>
                                 <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Location</th>
                                 <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Plan</th>
@@ -107,23 +107,23 @@ const BranchManagement = () => {
                         </thead>
                         <tbody className="divide-y divide-slate-50">
                             {branches.map((branch) => (
-                                <tr key={branch._id} className="hover:bg-slate-50/50 transition-all group">
+                                <tr key={branch._id} className="hover:bg-slate-50 dark:hover:bg-slate-800/80 dark:bg-slate-800/50/50 transition-all group">
                                     <td className="px-8 py-6">
                                         <div className="flex items-center gap-4">
                                             <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
                                                 {branch.name.charAt(0)}
                                             </div>
-                                            <p className="font-bold text-slate-900">{branch.name}</p>
+                                            <p className="font-bold text-slate-900 dark:text-white">{branch.name}</p>
                                         </div>
                                     </td>
-                                    <td className="px-8 py-6 text-sm text-slate-500 font-medium">
+                                    <td className="px-8 py-6 text-sm text-slate-500 dark:text-slate-400 font-medium">
                                         <div className="flex items-center gap-2">
                                             <MapPin size={14} className="text-slate-300" />
                                             {branch.address?.city || 'Not set'}
                                         </div>
                                     </td>
                                     <td className="px-8 py-6">
-                                        <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase border ${branch.subscriptionPlan === 'PREMIUM' ? 'bg-amber-50 border-amber-100 text-amber-600' : 'bg-slate-50 border-slate-100 text-slate-600'}`}>
+                                        <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase border ${branch.subscriptionPlan === 'PREMIUM' ? 'bg-amber-50 border-amber-100 text-amber-600' : 'bg-slate-50 dark:bg-slate-800/50 border-slate-100 dark:border-slate-800 text-slate-600 dark:text-slate-400'}`}>
                                             {branch.subscriptionPlan}
                                         </span>
                                     </td>
@@ -147,9 +147,9 @@ const BranchManagement = () => {
 
             {/* Create Branch Modal */}
             {isModalOpen && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
-                    <form onSubmit={handleCreateBranch} className="bg-white rounded-[3rem] w-full max-w-lg overflow-hidden shadow-2xl animate-in zoom-in duration-300">
-                        <div className="bg-slate-900 p-10 text-white relative">
+                <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900 dark:bg-slate-950/60 backdrop-blur-sm p-4">
+                    <form onSubmit={handleCreateBranch} className="bg-white dark:bg-[#111827] rounded-[3rem] w-full max-w-lg overflow-hidden shadow-2xl animate-in zoom-in duration-300">
+                        <div className="bg-slate-900 dark:bg-slate-950 p-10 text-white relative">
                             <div className="absolute top-0 right-0 p-10 opacity-10">
                                 <Building2 size={80} />
                             </div>
@@ -163,7 +163,7 @@ const BranchManagement = () => {
                                     required 
                                     type="text" 
                                     placeholder="e.g. City Central Academy"
-                                    className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl font-bold focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                                    className="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 rounded-2xl font-bold focus:outline-none focus:ring-2 focus:ring-blue-500/20"
                                     value={newBranch.name}
                                     onChange={e => setNewBranch({...newBranch, name: e.target.value})}
                                 />
@@ -173,7 +173,7 @@ const BranchManagement = () => {
                                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">City</label>
                                     <input 
                                         type="text" 
-                                        className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl font-bold"
+                                        className="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 rounded-2xl font-bold"
                                         value={newBranch.city}
                                         onChange={e => setNewBranch({...newBranch, city: e.target.value})}
                                     />
@@ -181,7 +181,7 @@ const BranchManagement = () => {
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">Plan Tier</label>
                                     <select 
-                                        className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl font-bold"
+                                        className="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 rounded-2xl font-bold"
                                         value={newBranch.plan}
                                         onChange={e => setNewBranch({...newBranch, plan: e.target.value})}
                                     >
@@ -192,7 +192,7 @@ const BranchManagement = () => {
                                 </div>
                             </div>
                             <div className="pt-4 flex gap-3">
-                                <button type="button" onClick={() => setIsModalOpen(false)} className="flex-1 py-4 text-slate-400 font-bold uppercase text-xs tracking-widest hover:text-slate-600">Cancel</button>
+                                <button type="button" onClick={() => setIsModalOpen(false)} className="flex-1 py-4 text-slate-400 font-bold uppercase text-xs tracking-widest hover:text-slate-600 dark:hover:text-slate-300 dark:text-slate-400">Cancel</button>
                                 <button type="submit" className="flex-1 py-4 bg-blue-600 text-white rounded-2xl font-black shadow-lg shadow-blue-500/30 hover:bg-blue-700 transition-all active:scale-95">Deploy Campus</button>
                             </div>
                         </div>
@@ -210,13 +210,13 @@ const GlobalStatCard = ({ title, value, icon, color }) => {
         emerald: 'text-emerald-600 bg-emerald-50 shadow-emerald-100/50'
     };
     return (
-        <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-xl flex items-center gap-6">
+        <div className="bg-white dark:bg-[#111827] p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-xl flex items-center gap-6">
             <div className={`w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 shadow-lg ${colors[color]}`}>
                 {React.cloneElement(icon, { size: 28, strokeWidth: 2.5 })}
             </div>
             <div>
                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">{title}</p>
-                <p className="text-3xl font-black text-slate-900 tracking-tighter">{value}</p>
+                <p className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter">{value}</p>
             </div>
         </div>
     );

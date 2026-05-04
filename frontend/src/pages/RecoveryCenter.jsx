@@ -78,19 +78,19 @@ const RecoveryCenter = () => {
     };
 
     return (
-        <div className="max-w-6xl mx-auto space-y-10 animate-in fade-in duration-500 pb-20 text-slate-800">
+        <div className="max-w-6xl mx-auto space-y-10 animate-in fade-in duration-500 pb-20 text-slate-800 dark:text-slate-100">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                 <div>
-                   <h1 className="text-4xl font-black text-slate-900 tracking-tighter flex items-center gap-3">
+                   <h1 className="text-4xl font-black text-slate-900 dark:text-white tracking-tighter flex items-center gap-3">
                       <ShieldAlert className="text-rose-600" size={36} />
                       Recovery Center
                    </h1>
-                   <p className="text-slate-500 font-medium mt-2">Disaster recovery and automated system snapshots (Head Office only).</p>
+                   <p className="text-slate-500 dark:text-slate-400 font-medium mt-2">Disaster recovery and automated system snapshots (Head Office only).</p>
                 </div>
                 <button 
                    onClick={triggerBackup}
                    disabled={isBackingUp}
-                   className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-black shadow-xl shadow-slate-900/20 flex items-center gap-3 transition-all hover:bg-black active:scale-95 disabled:grayscale"
+                   className="bg-slate-900 dark:bg-slate-950 text-white px-8 py-4 rounded-2xl font-black shadow-xl shadow-slate-900/20 flex items-center gap-3 transition-all hover:bg-black active:scale-95 disabled:grayscale"
                 >
                    {isBackingUp ? <Loader2 className="animate-spin" /> : <Database size={20} />}
                    {isBackingUp ? 'Snapshotting...' : 'Create Manual Backup'}
@@ -100,14 +100,14 @@ const RecoveryCenter = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {/* Status Column */}
                 <div className="lg:col-span-1 space-y-8">
-                    <div className="bg-white border border-slate-100 p-8 rounded-[2.5rem] shadow-xl space-y-8">
+                    <div className="bg-white dark:bg-[#111827] border border-slate-100 dark:border-slate-800 p-8 rounded-[2.5rem] shadow-xl space-y-8">
                         <div className="flex items-center gap-4">
                             <div className="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center">
                                 <ShieldCheck size={24} />
                             </div>
                             <div>
                                 <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Health Status</p>
-                                <p className="text-xl font-black text-slate-900 uppercase">Operational</p>
+                                <p className="text-xl font-black text-slate-900 dark:text-white uppercase">Operational</p>
                             </div>
                         </div>
 
@@ -122,16 +122,16 @@ const RecoveryCenter = () => {
                         <div className="absolute top-0 right-0 p-10 opacity-10 group-hover:scale-125 transition-transform"><Activity size={100} /></div>
                         <h4 className="text-xl font-black leading-tight uppercase tracking-tighter">Point-in-Time Recovery Power</h4>
                         <p className="text-sm font-medium mt-4 opacity-80 leading-relaxed">Every snapshot creates a 100% accurate clone of your entire institutional data. You can rollback time with a single click.</p>
-                        <div className="mt-8 flex items-center gap-2 text-xs font-black uppercase tracking-widest bg-white/10 px-4 py-2 rounded-xl inline-flex border border-white/5">
+                        <div className="mt-8 flex items-center gap-2 text-xs font-black uppercase tracking-widest bg-white dark:bg-[#111827]/10 px-4 py-2 rounded-xl inline-flex border border-white/5">
                            Total Snapshots: {backups.length}
                         </div>
                     </div>
                 </div>
 
                 {/* Backups List */}
-                <div className="lg:col-span-2 bg-white rounded-[3rem] border border-slate-100 shadow-xl overflow-hidden flex flex-col">
-                    <div className="p-8 border-b border-slate-50 bg-slate-50/30 flex items-center justify-between">
-                        <h3 className="font-black text-slate-900 uppercase tracking-tight">Recovery Point Timeline</h3>
+                <div className="lg:col-span-2 bg-white dark:bg-[#111827] rounded-[3rem] border border-slate-100 dark:border-slate-800 shadow-xl overflow-hidden flex flex-col">
+                    <div className="p-8 border-b border-slate-50 dark:border-slate-800/50 bg-slate-50 dark:bg-slate-800/50/30 flex items-center justify-between">
+                        <h3 className="font-black text-slate-900 dark:text-white uppercase tracking-tight">Recovery Point Timeline</h3>
                         <div className="flex items-center gap-2 text-xs font-bold text-slate-400">
                              Sorted by Date (Latest First)
                         </div>
@@ -148,13 +148,13 @@ const RecoveryCenter = () => {
                         ) : (
                             <div className="divide-y divide-slate-50">
                                 {backups.map((b, i) => (
-                                    <div key={i} className="px-8 py-6 hover:bg-slate-50 transition-all group flex items-center justify-between">
+                                    <div key={i} className="px-8 py-6 hover:bg-slate-50 dark:hover:bg-slate-800/80 dark:bg-slate-800/50 transition-all group flex items-center justify-between">
                                         <div className="flex items-center gap-6">
-                                            <div className="w-12 h-12 bg-slate-100 rounded-2xl flex items-center justify-center text-slate-400">
+                                            <div className="w-12 h-12 bg-slate-100 dark:bg-slate-800 rounded-2xl flex items-center justify-center text-slate-400">
                                                 <ArchiveIcon size={20} />
                                             </div>
                                             <div>
-                                                <p className="font-bold text-slate-900 uppercase tracking-tight text-sm">{b.filename}</p>
+                                                <p className="font-bold text-slate-900 dark:text-white uppercase tracking-tight text-sm">{b.filename}</p>
                                                 <div className="flex items-center gap-4 mt-1">
                                                     <p className="text-[10px] text-slate-400 font-black uppercase flex items-center gap-1">
                                                         <Clock size={10} /> {new Date(b.date).toLocaleString()}
@@ -179,8 +179,8 @@ const RecoveryCenter = () => {
 
             {/* Restore Modal */}
             {confirmFile && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/80 backdrop-blur-md p-4">
-                    <div className="bg-white rounded-[3rem] w-full max-w-xl overflow-hidden shadow-2xl animate-in zoom-in duration-300">
+                <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900 dark:bg-slate-950/80 backdrop-blur-md p-4">
+                    <div className="bg-white dark:bg-[#111827] rounded-[3rem] w-full max-w-xl overflow-hidden shadow-2xl animate-in zoom-in duration-300">
                         <div className="bg-rose-600 p-10 text-white relative">
                             <div className="absolute top-0 right-0 p-10 opacity-20"><AlertTriangle size={80} /></div>
                             <h3 className="text-3xl font-black tracking-tighter">Emergency Restoration</h3>
@@ -191,7 +191,7 @@ const RecoveryCenter = () => {
                                 <p className="text-sm font-bold text-rose-700 leading-relaxed">
                                     You are about to rebuild the entire database using the snapshot:
                                     <br />
-                                    <code className="text-[10px] block mt-2 bg-white px-3 py-2 rounded font-black border border-rose-200">{confirmFile}</code>
+                                    <code className="text-[10px] block mt-2 bg-white dark:bg-[#111827] px-3 py-2 rounded font-black border border-rose-200">{confirmFile}</code>
                                 </p>
                                 <p className="text-[11px] text-rose-600 font-medium italic">
                                     This action will **PERMANENTLY OVERWRITE** all current data with data from this snapshot.
@@ -217,10 +217,10 @@ const RecoveryCenter = () => {
 
 const StatusItem = ({ label, status, active }) => (
     <div className="flex items-center justify-between">
-        <span className="text-xs font-bold text-slate-500">{label}</span>
+        <span className="text-xs font-bold text-slate-500 dark:text-slate-400">{label}</span>
         <div className="flex items-center gap-2">
             <div className={`w-1.5 h-1.5 rounded-full ${active ? 'bg-emerald-500' : 'bg-slate-300'}`}></div>
-            <span className="text-[10px] font-black text-slate-900 uppercase tracking-tighter">{status}</span>
+            <span className="text-[10px] font-black text-slate-900 dark:text-white uppercase tracking-tighter">{status}</span>
         </div>
     </div>
 );
