@@ -45,7 +45,8 @@ exports.registerSchool = async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
-        schoolId: user.schoolId
+        schoolId: user.schoolId,
+        isHeadOffice: user.isHeadOffice
       }
     });
   } catch (error) {
@@ -90,7 +91,8 @@ exports.registerUser = async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
-        schoolId: user.schoolId
+        schoolId: user.schoolId,
+        isHeadOffice: user.isHeadOffice
       }
     });
   } catch (error) {
@@ -127,7 +129,8 @@ exports.login = async (req, res) => {
         role: user.role,
         schoolId: user.schoolId._id,
         plan: user.schoolId.subscriptionPlan,
-        hasCompletedTour: user.hasCompletedTour
+        hasCompletedTour: user.hasCompletedTour,
+        isHeadOffice: user.isHeadOffice
       }
     });
   } catch (error) {
@@ -173,7 +176,8 @@ exports.verifyTwoFactor = async (req, res) => {
             role: user.role,
             schoolId: user.schoolId._id,
             plan: user.schoolId.subscriptionPlan,
-            hasCompletedTour: user.hasCompletedTour
+            hasCompletedTour: user.hasCompletedTour,
+            isHeadOffice: user.isHeadOffice
          }
       });
    } catch (error) {
