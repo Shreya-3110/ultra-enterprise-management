@@ -16,6 +16,7 @@ import {
   Upload,
   X as XIcon
 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import { generateStudentReport } from '../utils/reportGenerator';
 
@@ -263,7 +264,12 @@ const Students = () => {
   };
 
   return (
-    <div className="space-y-8 max-w-7xl mx-auto animate-in fade-in duration-500">
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="space-y-8 max-w-7xl mx-auto"
+    >
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
           <h2 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Student Directory</h2>
@@ -285,18 +291,20 @@ const Students = () => {
             Bulk Import
           </button>
 
-          <button 
+          <motion.button 
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={openAddModal}
-            className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-xl text-sm font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/20"
+            className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl text-sm font-bold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/30 border border-blue-500/20"
           >
             <UserPlus size={18} />
             Add New Record
-          </button>
+          </motion.button>
         </div>
       </div>
 
-      <div className="bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700/50 rounded-3xl overflow-hidden shadow-sm shadow-slate-200/50">
-        <div className="p-6 border-b border-slate-100 dark:border-slate-800 flex flex-col md:flex-row items-center gap-4">
+      <div className="bg-white/80 dark:bg-[#111827]/80 backdrop-blur-2xl border border-white dark:border-slate-700/50 rounded-3xl overflow-hidden shadow-2xl shadow-slate-200/50 dark:shadow-none">
+        <div className="p-6 border-b border-slate-100 dark:border-slate-800 flex flex-col md:flex-row items-center gap-4 bg-gradient-to-r from-slate-50/50 to-white/50 dark:from-slate-900/50 dark:to-black/50">
           <div className="relative flex-1 w-full">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
             <input 
@@ -328,81 +336,90 @@ const Students = () => {
                   <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 dark:border-slate-800 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800/50">
+                <AnimatePresence>
                 {students.map((student, idx) => (
-                  <tr key={student._id} className={`${idx % 2 === 0 ? 'bg-white dark:bg-[#111827]' : 'bg-slate-50 dark:bg-slate-800/50/20'} hover:bg-blue-50/30 transition-colors group`}>
+                  <motion.tr 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ delay: idx * 0.05 }}
+                    key={student._id} 
+                    className={`${idx % 2 === 0 ? 'bg-white/40 dark:bg-[#111827]/40' : 'bg-slate-50/40 dark:bg-slate-800/20'} hover:bg-blue-50/50 dark:hover:bg-blue-900/10 transition-colors group`}
+                  >
                     <td className="px-8 py-6">
                       <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-xl bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700/50 flex items-center justify-center font-bold text-slate-500 dark:text-slate-400 text-xs shadow-sm shadow-slate-100 group-hover:border-blue-200 transition-colors">
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-slate-100 to-white dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700/50 flex items-center justify-center font-black text-slate-500 dark:text-slate-400 text-xs shadow-sm shadow-slate-100/50 group-hover:border-blue-300 dark:group-hover:border-blue-500/50 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-all duration-300">
                           {student.firstName[0]}{student.lastName[0]}
                         </div>
                         <div>
-                          <p className="font-bold text-sm text-slate-800 dark:text-slate-100 tracking-tight">{student.firstName} {student.lastName}</p>
-                          <p className="text-[10px] text-slate-400 font-bold uppercase tracking-tighter mt-0.5">{student.admissionNumber}</p>
+                          <p className="font-bold text-sm text-slate-800 dark:text-slate-100 tracking-tight group-hover:text-blue-700 dark:group-hover:text-blue-400 transition-colors">{student.firstName} {student.lastName}</p>
+                          <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">{student.admissionNumber}</p>
                         </div>
                       </div>
                     </td>
                     <td className="px-8 py-6">
                       <p className="text-sm font-bold text-slate-700 dark:text-slate-300">{student.currentClass} - {student.section || 'A'}</p>
-                      <p className="text-xs text-slate-400 font-medium">Standard Section</p>
+                      <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">Standard Section</p>
                     </td>
                     <td className="px-8 py-6">
                       <p className="text-sm text-slate-700 dark:text-slate-300 font-bold">{student.parentDetails?.name}</p>
-                      <p className="text-xs text-slate-400 font-medium mt-0.5">{student.parentDetails?.phone}</p>
+                      <p className="text-[10px] text-slate-400 font-bold tracking-widest mt-0.5">{student.parentDetails?.phone}</p>
                     </td>
                     <td className="px-8 py-6">
-                      <span className={`text-[10px] font-bold px-3 py-1 rounded-full ${
+                      <span className={`text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full ${
                         student.status === 'ACTIVE' 
-                        ? 'bg-green-50 text-green-600 border border-green-100' 
-                        : 'bg-slate-100 dark:bg-slate-800 text-slate-400 border border-slate-200 dark:border-slate-700/50'
+                        ? 'bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20' 
+                        : 'bg-slate-500/10 text-slate-500 dark:text-slate-400 border border-slate-500/20'
                       }`}>
                         {student.status || 'ACTIVE'}
                       </span>
                     </td>
                     <td className="px-8 py-6">
                       {student.activeFeeStructure ? (
-                        <span className="text-[10px] font-bold px-3 py-1 bg-blue-50 text-blue-600 border border-blue-100 rounded-full">
+                        <span className="text-[9px] font-black uppercase tracking-widest px-3 py-1.5 bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 rounded-full">
                           {typeof student.activeFeeStructure === 'object' ? student.activeFeeStructure.name : 'Linked'}
                         </span>
                       ) : (
-                        <span className="text-[10px] font-bold px-3 py-1 bg-slate-50 dark:bg-slate-800/50 text-slate-400 border border-slate-100 dark:border-slate-800 rounded-full italic">No Plan Assigned</span>
+                        <span className="text-[9px] font-black uppercase tracking-widest px-3 py-1.5 bg-slate-500/10 text-slate-400 border border-slate-500/20 rounded-full">No Plan Assigned</span>
                       )}
                     </td>
                     <td className="px-8 py-6">
                      {student.riskProfile === 'CRITICAL' ? (
-                        <span className="text-[10px] inline-flex items-center px-3 py-1 rounded-full font-bold bg-red-100 text-red-700 border border-red-200 shadow-sm animate-pulse">
+                        <span className="text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20 shadow-sm animate-pulse">
                            CRITICAL RISK
                         </span>
                      ) : student.riskProfile === 'HIGH_RISK' ? (
-                        <span className="text-[10px] inline-flex items-center px-3 py-1 rounded-full font-bold bg-amber-100 text-amber-700 border border-amber-200">
+                        <span className="text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
                            HIGH RISK
                         </span>
                      ) : (
-                        <span className="text-[10px] inline-flex items-center px-3 py-1 rounded-full font-bold bg-emerald-100 text-emerald-700">
+                        <span className="text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
                            NORMAL
                         </span>
                      )}
                     </td>
                     <td className="px-8 py-6 text-right">
-                      <div className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-4 group-hover:translate-x-0">
                         <button 
                           onClick={() => openEditModal(student)}
-                          className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
+                          className="p-2.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-xl transition-all"
                           title="Edit Record"
                         >
-                          <Pencil size={18} />
+                          <Pencil size={16} />
                         </button>
                         <button 
                           onClick={() => handleDelete(student._id, `${student.firstName} ${student.lastName}`)}
-                          className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
+                          className="p-2.5 text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-all"
                           title="Delete Record"
                         >
-                          <Trash2 size={18} />
+                          <Trash2 size={16} />
                         </button>
                       </div>
                     </td>
-                  </tr>
+                  </motion.tr>
                 ))}
+                </AnimatePresence>
               </tbody>
             </table>
           )}
@@ -523,10 +540,21 @@ const Students = () => {
       )}
 
       {/* Unified Add/Edit Modal */}
+      <AnimatePresence>
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900 dark:bg-slate-950/60 backdrop-blur-md animate-in fade-in duration-300">
-          <div className="bg-white dark:bg-[#111827] w-full max-w-md rounded-[2.5rem] shadow-2xl border border-white/20 overflow-hidden animate-in slide-in-from-bottom-8 duration-500">
-            <div className="p-8 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 dark:bg-slate-950/80 backdrop-blur-md"
+        >
+          <motion.div 
+            initial={{ scale: 0.95, y: 20 }}
+            animate={{ scale: 1, y: 0 }}
+            exit={{ scale: 0.95, y: 20 }}
+            className="bg-white/90 dark:bg-[#111827]/90 backdrop-blur-2xl w-full max-w-md rounded-[2.5rem] shadow-2xl border border-white dark:border-slate-700/50 overflow-hidden"
+          >
+            <div className="p-8 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-gradient-to-r from-slate-50 to-white dark:from-slate-900 dark:to-slate-950">
               <div>
                 <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">{editingId ? 'Update Student' : 'Register Student'}</h3>
                 <p className="text-xs text-slate-400 mt-1 font-medium">{editingId ? 'Modify existing academic record' : 'Add a new academic life cycle entry'}</p>
@@ -685,10 +713,11 @@ const Students = () => {
               </div>
               </form>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
-    </div>
+      </AnimatePresence>
+    </motion.div>
   );
 };
 
