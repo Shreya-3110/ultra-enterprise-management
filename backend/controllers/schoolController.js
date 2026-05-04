@@ -66,3 +66,22 @@ exports.getHeadOfficeStats = async (req, res) => {
        res.status(500).json({ success: false, message: error.message });
     }
 };
+// @desc    Search schools by name (for parents)
+// @route   GET /api/v1/schools/search
+exports.searchSchools = async (req, res) => {
+    try {
+        const { q } = req.query;
+        if (!q) return res.status(200).json({ success: true, data: [] });
+
+        const schools = await School.find({ 
+            name: { $regex: q, $options: 'i' } 
+        }).select('name _id').limit(10);
+
+        res.status(200).json({
+            success: true,
+            data: schools
+        });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};

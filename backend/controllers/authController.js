@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const School = require('../models/School');
+const Student = require('../models/Student');
 const jwt = require('jsonwebtoken');
 const { createTransporter, sendWelcomeEmail } = require('../utils/notificationService');
 const nodemailer = require('nodemailer'); // Keep for getTestMessageUrl if fallbacks happen
@@ -73,6 +74,26 @@ exports.registerUser = async (req, res) => {
       role: role || 'PARENT',
       schoolId
     });
+
+    // If parent is registering and provides child details, admit child directly
+    if (role === 'PARENT' && req.body.childDetails) {
+        const { firstName, lastName, currentClass, section } = req.body.childDetails;
+        if (firstName && lastName && currentClass) {
+            await Student.create({
+                schoolId,
+                firstName,
+                lastName,
+                currentClass,
+                section,
+                admissionNumber: `ADM-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+                parentDetails: {
+                    name: user.name,
+                    email: user.email
+                },
+                status: 'ACTIVE'
+            });
+        }
+    }
 
     const token = generateToken(user._id);
 

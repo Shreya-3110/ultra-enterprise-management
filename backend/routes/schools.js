@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { getBranches, createBranch, getHeadOfficeStats } = require('../controllers/schoolController');
+const { getBranches, createBranch, getHeadOfficeStats, searchSchools } = require('../controllers/schoolController');
 const { protect, authorize } = require('../middleware/auth');
+
+router.get('/search', searchSchools);
 
 router.use(protect);
 router.use(authorize('ADMIN'));
