@@ -88,24 +88,24 @@ const BranchManagement = () => {
 
             {/* Branch List */}
             <div className="bg-white dark:bg-[#111827] rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-xl overflow-hidden">
-                <div className="p-8 border-b border-slate-50 dark:border-slate-800/50 bg-slate-50 dark:bg-slate-800/50/30 flex items-center justify-between">
+                <div className="p-8 border-b border-slate-100 dark:border-slate-800/50 flex items-center justify-between">
                     <h3 className="text-lg font-black text-slate-900 dark:text-white uppercase tracking-tight">Institutional Directory</h3>
                     <div className="flex items-center gap-2 text-xs font-bold text-slate-400">
-                        <Globe size={14} /> Global Sync: Active
+                        <Globe size={14} className="text-blue-500" /> Global Sync: <span className="text-emerald-500">Active</span>
                     </div>
                 </div>
                 <div className="overflow-x-auto">
                     <table className="w-full text-left">
                         <thead>
-                            <tr className="border-b border-slate-50 dark:border-slate-800/50">
-                                <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Branch Name</th>
-                                <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Location</th>
-                                <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Plan</th>
-                                <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Status</th>
+                            <tr className="border-b border-slate-100 dark:border-slate-800/50 bg-slate-50/50 dark:bg-slate-800/20">
+                                <th className="px-8 py-5 text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em]">Branch Name</th>
+                                <th className="px-8 py-5 text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em]">Location</th>
+                                <th className="px-8 py-5 text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em]">Plan</th>
+                                <th className="px-8 py-5 text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em]">Status</th>
                                 <th className="px-8 py-5 text-right font-black"></th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-slate-50">
+                        <tbody className="divide-y divide-slate-100 dark:divide-slate-800/50">
                             {branches.map((branch) => (
                                 <tr key={branch._id} className="hover:bg-slate-50 dark:hover:bg-slate-800/80 dark:bg-slate-800/50/50 transition-all group">
                                     <td className="px-8 py-6">
