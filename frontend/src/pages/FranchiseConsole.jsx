@@ -72,7 +72,7 @@ const FranchiseConsole = () => {
 
                 {/* Detailed Branch Ledger */}
                 <div className="bg-white dark:bg-[#111827] rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-xl overflow-hidden">
-                    <div className="p-8 border-b border-slate-50 dark:border-slate-800/50 bg-slate-50 dark:bg-slate-800/50/30">
+                    <div className="p-8 border-b border-slate-50 dark:border-slate-800/50 bg-slate-50 dark:bg-slate-800/40">
                         <h3 className="font-black text-slate-900 dark:text-white uppercase tracking-tight">Consolidated Franchise Audit</h3>
                     </div>
                     <div className="overflow-x-auto">
@@ -88,7 +88,7 @@ const FranchiseConsole = () => {
                             </thead>
                             <tbody className="divide-y divide-slate-50">
                                 {data?.details.map((b) => (
-                                    <tr key={b.branchId} className="hover:bg-slate-50 dark:hover:bg-slate-800/80 dark:bg-slate-800/50/50 transition-all">
+                                    <tr key={b.branchId} className="hover:bg-slate-50 dark:hover:bg-slate-800/80 dark:bg-slate-800/40 transition-all">
                                         <td className="px-8 py-6">
                                             <p className="font-bold text-slate-900 dark:text-white uppercase tracking-tight">{b.branchName}</p>
                                         </td>

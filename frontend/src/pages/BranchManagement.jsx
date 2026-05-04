@@ -107,7 +107,7 @@ const BranchManagement = () => {
                         </thead>
                         <tbody className="divide-y divide-slate-100 dark:divide-slate-800/50">
                             {branches.map((branch) => (
-                                <tr key={branch._id} className="hover:bg-slate-50 dark:hover:bg-slate-800/80 dark:bg-slate-800/50/50 transition-all group">
+                                <tr key={branch._id} className="hover:bg-slate-50 dark:hover:bg-slate-800/80 dark:bg-slate-800/40 transition-all group">
                                     <td className="px-8 py-6">
                                         <div className="flex items-center gap-4">
                                             <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">

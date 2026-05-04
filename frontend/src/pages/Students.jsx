@@ -326,7 +326,7 @@ const Students = () => {
           ) : (
             <table className="w-full text-left">
               <thead>
-                <tr className="bg-slate-50 dark:bg-slate-800/50/50">
+                <tr className="bg-slate-50 dark:bg-slate-800/40">
                   <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 dark:border-slate-800">Student Identity</th>
                   <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 dark:border-slate-800">Class & Section</th>
                   <th className="px-8 py-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 dark:border-slate-800">Guardian Details</th>
@@ -430,7 +430,7 @@ const Students = () => {
       {isBulkModalOpen && (
         <div className="fixed inset-0 bg-slate-900 dark:bg-slate-950/40 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
           <div className="bg-white dark:bg-[#111827] rounded-[2.5rem] w-full max-w-xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-200">
-            <div className="px-8 pt-8 pb-6 bg-slate-50 dark:bg-slate-800/50/50">
+            <div className="px-8 pt-8 pb-6 bg-slate-50 dark:bg-slate-800/40">
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <h3 className="text-xl font-bold text-slate-900 dark:text-white">Bulk Student Import</h3>

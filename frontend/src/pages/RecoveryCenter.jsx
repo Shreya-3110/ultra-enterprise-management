@@ -130,7 +130,7 @@ const RecoveryCenter = () => {
 
                 {/* Backups List */}
                 <div className="lg:col-span-2 bg-white dark:bg-[#111827] rounded-[3rem] border border-slate-100 dark:border-slate-800 shadow-xl overflow-hidden flex flex-col">
-                    <div className="p-8 border-b border-slate-50 dark:border-slate-800/50 bg-slate-50 dark:bg-slate-800/50/30 flex items-center justify-between">
+                    <div className="p-8 border-b border-slate-50 dark:border-slate-800/50 bg-slate-50 dark:bg-slate-800/50 flex items-center justify-between">
                         <h3 className="font-black text-slate-900 dark:text-white uppercase tracking-tight">Recovery Point Timeline</h3>
                         <div className="flex items-center gap-2 text-xs font-bold text-slate-400">
                              Sorted by Date (Latest First)
