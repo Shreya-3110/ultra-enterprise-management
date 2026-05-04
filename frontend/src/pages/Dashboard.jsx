@@ -16,8 +16,10 @@ import {
   Download,
   CheckCircle2,
   Search,
-  Sparkles
+  Sparkles,
+  Layers
 } from 'lucide-react';
+import { motion } from 'framer-motion';
 import PlanGate from '../components/PlanGate';
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
@@ -131,21 +133,35 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="space-y-10 max-w-7xl mx-auto">
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="space-y-10 max-w-7xl mx-auto"
+    >
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white tracking-tighter flex items-center gap-2">
+          <h2 className="text-2xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tighter flex items-center gap-3">
             Intelligence Center
-            <span className="text-[10px] bg-blue-600 text-white px-2 py-0.5 rounded-full uppercase tracking-widest font-black">AI Enabled</span>
+            <motion.span 
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              transition={{ repeat: Infinity, duration: 2, repeatType: "reverse" }}
+              className="text-[10px] bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-3 py-1 rounded-full uppercase tracking-widest font-black shadow-lg shadow-blue-500/30"
+            >
+              AI Enabled
+            </motion.span>
           </h2>
           <p className="text-sm text-slate-500 dark:text-slate-400 font-medium mt-1">Institutional health and predictive revenue modeling.</p>
         </div>
-        <button 
+        <motion.button 
+           whileHover={{ scale: 1.05 }}
+           whileTap={{ scale: 0.95 }}
            onClick={() => generateDashboardSummary(stats, recentLogs)}
-           className="px-6 py-3 bg-slate-900 dark:bg-slate-950 text-white rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-black transition-all shadow-xl shadow-slate-900/20 active:scale-95"
+           className="px-6 py-3 bg-gradient-to-r from-slate-900 to-slate-800 dark:from-white dark:to-slate-200 dark:text-slate-900 text-white rounded-xl font-bold text-xs uppercase tracking-widest transition-all shadow-xl shadow-slate-900/20"
         >
            Export Strategy Report
-        </button>
+        </motion.button>
       </div>
 
       {/* Performance & Upgrade Banner */}
@@ -173,15 +189,20 @@ const Dashboard = () => {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-10">
-        <StatCard title="Total Students" value={stats?.studentCount?.toLocaleString() || '0'} change="+12" isUp={true} icon={<Users size={20} />} />
-        <StatCard title="Total Collection" value={`₹${stats?.totalCollection?.toLocaleString() || '0'}`} change={`+₹${stats?.lateFeesRecovered?.toLocaleString() || '0'} late fees`} isUp={true} icon={<DollarSign size={20} />} />
-        <StatCard title="Wallet Credits" value={`₹${stats?.walletCredits?.toLocaleString() || '0'}`} change="Surplus" isUp={true} icon={<Wallet size={20} />} />
-        <StatCard title="Outstanding" value={`₹${stats?.outstandingDues?.toLocaleString() || '0'}`} change={`${stats?.collectionRate || 0}% Rate`} isUp={(stats?.collectionRate || 0) > 80} icon={<AlertCircle size={20} />} />
+        <StatCard delay={0.1} title="Total Students" value={stats?.studentCount?.toLocaleString() || '0'} change="+12" isUp={true} icon={<Users size={20} />} />
+        <StatCard delay={0.2} title="Total Collection" value={`₹${stats?.totalCollection?.toLocaleString() || '0'}`} change={`+₹${stats?.lateFeesRecovered?.toLocaleString() || '0'} late fees`} isUp={true} icon={<DollarSign size={20} />} />
+        <StatCard delay={0.3} title="Wallet Credits" value={`₹${stats?.walletCredits?.toLocaleString() || '0'}`} change="Surplus" isUp={true} icon={<Wallet size={20} />} />
+        <StatCard delay={0.4} title="Outstanding" value={`₹${stats?.outstandingDues?.toLocaleString() || '0'}`} change={`${stats?.collectionRate || 0}% Rate`} isUp={(stats?.collectionRate || 0) > 80} icon={<AlertCircle size={20} />} />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Cash Flow Forecast Chart */}
-        <div className="lg:col-span-2 bg-white dark:bg-[#111827] border border-slate-100 dark:border-slate-800 rounded-[2.5rem] p-8 shadow-xl shadow-slate-200/40 relative overflow-hidden group">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.5, duration: 0.4 }}
+          className="lg:col-span-2 bg-white/60 dark:bg-[#111827]/60 backdrop-blur-2xl border border-white dark:border-white/5 rounded-[2.5rem] p-8 shadow-2xl shadow-blue-900/5 relative overflow-hidden group"
+        >
           <div className="absolute top-0 right-0 p-8">
              <Zap size={32} className="text-emerald-500 opacity-20" />
           </div>
@@ -192,10 +213,16 @@ const Dashboard = () => {
           <div className="h-[300px]">
             <Line data={forecastChartData} options={lineOptions} />
           </div>
-        </div>
+        </motion.div>
 
         {/* AI Deferral Alerts / Defaulter Risk */}
-        <div className="bg-slate-900 dark:bg-slate-950 rounded-[2.5rem] flex flex-col shadow-2xl shadow-slate-900/40 p-8 border border-white/5">
+        <motion.div 
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.6, duration: 0.4 }}
+          className="bg-gradient-to-b from-slate-900 to-[#020617] dark:from-slate-950 dark:to-black rounded-[2.5rem] flex flex-col shadow-2xl shadow-slate-900/40 p-8 border border-white/10 relative overflow-hidden"
+        >
+          <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
           <div className="mb-8">
             <h3 className="font-black text-white text-lg flex items-center gap-2">
               <Zap size={18} className="text-amber-400 fill-amber-400" />
@@ -232,15 +259,24 @@ const Dashboard = () => {
               ))
             )}
           </div>
-          <button className="mt-8 py-4 bg-white dark:bg-[#111827]/5 hover:bg-white dark:bg-[#111827]/10 border border-white/10 rounded-2xl text-[10px] font-black text-slate-400 uppercase tracking-widest transition-all">
+          <motion.button 
+             whileHover={{ scale: 1.02 }}
+             whileTap={{ scale: 0.98 }}
+             className="mt-8 py-4 bg-white/5 hover:bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl text-[10px] font-black text-slate-300 uppercase tracking-widest transition-all"
+          >
              Full Risk Audit
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pb-10">
         <PlanGate requiredPlan="STANDARD" message="Standard plan required for AI analytics">
-          <div className="bg-white dark:bg-[#111827] border border-slate-100 dark:border-slate-800 p-8 rounded-[2.5rem] shadow-xl shadow-slate-200/40 flex flex-col h-full relative overflow-hidden group">
+          <motion.div 
+             initial={{ opacity: 0, y: 20 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             viewport={{ once: true }}
+             className="bg-white/60 dark:bg-[#111827]/60 backdrop-blur-2xl border border-white dark:border-slate-800/50 p-8 rounded-[2.5rem] shadow-2xl shadow-slate-200/20 dark:shadow-none flex flex-col h-full relative overflow-hidden group hover:border-indigo-500/30 transition-colors"
+          >
             <h3 className="text-lg font-black text-slate-900 dark:text-white mb-8 flex items-center gap-3">
               <span className="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-[1.2rem] flex items-center justify-center shadow-lg shadow-indigo-100/50">
                 <TrendingUp size={20} />
@@ -264,10 +300,16 @@ const Dashboard = () => {
                   </div>
                ))}
             </div>
-          </div>
+          </motion.div>
         </PlanGate>
 
-        <div className="bg-white dark:bg-[#111827] border border-slate-100 dark:border-slate-800 p-8 rounded-[2.5rem] shadow-xl shadow-slate-200/40">
+        <motion.div 
+           initial={{ opacity: 0, y: 20 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true }}
+           transition={{ delay: 0.2 }}
+           className="bg-white/60 dark:bg-[#111827]/60 backdrop-blur-2xl border border-white dark:border-slate-800/50 p-8 rounded-[2.5rem] shadow-2xl shadow-slate-200/20 dark:shadow-none hover:border-emerald-500/30 transition-colors"
+        >
            <div className="flex items-center justify-between mb-8">
               <h3 className="text-lg font-black text-slate-900 dark:text-white flex items-center gap-3">
                  <span className="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-[1.2rem] flex items-center justify-center shadow-lg shadow-emerald-100/50">
@@ -297,24 +339,32 @@ const Dashboard = () => {
   );
 };
 
-const StatCard = ({ title, value, change, isUp, icon }) => (
-  <div className="bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700/50 p-6 rounded-2xl flex flex-col justify-between">
-    <div className="flex items-start justify-between">
-      <div className="p-2 bg-slate-50 dark:bg-slate-800/50 rounded-lg text-slate-400 border border-slate-100 dark:border-slate-800">
+const StatCard = ({ title, value, change, isUp, icon, delay }) => (
+  <motion.div 
+    initial={{ opacity: 0, scale: 0.9 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ delay, type: "spring", stiffness: 200, damping: 20 }}
+    whileHover={{ y: -5, scale: 1.02 }}
+    className="bg-white/80 dark:bg-[#111827]/80 backdrop-blur-xl border border-white dark:border-slate-700/50 p-6 rounded-[2rem] shadow-xl shadow-slate-200/40 dark:shadow-none flex flex-col justify-between overflow-hidden relative group"
+  >
+    <div className="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 rounded-full bg-gradient-to-br from-blue-500/5 to-purple-500/5 blur-2xl group-hover:bg-blue-500/10 transition-colors" />
+    
+    <div className="flex items-start justify-between relative z-10">
+      <div className="p-3 bg-gradient-to-br from-slate-50 to-white dark:from-slate-800 dark:to-slate-900 rounded-2xl text-slate-600 dark:text-slate-300 border border-slate-100 dark:border-slate-700 shadow-sm">
         {icon}
       </div>
-      <div className={`flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full ${
-        isUp ? 'text-green-600 bg-green-50' : 'text-red-600 bg-red-50'
+      <div className={`flex items-center gap-1 text-[10px] font-black px-3 py-1 rounded-full border ${
+        isUp ? 'text-emerald-600 bg-emerald-50 border-emerald-100 dark:bg-emerald-500/10 dark:border-emerald-500/20' : 'text-rose-600 bg-rose-50 border-rose-100 dark:bg-rose-500/10 dark:border-rose-500/20'
       }`}>
-        {isUp ? <ArrowUpRight size={10} /> : <ArrowDownRight size={10} />}
+        {isUp ? <ArrowUpRight size={12} strokeWidth={3} /> : <ArrowDownRight size={12} strokeWidth={3} />}
         {change}
       </div>
     </div>
-    <div className="mt-4">
-      <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">{title}</p>
-      <p className="text-2xl font-bold text-slate-900 dark:text-white mt-1">{value}</p>
+    <div className="mt-6 relative z-10">
+      <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">{title}</p>
+      <p className="text-3xl font-black text-slate-900 dark:text-white mt-1 tracking-tighter">{value}</p>
     </div>
-  </div>
+  </motion.div>
 );
 
 const InsightItem = ({ text }) => (

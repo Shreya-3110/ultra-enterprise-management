@@ -23,6 +23,18 @@ exports.protect = async (req, res, next) => {
       return res.status(401).json({ success: false, message: 'No user found with this id' });
     }
 
+    // Branch Context Switching for Head Office Users
+    const requestedBranchId = req.headers['x-branch-id'];
+    if (requestedBranchId && req.user.isHeadOffice) {
+      if (requestedBranchId !== req.user.schoolId.toString()) {
+        const branch = await School.findById(requestedBranchId);
+        // Only allow switching if the requested branch's parent is this Head Office
+        if (branch && branch.parentSchoolId && branch.parentSchoolId.toString() === req.user.schoolId.toString()) {
+          req.user.schoolId = requestedBranchId; // Scope all subsequent DB queries to this branch
+        }
+      }
+    }
+
     next();
   } catch (err) {
     return res.status(401).json({ success: false, message: 'Not authorized to access this route' });

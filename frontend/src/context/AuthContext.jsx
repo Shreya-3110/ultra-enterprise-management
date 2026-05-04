@@ -7,6 +7,18 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [loading, setLoading] = useState(true);
+  const [activeBranchId, setActiveBranchId] = useState(localStorage.getItem('activeBranchId'));
+
+  // Global Axios Interceptor for Branch Switching
+  useEffect(() => {
+    if (activeBranchId) {
+      localStorage.setItem('activeBranchId', activeBranchId);
+      axios.defaults.headers.common['x-branch-id'] = activeBranchId;
+    } else {
+      localStorage.removeItem('activeBranchId');
+      delete axios.defaults.headers.common['x-branch-id'];
+    }
+  }, [activeBranchId]);
 
   useEffect(() => {
     const initializeAuth = () => {
@@ -40,8 +52,11 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
     setToken(null);
+    setActiveBranchId(null);
     localStorage.removeItem('user');
     localStorage.removeItem('token');
+    localStorage.removeItem('activeBranchId');
+    delete axios.defaults.headers.common['x-branch-id'];
   };
 
   const completeTour = () => {
@@ -53,7 +68,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout, completeTour, isAuthenticated: !!token, loading }}>
+    <AuthContext.Provider value={{ user, token, activeBranchId, setActiveBranchId, login, logout, completeTour, isAuthenticated: !!token, loading }}>
         {!loading && children}
     </AuthContext.Provider>
   );

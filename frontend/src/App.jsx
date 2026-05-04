@@ -66,6 +66,43 @@ const ProtectedRoute = ({ children }) => {
   return children;
 };
 
+const BranchSelector = () => {
+  const { user, token, activeBranchId, setActiveBranchId } = useAuth();
+  const [branches, setBranches] = React.useState([]);
+
+  React.useEffect(() => {
+    if (user?.isHeadOffice && token) {
+      axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api/v1'}/schools/branches`, {
+        headers: { Authorization: `Bearer ${token}` }
+      }).then(res => {
+        if (res.data.success) {
+          setBranches(res.data.data);
+        }
+      }).catch(err => console.error("Failed to fetch branches", err));
+    }
+  }, [user, token]);
+
+  if (!user?.isHeadOffice) return null;
+
+  return (
+    <div className="hidden md:flex ml-4 items-center">
+      <select 
+        value={activeBranchId || ''}
+        onChange={(e) => {
+          setActiveBranchId(e.target.value || null);
+          window.location.reload(); // Hard reload to clear component states scoped to old branch
+        }}
+        className="bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/50 text-xs font-bold text-slate-700 dark:text-slate-300 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+      >
+        <option value="">Head Office (Global)</option>
+        {branches.map(b => (
+          <option key={b._id} value={b._id}>{b.name}</option>
+        ))}
+      </select>
+    </div>
+  );
+};
+
 const Layout = ({ children }) => {
   const location = useLocation();
   const { logout, user, token } = useAuth();
@@ -180,6 +217,7 @@ const Layout = ({ children }) => {
               <ChevronRight size={14} />
               <span className="text-slate-900 dark:text-white capitalize">{location.pathname === '/dashboard' ? 'Dashboard' : location.pathname.substring(1)}</span>
             </div>
+            <BranchSelector />
           </div>
           
           <div className="flex items-center gap-3 sm:gap-6">

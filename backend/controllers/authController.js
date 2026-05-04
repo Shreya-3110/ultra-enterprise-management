@@ -35,7 +35,7 @@ exports.registerSchool = async (req, res) => {
     const token = generateToken(user._id);
 
     // Send welcome email asynchronously
-    sendWelcomeEmail(school._id, user.email, user.name, user.role, school.name);
+    sendWelcomeEmail(school._id, user.email, user.name, user.role, school.name, password);
 
     res.status(201).json({
       success: true,
@@ -79,7 +79,7 @@ exports.registerUser = async (req, res) => {
     const school = await School.findById(schoolId);
     // Send welcome email asynchronously
     if (school) {
-      sendWelcomeEmail(schoolId, user.email, user.name, user.role, school.name);
+      sendWelcomeEmail(schoolId, user.email, user.name, user.role, school.name, password);
     }
 
     res.status(201).json({
