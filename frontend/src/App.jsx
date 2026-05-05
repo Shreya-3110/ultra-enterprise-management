@@ -138,40 +138,38 @@ const Layout = ({ children }) => {
 
       {/* Sidebar */}
       <aside className={`
-        fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-[#111827] border-r border-slate-200 dark:border-slate-700/50 flex flex-col items-stretch transition-transform duration-300 lg:relative lg:translate-x-0
+        fixed inset-y-0 left-0 z-50 w-72 bg-white dark:bg-[#111827] border-r border-slate-200 dark:border-white/5 flex flex-col items-stretch transition-transform duration-300 lg:relative lg:translate-x-0
         ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
-        <div className="h-16 flex items-center justify-between px-8 border-b border-slate-100 dark:border-slate-800">
-          <h1 className="text-xl font-bold text-blue-600 tracking-tight">
-            Ultra Enterprise
+        <div className="h-20 flex items-center gap-4 px-8 border-b border-slate-100 dark:border-white/5">
+          <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-500/20">
+             <GraduationCap size={24} />
+          </div>
+          <h1 className="text-xl font-black text-slate-900 dark:text-white tracking-tighter">
+            School Admin
           </h1>
-          <button className="lg:hidden p-2 text-slate-400" onClick={() => setIsSidebarOpen(false)}>
+          <button className="lg:hidden p-2 text-slate-400 ml-auto" onClick={() => setIsSidebarOpen(false)}>
              <ChevronRight size={20} className="rotate-180" />
           </button>
         </div>
 
-        <nav id="sidebar-nav" className="flex-1 py-6 space-y-1 overflow-y-auto custom-scrollbar">
-          <SidebarLink id="overview-link" to="/dashboard" icon={<LayoutDashboard size={20} />} label="Overview" active={location.pathname === '/dashboard'} />
+        <nav id="sidebar-nav" className="flex-1 py-6 space-y-1 overflow-y-auto custom-scrollbar px-4">
+          <SidebarLink id="overview-link" to="/dashboard" icon={<LayoutDashboard size={20} />} label="Dashboard" active={location.pathname === '/dashboard'} />
           
           {user?.role !== 'PARENT' && (
             <>
-              <SidebarLink to="/students" icon={<Users size={20} />} label="Students" active={location.pathname === '/students'} />
-              <SidebarLink to="/fees" icon={<CreditCard size={20} />} label="Fees Structure" active={location.pathname === '/fees'} />
-              <SidebarLink to="/payments" icon={<History size={20} />} label="Transaction History" active={location.pathname === '/payments'} />
-              <SidebarLink to="/reports" icon={<PieChart size={20} />} label="Reports" active={location.pathname === '/reports'} />
-              <SidebarLink to="/activity" icon={<FileText size={20} />} label="Audit Trail" active={location.pathname === '/activity'} />
-              <SidebarLink to="/communications" icon={<Bell size={20} />} label="Communication Hub" active={location.pathname === '/communications'} />
-              <SidebarLink to="/migration" icon={<Database size={20} />} label="Data Migration" active={location.pathname === '/migration'} />
-              {user?.isHeadOffice && (
-                <>
-                  <SidebarLink to="/branches" icon={<Building2 size={20} />} label="Head Office Console" active={location.pathname === '/branches'} />
-                  <SidebarLink to="/recovery" icon={<ShieldAlert size={20} />} label="Emergency Recovery" active={location.pathname === '/recovery'} />
-                </>
-              )}
-              <SidebarLink to="/franchise" icon={<BarChart3 size={20} />} label="Franchise Finances" active={location.pathname === '/franchise'} />
-              <SidebarLink to="/adjustments" icon={<Scissors size={20} />} label="Financial Adjustments" active={location.pathname === '/adjustments'} />
-              <SidebarLink to="/integrations" icon={<Terminal size={20} />} label="API Integration" active={location.pathname === '/integrations'} />
-              <SidebarLink to="/subscription" icon={<Sparkles size={20} />} label="Subscription Plan" active={location.pathname === '/subscription'} />
+              <SidebarLink to="/front-office" icon={<Building2 size={20} />} label="Front Office" active={location.pathname === '/front-office'} hasSubmenu={true} />
+              <SidebarLink to="/academics" icon={<GraduationCap size={20} />} label="Academics" active={location.pathname === '/academics'} hasSubmenu={true} />
+              <SidebarLink to="/students" icon={<Users size={20} />} label="Student Information" active={location.pathname === '/students'} hasSubmenu={true} />
+              <SidebarLink to="/certificate" icon={<Sparkles size={20} />} label="Certificate" active={location.pathname === '/certificate'} />
+              <SidebarLink to="/attendance" icon={<UserCheck size={20} />} label="Attendance" active={location.pathname === '/attendance'} hasSubmenu={true} />
+              <SidebarLink to="/examination" icon={<FileText size={20} />} label="Examination" active={location.pathname === '/examination'} hasSubmenu={true} />
+              <SidebarLink to="/fees" icon={<CreditCard size={20} />} label="Fees Collection" active={location.pathname === '/fees'} hasSubmenu={true} />
+              <SidebarLink to="/hr" icon={<Users size={20} />} label="Human Resource" active={location.pathname === '/hr'} />
+              <SidebarLink to="/calendar" icon={<Calendar size={20} />} label="Annual Calendar" active={location.pathname === '/calendar'} />
+              <SidebarLink to="/communications" icon={<Bell size={20} />} label="Communicate" active={location.pathname === '/communications'} />
+              <SidebarLink to="/leave" icon={<FileText size={20} />} label="Leave Request" active={location.pathname === '/leave'} />
+              <SidebarLink to="/library" icon={<BookOpen size={20} />} label="Library" active={location.pathname === '/library'} />
             </>
           )}
 
@@ -181,64 +179,67 @@ const Layout = ({ children }) => {
                <SidebarLink to="/notifications" icon={<Bell size={20} />} label="School Alerts" active={location.pathname === '/notifications'} />
             </>
           )}
-          
-          <div id="support-section" className="mt-8 px-8 pt-4 border-t border-slate-50 dark:border-slate-800/50">
-            <h3 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4">Support</h3>
-            <SidebarLink to="/settings" icon={<SettingsIcon size={20} />} label="Configuration" active={location.pathname === '/settings'} />
-          </div>
         </nav>
 
-        <div className="p-6">
-          <div className={`${user?.plan === 'PREMIUM' ? 'bg-blue-50 border-blue-100' : 'bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700/50'} border rounded-xl p-4`}>
-            <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">Subscription</p>
-            <p className={`text-sm font-bold ${user?.plan === 'PREMIUM' ? 'text-blue-700' : 'text-slate-700 dark:text-slate-300'}`}>
-              {user?.plan || 'Basic'} Plan
-            </p>
-            <Link to="/subscription" className="mt-3 block text-center w-full py-2 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700/50 rounded-lg text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-800/80 dark:bg-slate-800/50 transition-colors">
-              {user?.plan === 'PREMIUM' ? 'Plan Details' : 'Upgrade Now'}
-            </Link>
-          </div>
+        <div className="p-4 mt-auto border-t border-slate-100 dark:border-white/5">
+           <div className="flex items-center gap-3 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl">
+              <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-black border border-blue-200 uppercase">
+                 {user?.name?.charAt(0) || 'D'}
+              </div>
+              <div className="flex-1 overflow-hidden text-ellipsis">
+                 <p className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-tight">{user?.name || 'DEMO ADMIN'}</p>
+                 <p className="text-[10px] text-slate-400 font-bold uppercase">{user?.role || 'Admin'}</p>
+              </div>
+              <button onClick={logout} className="p-2 text-slate-400 hover:text-red-500 transition-colors">
+                 <LogOut size={18} />
+              </button>
+           </div>
         </div>
       </aside>
 
       {/* Main Container */}
       <div className="flex-1 flex flex-col h-full overflow-hidden">
         {/* Top Navbar */}
-        <header id="top-navbar" className="h-16 bg-white dark:bg-[#111827] border-b border-slate-200 dark:border-slate-700/50 flex items-center justify-between px-4 sm:px-10 flex-shrink-0">
-          <div className="flex items-center gap-4">
+        <header id="top-navbar" className="h-20 bg-white dark:bg-[#111827] border-b border-slate-200 dark:border-white/5 flex items-center justify-between px-6 sm:px-10 flex-shrink-0">
+          <div className="flex-1 flex items-center gap-4">
             <button 
               onClick={() => setIsSidebarOpen(true)}
               className="lg:hidden p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/80 dark:bg-slate-800/50 rounded-lg"
             >
               <LayoutDashboard size={20} />
             </button>
-            <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 font-medium hidden sm:flex">
-              <span>Home</span>
-              <ChevronRight size={14} />
-              <span className="text-slate-900 dark:text-white capitalize">{location.pathname === '/dashboard' ? 'Dashboard' : location.pathname.substring(1)}</span>
+            
+            {/* Search Bar */}
+            <div className="hidden sm:flex items-center gap-3 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-white/5 px-4 py-2.5 rounded-xl w-full max-w-md group focus-within:ring-2 ring-blue-500/10 transition-all">
+               <Search size={18} className="text-slate-400 group-focus-within:text-blue-500 transition-colors" />
+               <input 
+                 type="text" 
+                 placeholder="Search users..." 
+                 className="bg-transparent border-none outline-none text-sm font-medium text-slate-600 dark:text-slate-300 w-full placeholder:text-slate-400"
+               />
             </div>
-            <BranchSelector />
           </div>
           
           <div className="flex items-center gap-3 sm:gap-6">
             <button 
               onClick={toggleTheme}
-              className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-slate-800 transition-all rounded-lg"
+              className="p-2.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-slate-800 transition-all rounded-xl"
               title="Toggle Theme"
             >
               {isDark ? <Sun size={20} /> : <Moon size={20} />}
             </button>
+            
             <div className="relative">
               <button 
                 onClick={() => setIsNotifOpen(!isNotifOpen)}
-                className={`transition-colors p-2 rounded-lg relative ${isNotifOpen ? 'bg-blue-50 text-blue-600' : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 dark:text-slate-400'}`}
+                className={`transition-colors p-2.5 rounded-xl relative ${isNotifOpen ? 'bg-blue-50 text-blue-600' : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-300'}`}
               >
                 <Bell size={20} />
                 {notifications.length > 0 && (
-                  <span className="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-red-500 border-2 border-white rounded-full animate-pulse" />
+                  <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 border-2 border-white rounded-full" />
                 )}
               </button>
-
+              
               {isNotifOpen && (
                 <div className="absolute right-0 mt-3 w-80 bg-white dark:bg-[#111827] rounded-2xl shadow-2xl border border-slate-100 dark:border-slate-800 py-4 z-[60] animate-in fade-in slide-in-from-top-2">
                   <div className="px-6 pb-3 border-b border-slate-50 dark:border-slate-800/50 flex justify-between items-center">
@@ -261,23 +262,17 @@ const Layout = ({ children }) => {
                 </div>
               )}
             </div>
-            <div className="h-8 w-px bg-slate-200 hidden xs:block"></div>
-            <div id="user-profile" className="flex items-center gap-3">
-              <div className="text-right hidden md:block">
-                <p className="text-sm font-bold text-slate-900 dark:text-white">{user?.name || 'Guest'}</p>
-                <p className="text-[10px] font-medium text-slate-400">{user?.role || 'User'}</p>
-              </div>
-              <div className="w-9 h-9 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold border border-blue-200">
-                {user?.name?.charAt(0) || 'U'}
-              </div>
+
+            {/* Year Selector */}
+            <div className="hidden md:flex items-center gap-2 bg-slate-900 text-slate-400 px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest border border-white/10">
+               2026-27
             </div>
-            <button 
-              onClick={logout}
-              className="p-2 text-slate-400 hover:text-red-500 rounded-lg hover:bg-red-50 transition-all"
-              title="Log Out"
-            >
-              <LogOut size={20} />
-            </button>
+
+            <div className="h-8 w-px bg-slate-100 dark:bg-white/5 hidden xs:block"></div>
+            
+            <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-400">
+               <Users size={20} />
+            </div>
           </div>
         </header>
 
@@ -290,21 +285,23 @@ const Layout = ({ children }) => {
   );
 };
 
-const SidebarLink = ({ to, icon, label, active, id }) => (
+const SidebarLink = ({ to, icon, label, active, id, hasSubmenu }) => (
   <Link
     to={to}
     id={id}
-    className={`flex items-center gap-3 px-8 py-3 transition-all duration-200 relative group
+    className={`flex items-center justify-between px-4 py-3.5 transition-all duration-200 rounded-2xl group mb-1
       ${active 
-        ? 'text-blue-600 font-bold bg-blue-50/50' 
-        : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white dark:text-white hover:bg-slate-50 dark:hover:bg-slate-800/80 dark:bg-slate-800/50'
+        ? 'text-blue-600 font-black bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/5 shadow-sm' 
+        : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
       }`}
   >
-    {active && <div className="absolute left-0 w-1 h-8 bg-blue-600 rounded-r-full" />}
-    <span className={`${active ? 'text-blue-600' : 'text-slate-400'} group-hover:text-slate-900 dark:hover:text-white dark:text-white ml-1`}>
-      {icon}
-    </span>
-    <span className="text-sm">{label}</span>
+    <div className="flex items-center gap-3">
+       <span className={`${active ? 'text-blue-600' : 'text-slate-400'} group-hover:scale-110 transition-transform`}>
+         {icon}
+       </span>
+       <span className="text-[13px] tracking-tight">{label}</span>
+    </div>
+    {hasSubmenu && <ChevronRight size={14} className={`opacity-50 ${active ? 'text-blue-600' : ''}`} />}
   </Link>
 );
 
