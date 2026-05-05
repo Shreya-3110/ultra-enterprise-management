@@ -20,7 +20,12 @@ import {
   RotateCcw,
   Terminal,
   ShieldAlert,
-  Sparkles
+  Sparkles,
+  GraduationCap,
+  UserCheck,
+  Calendar,
+  Search,
+  BookOpen
 } from 'lucide-react';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
