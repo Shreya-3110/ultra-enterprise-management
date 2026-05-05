@@ -19,11 +19,8 @@ import {
   Mail,
   Smartphone
 } from 'lucide-react';
-import dashboardMockup from '../assets/dashboard_mockup.png';
-
 const Landing = () => {
   const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#0B1121] font-sans selection:bg-blue-200 overflow-x-hidden">
@@ -89,48 +86,35 @@ const Landing = () => {
                </div>
             </motion.div>
 
-            {/* Floating Mockup Reveal */}
-            <motion.div 
-               style={{ y: y1 }}
-               initial={{ y: 100, opacity: 0, rotateX: 20 }}
-               animate={{ y: 0, opacity: 1, rotateX: 0 }}
-               transition={{ delay: 0.4, duration: 1 }}
-               className="mt-24 relative group"
-            >
-               <div className="absolute -inset-4 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-[3rem] blur-3xl opacity-20 group-hover:opacity-40 transition duration-1000"></div>
-               <div className="relative bg-white/80 dark:bg-[#111827]/80 backdrop-blur-2xl rounded-[2.5rem] p-4 border border-white/20 dark:border-white/10 shadow-2xl shadow-blue-500/10">
-                  <div className="overflow-hidden rounded-[2rem] border border-slate-200 dark:border-white/5">
-                     <img 
-                        src={dashboardMockup} 
-                        alt="School Admin Dashboard" 
-                        className="w-full h-auto max-w-4xl opacity-90 group-hover:opacity-100 transition-opacity"
-                     />
-                  </div>
-                  {/* Floating Action Cards */}
-                  <div className="absolute -right-12 top-1/4 hidden lg:block bg-white dark:bg-[#0B1121] p-6 rounded-3xl border border-slate-200 dark:border-white/10 shadow-2xl animate-float">
-                     <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-emerald-500/20 text-emerald-500 rounded-2xl flex items-center justify-center">
-                           <TrendingUp size={24} />
-                        </div>
-                        <div className="text-left">
-                           <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Fee Collection</p>
-                           <p className="text-xl font-black text-slate-900 dark:text-white tracking-tighter">98.4% <span className="text-xs text-emerald-500">+2.5%</span></p>
-                        </div>
-                     </div>
-                  </div>
-                  <div className="absolute -left-12 bottom-1/4 hidden lg:block bg-white dark:bg-[#0B1121] p-6 rounded-3xl border border-slate-200 dark:border-white/10 shadow-2xl animate-float-delayed">
-                     <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-blue-500/20 text-blue-500 rounded-2xl flex items-center justify-center">
-                           <Users size={24} />
-                        </div>
-                        <div className="text-left">
-                           <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">New Admissions</p>
-                           <p className="text-xl font-black text-slate-900 dark:text-white tracking-tighter">248 <span className="text-xs text-blue-500">Goal</span></p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </motion.div>
+            {/* Feature Highlights Instead of Mockup */}
+            <div className="mt-32 grid grid-cols-1 sm:grid-cols-3 gap-8 w-full max-w-5xl">
+               <motion.div 
+                 initial={{ y: 20, opacity: 0 }}
+                 whileInView={{ y: 0, opacity: 1 }}
+                 className="p-8 rounded-[2.5rem] bg-white/5 backdrop-blur-xl border border-white/5 text-center"
+               >
+                  <p className="text-3xl font-black text-white mb-2">100%</p>
+                  <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Digital Attendance</p>
+               </motion.div>
+               <motion.div 
+                 initial={{ y: 20, opacity: 0 }}
+                 whileInView={{ y: 0, opacity: 1 }}
+                 transition={{ delay: 0.1 }}
+                 className="p-8 rounded-[2.5rem] bg-white/5 backdrop-blur-xl border border-white/5 text-center"
+               >
+                  <p className="text-3xl font-black text-white mb-2">₹0.00</p>
+                  <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Transaction Fees</p>
+               </motion.div>
+               <motion.div 
+                 initial={{ y: 20, opacity: 0 }}
+                 whileInView={{ y: 0, opacity: 1 }}
+                 transition={{ delay: 0.2 }}
+                 className="p-8 rounded-[2.5rem] bg-white/5 backdrop-blur-xl border border-white/5 text-center"
+               >
+                  <p className="text-3xl font-black text-white mb-2">Live</p>
+                  <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Parent Communication</p>
+               </motion.div>
+            </div>
          </div>
       </section>
 
