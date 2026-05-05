@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Loader2, Mail, Lock, ShieldCheck } from 'lucide-react';
+import { Loader2, Mail, Lock, ShieldCheck, GraduationCap } from 'lucide-react';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/v1';
 
@@ -72,11 +72,11 @@ const Login = () => {
       <div className="w-full max-w-md bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700/50 rounded-3xl shadow-xl shadow-slate-200/50 overflow-hidden animate-in fade-in zoom-in duration-500">
         <div className="p-10">
           <div className="flex flex-col items-center text-center mb-10">
-            <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-6 border border-blue-100">
-              <ShieldCheck size={32} />
+            <div className="w-16 h-16 bg-blue-50 dark:bg-blue-500/10 rounded-2xl flex items-center justify-center text-blue-600 mb-6 border border-blue-100 dark:border-white/5">
+              <GraduationCap size={32} />
             </div>
-            <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
-               {step === 'OTP' ? 'Security Verification' : 'Ultra Enterprise'}
+            <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">
+               {step === 'OTP' ? 'Security Verification' : 'School Admin'}
             </h1>
             <p className="text-sm text-slate-400 mt-2 font-medium">
                {step === 'OTP' ? 'Please enter the 6-digit code sent to your email' : 'Please sign in to access your dashboard'}
